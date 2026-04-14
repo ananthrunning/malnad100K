@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<title>Sunday Check-In — Malnad 100K</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{--ink:#0f0f0d;--paper:#f5f2ea;--warm:#ece8dd;--rule:rgba(15,15,13,0.1);--accent:#c94c1e;--forest:#2d6a4f;--muted:#7a756b;--card:#ffffff}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--paper);color:var(--ink);font-family:'DM Sans',sans-serif;font-weight:300;font-size:15px;min-height:100vh;padding-bottom:3rem}
+
+.top-bar{background:var(--ink);color:var(--paper);padding:1rem 1.5rem;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:0.5rem}
+.top-title{font-family:'Bebas Neue',sans-serif;font-size:1.5rem;letter-spacing:0.06em}
+.top-meta{font-family:'DM Mono',monospace;font-size:0.7rem;color:rgba(245,242,234,0.6);text-align:right}
+.top-meta strong{color:var(--paper);display:block;font-size:0.85rem}
+
+.hero{background:var(--accent);color:white;padding:1.25rem 1.5rem;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:0.5rem}
+.hero-label{font-size:0.65rem;letter-spacing:0.12em;text-transform:uppercase;opacity:0.8;margin-bottom:2px}
+.hero-num{font-family:'Bebas Neue',sans-serif;font-size:2.5rem;line-height:1}
+.hero-week{font-family:'DM Mono',monospace;font-size:0.75rem;opacity:0.85}
+
+.wrap{max-width:680px;margin:0 auto;padding:1.5rem}
+
+.section-head{font-size:0.62rem;font-weight:500;letter-spacing:0.14em;text-transform:uppercase;color:var(--muted);margin:1.75rem 0 0.75rem;padding-bottom:0.4rem;border-bottom:1px solid var(--rule)}
+
+.card{background:var(--card);border:1px solid var(--rule);border-radius:4px;padding:1.1rem 1.25rem;margin-bottom:0.75rem}
+.card-title{font-size:0.8rem;font-weight:500;color:var(--ink);margin-bottom:0.75rem;display:flex;align-items:center;gap:0.5rem}
+.day-badge{font-size:0.6rem;font-weight:500;background:var(--warm);color:var(--muted);padding:2px 7px;border-radius:3px;letter-spacing:0.08em;text-transform:uppercase}
+
+.field-row{display:grid;grid-template-columns:1fr 1fr 1fr;gap:0.6rem;margin-bottom:0.6rem}
+.field-row.two{grid-template-columns:1fr 1fr}
+.field-row.one{grid-template-columns:1fr}
+.field-group{display:flex;flex-direction:column;gap:0.3rem}
+.field-label{font-size:0.65rem;letter-spacing:0.08em;text-transform:uppercase;color:var(--muted);font-weight:500}
+input,select,textarea{width:100%;background:var(--warm);border:1px solid transparent;border-radius:3px;padding:8px 10px;font-family:'DM Mono',monospace;font-size:0.8rem;color:var(--ink);outline:none;transition:border-color 0.15s}
+input:focus,select:focus,textarea:focus{border-color:var(--accent);background:white}
+textarea{resize:vertical;min-height:60px;font-family:'DM Sans',sans-serif;font-size:0.82rem}
+select{appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath d='M0 0l5 6 5-6z' fill='%237a756b'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 10px center}
+
+.rating-row{display:flex;gap:6px;flex-wrap:wrap;margin-top:4px}
+.rating-btn{width:36px;height:36px;border:1px solid var(--rule);border-radius:3px;background:var(--warm);color:var(--muted);font-family:'DM Mono',monospace;font-size:0.8rem;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all 0.12s;font-weight:500}
+.rating-btn.selected{background:var(--accent);color:white;border-color:var(--accent)}
+.rating-btn:hover{border-color:var(--accent);color:var(--accent)}
+
+.toggle-row{display:flex;gap:8px;flex-wrap:wrap;margin-top:4px}
+.tog{padding:6px 14px;border:1px solid var(--rule);border-radius:3px;background:var(--warm);color:var(--muted);font-size:0.78rem;cursor:pointer;transition:all 0.12s;font-weight:400}
+.tog.yes.active{background:#d4edda;color:#155724;border-color:#c3e6cb}
+.tog.no.active{background:#f8d7da;color:#721c24;border-color:#f5c6cb}
+.tog.partial.active{background:#fff3cd;color:#856404;border-color:#ffeeba}
+
+.pain-fields{display:none;margin-top:0.75rem;padding-top:0.75rem;border-top:1px dashed var(--rule)}
+.pain-fields.show{display:block}
+
+.generate-btn{width:100%;padding:1rem;background:var(--accent);color:white;border:none;border-radius:4px;font-family:'Bebas Neue',sans-serif;font-size:1.4rem;letter-spacing:0.1em;cursor:pointer;margin-top:1.5rem;transition:opacity 0.15s}
+.generate-btn:hover{opacity:0.88}
+
+.output-block{display:none;margin-top:1.25rem}
+.output-block.show{display:block}
+.output-label{font-size:0.65rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--muted);margin-bottom:0.5rem;font-weight:500}
+.output-text{background:var(--ink);color:#e8e4da;font-family:'DM Mono',monospace;font-size:0.72rem;padding:1.25rem;border-radius:4px;line-height:1.7;white-space:pre-wrap;word-break:break-word}
+.copy-btn{width:100%;padding:0.75rem;background:var(--forest);color:white;border:none;border-radius:4px;font-family:'DM Sans',sans-serif;font-size:0.85rem;font-weight:500;cursor:pointer;margin-top:0.5rem;letter-spacing:0.04em;transition:opacity 0.15s}
+.copy-btn:hover{opacity:0.88}
+.copy-btn.copied{background:var(--forest);opacity:0.7}
+
+.weight-note{font-size:0.68rem;color:var(--muted);margin-top:3px}
+.garmin-note{background:var(--warm);border-radius:3px;padding:0.75rem 1rem;font-size:0.75rem;color:var(--muted);margin-bottom:0.75rem;line-height:1.55;border-left:3px solid var(--accent)}
+.garmin-note strong{color:var(--ink);font-weight:500}
+</style>
+</head>
+<body>
+
+<div class="top-bar">
+  <div class="top-title">Sunday Check-In</div>
+  <div class="top-meta">
+    <span>Malnad Ultra 100K</span>
+    <strong id="top-countdown"></strong>
+  </div>
+</div>
+
+<div class="hero">
+  <div>
+    <div class="hero-label">Training week</div>
+    <div class="hero-num" id="week-num">—</div>
+    <div class="hero-week" id="week-range"></div>
+  </div>
+  <div style="text-align:right">
+    <div class="hero-label">Days to race</div>
+    <div class="hero-num" id="days-left">—</div>
+    <div class="hero-week">Nov 28, 2026</div>
+  </div>
+</div>
+
+<div class="wrap">
+
+  <!-- GARMIN EXPORTS NOTE -->
+  <div class="garmin-note">
+    <strong>Garmin exports this week:</strong> Go to Garmin Connect → Reports → Running → set date range to Mon–Sun → export CSV. Also grab screenshots of Training Status and Body Battery. Attach to the message alongside this report.
+  </div>
+
+  <!-- RUNS -->
+  <div class="section-head">This week's runs</div>
+
+  <div class="card">
+    <div class="card-title"><span class="day-badge">Tuesday</span> Easy Zone 2 road run</div>
+    <div class="field-row">
+      <div class="field-group"><div class="field-label">Distance (km)</div><input type="number" id="tue-km" placeholder="e.g. 9" step="0.1"></div>
+      <div class="field-group"><div class="field-label">Avg HR (bpm)</div><input type="number" id="tue-hr" placeholder="e.g. 118"></div>
+      <div class="field-group"><div class="field-label">Avg pace (/km)</div><input type="text" id="tue-pace" placeholder="e.g. 8:45"></div>
+    </div>
+    <div class="field-row one"><div class="field-group"><div class="field-label">How it felt</div><select id="tue-feel"><option value="">— select —</option><option>Easy — could have gone much further</option><option>Comfortable — controlled effort</option><option>Moderate — felt the work</option><option>Hard — struggled to hold zone</option><option>Missed this session</option></select></div></div>
+  </div>
+
+  <div class="card">
+    <div class="card-title"><span class="day-badge">Thursday</span> Road run</div>
+    <div class="field-row">
+      <div class="field-group"><div class="field-label">Distance (km)</div><input type="number" id="thu-km" placeholder="e.g. 10" step="0.1"></div>
+      <div class="field-group"><div class="field-label">Avg HR (bpm)</div><input type="number" id="thu-hr" placeholder="e.g. 122"></div>
+      <div class="field-group"><div class="field-label">Avg pace (/km)</div><input type="text" id="thu-pace" placeholder="e.g. 8:30"></div>
+    </div>
+    <div class="field-row one"><div class="field-group"><div class="field-label">How it felt</div><select id="thu-feel"><option value="">— select —</option><option>Easy — could have gone much further</option><option>Comfortable — controlled effort</option><option>Moderate — felt the work</option><option>Hard — struggled to hold zone</option><option>Missed this session</option></select></div></div>
+  </div>
+
+  <div class="card">
+    <div class="card-title"><span class="day-badge">Saturday</span> Long run / trail / Nandi Hills</div>
+    <div class="field-row">
+      <div class="field-group"><div class="field-label">Distance (km)</div><input type="number" id="sat-km" placeholder="e.g. 20" step="0.1"></div>
+      <div class="field-group"><div class="field-label">Avg HR (bpm)</div><input type="number" id="sat-hr" placeholder="e.g. 125"></div>
+      <div class="field-group"><div class="field-label">Total ascent (m)</div><input type="number" id="sat-asc" placeholder="e.g. 180"></div>
+    </div>
+    <div class="field-row two">
+      <div class="field-group"><div class="field-label">Surface</div><select id="sat-surface"><option value="">— select —</option><option>Road</option><option>Avalahalli trail</option><option>Nandi Hills</option><option>Devarayanadurga</option><option>Mixed road + trail</option></select></div>
+      <div class="field-group"><div class="field-label">How it felt</div><select id="sat-feel"><option value="">— select —</option><option>Easy — strong finish</option><option>Comfortable — steady throughout</option><option>Moderate — tired in last third</option><option>Hard — struggled significantly</option><option>Missed this session</option></select></div>
+    </div>
+    <div class="field-row one"><div class="field-group"><div class="field-label">Notes (nutrition on run, any issues)</div><textarea id="sat-notes" placeholder="e.g. Ate dates at km 12, felt strong. HR spiked on the climb near km 15..."></textarea></div></div>
+  </div>
+
+  <!-- STRENGTH -->
+  <div class="section-head">Strength & recovery</div>
+  <div class="card">
+    <div class="field-row two">
+      <div class="field-group">
+        <div class="field-label">Wednesday strength session</div>
+        <div class="toggle-row">
+          <div class="tog yes" onclick="tog(this,'strength-wed','yes')">Done ✓</div>
+          <div class="tog partial" onclick="tog(this,'strength-wed','partial')">Partial</div>
+          <div class="tog no" onclick="tog(this,'strength-wed','no')">Missed</div>
+        </div>
+        <input type="hidden" id="strength-wed" value="">
+      </div>
+      <div class="field-group">
+        <div class="field-label">Badminton Sunday</div>
+        <div class="toggle-row">
+          <div class="tog yes" onclick="tog(this,'badminton','yes')">Played</div>
+          <div class="tog no" onclick="tog(this,'badminton','no')">Skipped</div>
+        </div>
+        <input type="hidden" id="badminton" value="">
+      </div>
+    </div>
+  </div>
+
+  <!-- BODY METRICS -->
+  <div class="section-head">Body & recovery metrics</div>
+  <div class="card">
+    <div class="field-row two">
+      <div class="field-group">
+        <div class="field-label">Sunday morning weight (kg)</div>
+        <input type="number" id="weight" placeholder="e.g. 79.2" step="0.1">
+        <div class="weight-note">Same time each week — after toilet, before eating.</div>
+      </div>
+      <div class="field-group">
+        <div class="field-label">Avg sleep this week (hrs)</div>
+        <input type="number" id="sleep" placeholder="e.g. 7.5" step="0.5">
+      </div>
+    </div>
+    <div class="field-row two" style="margin-top:0.75rem">
+      <div class="field-group">
+        <div class="field-label">Resting HR Monday AM (bpm)</div>
+        <input type="number" id="rhr" placeholder="e.g. 49">
+      </div>
+      <div class="field-group">
+        <div class="field-label">Garmin body battery (Mon AM)</div>
+        <input type="number" id="battery" placeholder="e.g. 72" min="0" max="100">
+      </div>
+    </div>
+    <div style="margin-top:0.75rem">
+      <div class="field-label">Overall energy level this week</div>
+      <div class="rating-row" id="energy-row"></div>
+      <input type="hidden" id="energy" value="">
+    </div>
+  </div>
+
+  <!-- NUTRITION -->
+  <div class="section-head">Nutrition & hydration</div>
+  <div class="card">
+    <div class="field-row two">
+      <div class="field-group">
+        <div class="field-label">Protein target hit? (~140–160g/day)</div>
+        <div class="toggle-row">
+          <div class="tog yes" onclick="tog(this,'protein','yes')">Yes, most days</div>
+          <div class="tog partial" onclick="tog(this,'protein','partial')">Partially</div>
+          <div class="tog no" onclick="tog(this,'protein','no')">No, fell short</div>
+        </div>
+        <input type="hidden" id="protein" value="">
+      </div>
+      <div class="field-group">
+        <div class="field-label">Avg daily hydration (litres)</div>
+        <input type="number" id="hydration" placeholder="e.g. 2.8" step="0.1">
+      </div>
+    </div>
+    <div class="field-row two" style="margin-top:0.75rem">
+      <div class="field-group">
+        <div class="field-label">Post-run protein window habit</div>
+        <div class="toggle-row">
+          <div class="tog yes" onclick="tog(this,'post-run','yes')">Done every run</div>
+          <div class="tog partial" onclick="tog(this,'post-run','partial')">Some runs</div>
+          <div class="tog no" onclick="tog(this,'post-run','no')">Missed</div>
+        </div>
+        <input type="hidden" id="post-run" value="">
+      </div>
+      <div class="field-group">
+        <div class="field-label">Avg protein (g/day) if tracked</div>
+        <input type="number" id="protein-g" placeholder="e.g. 120">
+      </div>
+    </div>
+    <div class="field-row one" style="margin-top:0.75rem">
+      <div class="field-group">
+        <div class="field-label">Nutrition notes (what you ate, any issues)</div>
+        <textarea id="nutrition-notes" placeholder="e.g. Added eggs at breakfast 5 days. Lunch was mostly chicken curry. Protein shake post-Sat run..."></textarea>
+      </div>
+    </div>
+  </div>
+
+  <!-- PAIN / INJURY -->
+  <div class="section-head">Pain, injury & concerns</div>
+  <div class="card">
+    <div class="field-group">
+      <div class="field-label">Any pain or soreness this week?</div>
+      <div class="toggle-row">
+        <div class="tog yes" onclick="tog(this,'pain-flag','no');document.getElementById('pain-detail').classList.remove('show')">All clear</div>
+        <div class="tog no" onclick="tog(this,'pain-flag','yes');document.getElementById('pain-detail').classList.add('show')">Yes — describe below</div>
+      </div>
+      <input type="hidden" id="pain-flag" value="">
+    </div>
+    <div class="pain-fields" id="pain-detail">
+      <div class="field-row one"><div class="field-group"><div class="field-label">Where and what — be specific</div><textarea id="pain-notes" placeholder="e.g. Left heel, mildly sore after Saturday run. Felt fine during running, noticeable the evening after. Not worse than last week."></textarea></div></div>
+      <div class="field-row one"><div class="field-group"><div class="field-label">Duration — how many days?</div><select id="pain-duration"><option value="">— select —</option><option>Just this run</option><option>2–3 days</option><option>Most of the week</option><option>More than a week now</option></select></div></div>
+    </div>
+  </div>
+
+  <!-- OPEN NOTES -->
+  <div class="section-head">Anything else</div>
+  <div class="card">
+    <div class="field-row one"><div class="field-group"><div class="field-label">Questions, observations, or things you want to flag</div><textarea id="open-notes" style="min-height:80px" placeholder="e.g. Feeling slow on Zone 2 runs — is this normal? Work was stressful this week, might affect next week too. Tried the metronome drill and found it helpful..."></textarea></div></div>
+  </div>
+
+  <button class="generate-btn" onclick="generate()">Generate Sunday Report ↗</button>
+
+  <div class="output-block" id="output-block">
+    <div class="output-label">Copy this and paste into your Claude conversation</div>
+    <div class="output-text" id="output-text"></div>
+    <button class="copy-btn" id="copy-btn" onclick="copyReport()">Copy report to clipboard</button>
+  </div>
+
+</div>
+
+<script>
+// Auto-calculate week and countdown
+const RACE=new Date('2026-11-28T06:30:00+05:30');
+const START=new Date('2026-04-13');
+function getWeekNum(){const now=new Date();const ms=now-START;return Math.max(1,Math.ceil(ms/604800000))}
+function getDays(){return Math.max(0,Math.ceil((RACE-new Date())/864e5))}
+function getWeekRange(){const now=new Date();const mon=new Date(now);mon.setDate(now.getDate()-now.getDay()+1);const sun=new Date(mon);sun.setDate(mon.getDate()+6);const fmt=d=>d.toLocaleDateString('en-IN',{day:'numeric',month:'short'});return fmt(mon)+' – '+fmt(sun)}
+
+document.getElementById('week-num').textContent='Week '+getWeekNum();
+document.getElementById('week-range').textContent=getWeekRange();
+document.getElementById('days-left').textContent=getDays();
+document.getElementById('top-countdown').textContent=getDays()+' days to race';
+
+// Rating buttons 1-10
+const er=document.getElementById('energy-row');
+for(let i=1;i<=10;i++){const b=document.createElement('button');b.className='rating-btn';b.textContent=i;b.type='button';b.onclick=function(){document.querySelectorAll('#energy-row .rating-btn').forEach(x=>x.classList.remove('selected'));this.classList.add('selected');document.getElementById('energy').value=i};er.appendChild(b)}
+
+// Toggle buttons
+function tog(el,id,val){const parent=el.closest('.toggle-row');parent.querySelectorAll('.tog').forEach(t=>{t.classList.remove('active')});el.classList.add('active');document.getElementById(id).value=val}
+
+// Generate report
+function v(id){return document.getElementById(id)?.value||''}
+function generate(){
+  const w=getWeekNum();
+  const d=getDays();
+  const wr=getWeekRange();
+  const date=new Date().toLocaleDateString('en-IN',{day:'numeric',month:'long',year:'numeric'});
+
+  let lines=[
+    `━━━━━━━━━━━━━━━━━━━━━━━━━━━━`,
+    `MALNAD 100K — SUNDAY CHECK-IN`,
+    `Week ${w} of 32 · ${wr}`,
+    `Submitted: ${date} · ${d} days to race`,
+    `━━━━━━━━━━━━━━━━━━━━━━━━━━━━`,
+    ``,
+    `RUNS`,
+  ];
+
+  const tue_km=v('tue-km'),tue_hr=v('tue-hr'),tue_pace=v('tue-pace'),tue_feel=v('tue-feel');
+  if(tue_km||tue_feel){
+    lines.push(`Tuesday (Zone 2 road)`);
+    if(tue_km) lines.push(`  Distance: ${tue_km} km`);
+    if(tue_hr) lines.push(`  Avg HR: ${tue_hr} bpm`+(tue_hr<120?' ✓ Zone 2':tue_hr<130?' (slightly above zone)':`  ⚠ HR too high (target <120)`));
+    if(tue_pace) lines.push(`  Pace: ${tue_pace} /km`);
+    if(tue_feel) lines.push(`  Feel: ${tue_feel}`);
+  } else { lines.push(`Tuesday: No data entered`); }
+
+  lines.push('');
+  const thu_km=v('thu-km'),thu_hr=v('thu-hr'),thu_pace=v('thu-pace'),thu_feel=v('thu-feel');
+  if(thu_km||thu_feel){
+    lines.push(`Thursday (road run)`);
+    if(thu_km) lines.push(`  Distance: ${thu_km} km`);
+    if(thu_hr) lines.push(`  Avg HR: ${thu_hr} bpm`+(thu_hr<120?' ✓ Zone 2':thu_hr<130?' (slightly above zone)':' ⚠ above zone'));
+    if(thu_pace) lines.push(`  Pace: ${thu_pace} /km`);
+    if(thu_feel) lines.push(`  Feel: ${thu_feel}`);
+  } else { lines.push(`Thursday: No data entered`); }
+
+  lines.push('');
+  const sat_km=v('sat-km'),sat_hr=v('sat-hr'),sat_asc=v('sat-asc'),sat_surface=v('sat-surface'),sat_feel=v('sat-feel'),sat_notes=v('sat-notes');
+  if(sat_km||sat_feel){
+    lines.push(`Saturday (long run)`);
+    if(sat_surface) lines.push(`  Surface: ${sat_surface}`);
+    if(sat_km) lines.push(`  Distance: ${sat_km} km`);
+    if(sat_hr) lines.push(`  Avg HR: ${sat_hr} bpm`);
+    if(sat_asc) lines.push(`  Ascent: ${sat_asc} m`);
+    if(sat_feel) lines.push(`  Feel: ${sat_feel}`);
+    if(sat_notes) lines.push(`  Notes: ${sat_notes}`);
+  } else { lines.push(`Saturday: No data entered`); }
+
+  const totalKm=[tue_km,thu_km,sat_km].filter(Boolean).map(Number).reduce((a,b)=>a+b,0);
+  if(totalKm>0) lines.push(`\nWeek total: ~${totalKm.toFixed(1)} km`);
+
+  lines.push('');
+  lines.push('STRENGTH & RECOVERY');
+  const sw=v('strength-wed'),bd=v('badminton');
+  if(sw) lines.push(`Wednesday strength: ${sw}`);
+  if(bd) lines.push(`Badminton Sunday: ${bd}`);
+
+  lines.push('');
+  lines.push('BODY METRICS');
+  const wt=v('weight'),sl=v('sleep'),rhr=v('rhr'),bat=v('battery'),en=v('energy');
+  if(wt) lines.push(`Weight (Sun AM): ${wt} kg`+(wt?' (target: 73–74 kg by Nov 28)':''));
+  if(sl) lines.push(`Avg sleep: ${sl} hrs`);
+  if(rhr) lines.push(`Resting HR (Mon AM): ${rhr} bpm`);
+  if(bat) lines.push(`Body battery (Mon AM): ${bat}/100`);
+  if(en) lines.push(`Energy this week: ${en}/10`);
+
+  lines.push('');
+  lines.push('NUTRITION & HYDRATION');
+  const prot=v('protein'),protg=v('protein-g'),hyd=v('hydration'),pr=v('post-run'),nn=v('nutrition-notes');
+  if(prot) lines.push(`Protein target (~140–160g): ${prot}`);
+  if(protg) lines.push(`Tracked protein avg: ${protg}g/day`);
+  if(hyd) lines.push(`Daily hydration: ${hyd}L`);
+  if(pr) lines.push(`Post-run protein window: ${pr}`);
+  if(nn) lines.push(`Notes: ${nn}`);
+
+  const pf=v('pain-flag'),pn=v('pain-notes'),pd=v('pain-duration');
+  if(pf==='yes'||pn){
+    lines.push('');
+    lines.push('⚠ PAIN / SORENESS FLAGGED');
+    if(pn) lines.push(`Location/details: ${pn}`);
+    if(pd) lines.push(`Duration: ${pd}`);
+  }
+
+  const on=v('open-notes');
+  if(on){lines.push('');lines.push('OPEN NOTES');lines.push(on)}
+
+  lines.push('');
+  lines.push('━━━━━━━━━━━━━━━━━━━━━━━━━━━━');
+
+  const report=lines.join('\n');
+  document.getElementById('output-text').textContent=report;
+  document.getElementById('output-block').classList.add('show');
+  document.getElementById('output-block').scrollIntoView({behavior:'smooth',block:'start'});
+}
+
+function copyReport(){
+  const txt=document.getElementById('output-text').textContent;
+  navigator.clipboard.writeText(txt).then(()=>{
+    const btn=document.getElementById('copy-btn');
+    btn.textContent='Copied ✓';btn.classList.add('copied');
+    setTimeout(()=>{btn.textContent='Copy report to clipboard';btn.classList.remove('copied')},2500);
+  });
+}
+</script>
+</body>
+</html>
