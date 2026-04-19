@@ -90,6 +90,12 @@ select{appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='ht
     <div class="hero-week">Nov 28, 2026</div>
   </div>
 </div>
+<div style="background:#111;border-top:1px solid rgba(255,255,255,0.08);padding:0.6rem 1.5rem;display:flex;align-items:center;gap:1rem;flex-wrap:wrap">
+  <span style="font-size:0.68rem;color:rgba(245,242,234,0.5);letter-spacing:0.08em;text-transform:uppercase;font-weight:500">Reporting for</span>
+  <button id="btn-prev" onclick="selectWeek(-1)" style="font-size:0.72rem;padding:5px 14px;border:1px solid rgba(255,255,255,0.25);border-radius:3px;background:transparent;color:rgba(245,242,234,0.75);cursor:pointer">Previous week</button>
+  <button id="btn-curr" onclick="selectWeek(0)" style="font-size:0.72rem;padding:5px 14px;border:1px solid #c94c1e;border-radius:3px;background:#c94c1e;color:white;cursor:pointer;font-weight:500">This week</button>
+  <span style="font-size:0.7rem;color:rgba(245,242,234,0.45);font-style:italic" id="week-selected-label"></span>
+</div>
 
 <div class="wrap">
 
@@ -268,12 +274,32 @@ select{appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='ht
 // Auto-calculate week and countdown
 const RACE=new Date('2026-11-28T06:30:00+05:30');
 const START=new Date('2026-04-13');
-function getWeekNum(){const now=new Date();const ms=now-START;return Math.max(1,Math.ceil(ms/604800000))}
-function getDays(){return Math.max(0,Math.ceil((RACE-new Date())/864e5))}
-function getWeekRange(){const now=new Date();const mon=new Date(now);mon.setDate(now.getDate()-now.getDay()+1);const sun=new Date(mon);sun.setDate(mon.getDate()+6);const fmt=d=>d.toLocaleDateString('en-IN',{day:'numeric',month:'short'});return fmt(mon)+' – '+fmt(sun)}
+let weekOffset=0; // 0 = this week, -1 = previous week
 
-document.getElementById('week-num').textContent='Week '+getWeekNum();
-document.getElementById('week-range').textContent=getWeekRange();
+function getWeekNum(offset=0){const now=new Date();now.setDate(now.getDate()+offset*7);const ms=now-START;return Math.max(1,Math.ceil(ms/604800000))}
+function getDays(){return Math.max(0,Math.ceil((RACE-new Date())/864e5))}
+function getWeekRange(offset=0){
+  const now=new Date();now.setDate(now.getDate()+offset*7);
+  const mon=new Date(now);mon.setDate(now.getDate()-now.getDay()+1);
+  const sun=new Date(mon);sun.setDate(mon.getDate()+6);
+  const fmt=d=>d.toLocaleDateString('en-IN',{day:'numeric',month:'short'});
+  return fmt(mon)+' – '+fmt(sun)
+}
+
+function selectWeek(offset){
+  weekOffset=offset;
+  document.getElementById('week-num').textContent='Week '+getWeekNum(offset);
+  document.getElementById('week-range').textContent=getWeekRange(offset);
+  document.getElementById('btn-prev').style.background=offset===-1?'rgba(201,76,30,0.8)':'transparent';
+  document.getElementById('btn-prev').style.color=offset===-1?'white':'rgba(245,242,234,0.75)';
+  document.getElementById('btn-prev').style.borderColor=offset===-1?'#c94c1e':'rgba(255,255,255,0.25)';
+  document.getElementById('btn-curr').style.background=offset===0?'#c94c1e':'transparent';
+  document.getElementById('btn-curr').style.color=offset===0?'white':'rgba(245,242,234,0.75)';
+  document.getElementById('btn-curr').style.borderColor=offset===0?'#c94c1e':'rgba(255,255,255,0.25)';
+  document.getElementById('week-selected-label').textContent=offset===-1?'Reporting for last week ('+getWeekRange(-1)+')':'Reporting for current week';
+}
+
+selectWeek(0);
 document.getElementById('days-left').textContent=getDays();
 document.getElementById('top-countdown').textContent=getDays()+' days to race';
 
@@ -287,9 +313,9 @@ function tog(el,id,val){const parent=el.closest('.toggle-row');parent.querySelec
 // Generate report
 function v(id){return document.getElementById(id)?.value||''}
 function generate(){
-  const w=getWeekNum();
+  const w=getWeekNum(weekOffset);
   const d=getDays();
-  const wr=getWeekRange();
+  const wr=getWeekRange(weekOffset);
   const date=new Date().toLocaleDateString('en-IN',{day:'numeric',month:'long',year:'numeric'});
 
   let lines=[
