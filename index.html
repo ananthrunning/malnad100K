@@ -24,11 +24,11 @@ const PLAN = {
   daysToRace:   188,
   phase:        "Phase 1: Aerobic Rebuild",
   phaseDetail:  "Apr 13 – Jun 29 · Weeks 1–11 · Zone 2 base · Quality work introduced Wk 7",
-  campaignPct:  19,        // weekNumber ÷ 32 × 100
-  status:       "on-track", // "on-track" | "lagging" | "overdoing"
+  campaignPct:  19,
+  status:       "on-track",
 
   // ── COACH SUMMARY ─────────────────────────────────────────────────
-  coachSummary: "Week 6 closed with the Freedom Half Marathon — 2:47:50 across a rolling 21.16 km course with 196 m of ascent in 27.5°C heat, six days post-gastroenteritis. The race produced two pieces of data that change the campaign. First, max HR confirmed at 177 bpm — above the formula prediction of 173, giving us real anchors for training zones for the first time. Second, Garmin's performance condition reading of -8 during the race confirms the illness took more than it felt like, which explains the finish time more than fitness does. Thursday's shakeout hit 168 spm cadence almost effortlessly — the closest to the 170 target this campaign, a sign the neuromuscular pattern is embedding. Two coaching errors are owned: HR-only targets on a rolling course were not enforceable, and the Garmin High Aerobic Shortage flag was noted but not addressed for three weeks. Week 7 corrects both. Power becomes the primary metric for interval work, and the first true quality session enters the schedule on Thursday — 5 × 4 minutes at threshold. Volume holds at 44 km, equal to the pre-illness peak. The campaign arc through Phase 1 now builds toward 55 km/week with a 28 km long run by Week 11.",
+  coachSummary: "Week 6 closed with the Freedom Half Marathon — 2:47:50 across a rolling 21.16 km course with 196 m of ascent in 27.5°C heat, six days post-gastroenteritis. The race produced two pieces of data that change the campaign. First, max HR confirmed at 177 bpm — above the formula prediction of 173, giving us real anchors for training zones for the first time. Second, Garmin's performance condition reading of -8 during the race confirms the illness took more than it felt like, which explains the finish time more than fitness does. Thursday's shakeout hit 168 spm cadence almost effortlessly — the closest to the 170 target this campaign, a sign the neuromuscular pattern is embedding. Two coaching errors are owned: HR-only targets on a rolling course were not enforceable, and the Garmin High Aerobic Shortage flag was noted but not addressed for three weeks. Week 7 corrects both. Power becomes the primary metric for interval work, and the first true quality session enters the schedule on Thursday — 5 × 4 minutes at threshold. The Saturday long run shortens to 14–16 km because Sunday's race already supplied the week's long effort. The campaign arc through Phase 1 now builds toward 55 km/week with a 28 km long run by Week 11.",
 
   // ── FLAGS ─────────────────────────────────────────────────────────
   flags: [
@@ -64,15 +64,15 @@ const PLAN = {
   // ── NEXT WEEK PLAN ────────────────────────────────────────────────
   nextWeek: {
     label: "Week 7 · 25–31 May 2026",
-    theme: "Resume base + quality introduction",
-    note: "First proper structured intensity session of the campaign on Thursday — 5 × 4 min at threshold, power as primary metric. Volume holds at pre-illness peak (44 km). Monday and Tuesday handle race recovery; the rest of the week builds toward Phase 2.",
+    theme: "Race recovery + quality introduction",
+    note: "Sunday's race counted as this week's long effort. Thursday's quality session — 5 × 4 min at threshold — is the new headline stimulus. Saturday shortens to 14–16 km to protect Thursday's adaptation and respect the race load. Power becomes the primary metric for interval work.",
     days: [
       { day: "Mon", type: "rest",     label: "Rest",                                detail: "Complete rest. Aggressive hydration. Eat well — Sunday's race used significant glycogen. This is recovery, not training." },
       { day: "Tue", type: "run",      label: "Easy recovery · 8 km",                detail: "HR ≤120 bpm (guardrail), power 200–215W (primary). Include 5 × 1 min cadence drill at 170 spm with metronome. Asics Novablast 5." },
       { day: "Wed", type: "strength", label: "Strength · gym + home",               detail: "Resume normal strength. Lower body focus — squats, lunges, single-leg work. Calf raises progressive (plantar history). Core + mobility." },
       { day: "Thu", type: "run",      label: "Quality · 5 × 4 min threshold",        detail: "2 km warmup + 5 × 4 min at power 250–265W (HR guardrail 155–162 bpm, RPE 7/10) with 2 min jog recovery + 2 km cooldown. Total ~10 km. Brooks Glycerin Max 2. If can't hit power targets, drop to 4 × 4 min — form > grinding." },
-      { day: "Fri", type: "rest",     label: "Rest",                                detail: "Complete rest before long run." },
-      { day: "Sat", type: "run",      label: "Long run · 22 km",                    detail: "Road, HR ≤125 bpm, power 200–215W. Brooks Glycerin Max 2. First post-race long run — start very controlled, monitor HR drift through second hour. Walk-jog OK if HR creeps above 130." },
+      { day: "Fri", type: "rest",     label: "Rest",                                detail: "Complete rest before Saturday." },
+      { day: "Sat", type: "run",      label: "Easy run · 14–16 km",                 detail: "Road or Avalahalli trail — your call based on energy. HR ≤125 bpm, power 200–215W. Brooks Glycerin Max 2. Shorter than usual long run because Sunday's race supplied the week's long effort." },
       { day: "Sun", type: "recovery", label: "Optional badminton or rest",          detail: "If body battery >70 AM, badminton fine. Otherwise rest. Listen to body." },
     ],
     nutrition: "Mon–Tue: glycogen replenishment — extra carbs at breakfast (idli/dosa good). Continue 3-pivot protein protocol: eggs at breakfast, double chicken at lunch, thick dal at dinner. Target 120 g protein. Hydration 3L+ daily. By Thursday's quality session, body should feel fully reset.",
