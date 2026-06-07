@@ -82,7 +82,14 @@ const PLAN = {
     nutrition: "Protein hold at 120–130 g from whole foods — eggs at breakfast, double chicken at lunch, thick dal at dinner. KEY THIS WEEK: log fluid on the Nandi long run and nudge intake toward 500–600 ml/hr with a sodium tab (last week's 1.5 L went unrecorded). Nandi's early start makes a real pre-run breakfast and bedside electrolytes non-negotiable. This is direct rehearsal for the Bangalore Ultra fuelling plan.",
   },
 
-  // ── ADAPTATION RULES (visible on page — permanent protocol) ──────
+  // ── WHAT WE ADAPTED THIS WEEK ─────────────────────────────────────
+  whatWeAdapted: [
+    { change: "Saturday held at 22 km straight Zone 2 — dropped the planned tempo progression finish", because: "Thursday's threshold session already delivered the week's high-aerobic stimulus. Stacking a Zone 3 finish on top in a build week was more intensity than needed." },
+    { change: "Threshold target switched from a power number to feel (7/10)", because: "The prescribed 260–270W proved ~60W too low — your real interval power was ~330W. When the number contradicts the body, the body wins, and we log the mismatch." },
+    { change: "No recovery adaptations triggered", because: "RHR 47, sleep 7.25 hrs, cadence 164 — all green. The recurring Garmin Training Status flag resolved to Productive rather than escalating." },
+  ],
+
+  // ── ADAPTATION RULES (standing protocol — lives in Master Plan PDF) ──
   adaptationRules: [
     { trigger: "RHR ≥ 55 bpm on Monday AM",                     action: "Flag recovery concern. Reduce Thursday run to 6 km easy only. Investigate sleep and stress before prescribing next week." },
     { trigger: "Avg sleep < 6.5 hrs for the week",              action: "Reduce Saturday long run target by 15%. Sleep is the training. Do not compensate with longer weekday runs." },
@@ -416,6 +423,11 @@ h2          { font-size: clamp(1.5rem, 3vw, 2.1rem); margin-bottom: 1.5rem; }
   .rules-table tr { display: block; border-bottom: 1px solid var(--border); padding: 0.75rem 0; }
   .rules-table td { display: block; border: none; padding: 0.2rem 0; width: 100% !important; }
 }
+.adapted-list { display: flex; flex-direction: column; gap: 0.85rem; }
+.adapted-item { padding: 0.9rem 1.1rem; border-left: 3px solid var(--green); background: rgba(0,0,0,0.025); border-radius: 4px; }
+.adapted-change { font-weight: 600; font-size: 0.9rem; line-height: 1.5; margin-bottom: 0.35rem; }
+.adapted-because { font-size: 0.875rem; color: var(--muted); line-height: 1.55; }
+.adapted-because span { font-family: 'DM Mono', monospace; font-size: 0.62rem; color: var(--green); letter-spacing: 0.1em; text-transform: uppercase; margin-right: 0.4rem; }
 
 /* ── STORY ───────────────────────────────────────────────────────── */
 .lede {
@@ -659,21 +671,13 @@ h2          { font-size: clamp(1.5rem, 3vw, 2.1rem); margin-bottom: 1.5rem; }
   </div>
 </section>
 
-<!-- ── 4. ADAPTATION RULES ──────────────────────────────────────────── -->
-<section class="section" id="sec-rules">
+<!-- ── 4. WHAT WE ADAPTED THIS WEEK ──────────────────────────────────── -->
+<section class="section" id="sec-adapted">
   <div class="wrap">
-    <span class="eyebrow">Coach's protocol</span>
-    <h2>Adaptation rules</h2>
-    <p class="rules-intro">These rules govern how the training plan responds to Ananth's weekly body signals. They are applied before every new week is written — automatically, without negotiation.</p>
-    <table class="rules-table">
-      <thead>
-        <tr>
-          <th>If this is observed</th>
-          <th>Then this happens</th>
-        </tr>
-      </thead>
-      <tbody id="rules-tbody"></tbody>
-    </table>
+    <span class="eyebrow">Coach's decisions</span>
+    <h2>What we adapted this week</h2>
+    <p class="rules-intro">The live decisions behind this week's plan — what changed, and why. The standing IF/THEN protocol lives in the Master Training Plan; this section shows what actually happened.</p>
+    <div class="adapted-list" id="adapted-list"></div>
   </div>
 </section>
 
@@ -810,12 +814,12 @@ function render() {
   document.getElementById('nutrition-box').innerHTML =
     `<strong>Nutrition this week:</strong> ${p.nextWeek.nutrition}`;
 
-  // Adaptation rules
-  document.getElementById('rules-tbody').innerHTML = p.adaptationRules.map(r =>
-    `<tr>
-       <td><span class="rule-if">If</span>${r.trigger}</td>
-       <td><span class="rule-then">Then</span>${r.action}</td>
-     </tr>`
+  // What we adapted this week
+  document.getElementById('adapted-list').innerHTML = p.whatWeAdapted.map(a =>
+    `<div class="adapted-item">
+       <div class="adapted-change">${a.change}</div>
+       <div class="adapted-because"><span>Why</span> ${a.because}</div>
+     </div>`
   ).join('');
 
   // Race calendar
