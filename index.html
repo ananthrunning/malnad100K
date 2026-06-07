@@ -1,0 +1,1043 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Malnad Ultra 100K — Ananth's Training Journal</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Source+Sans+3:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+<!-- ═══════════════════════════════════════════════════════════════════
+     ██  PLAN BLOCK — REPLACE ENTIRE BLOCK EACH SUNDAY  ██
+     Only this section changes week to week.
+     Everything else in this file is permanent — do not edit.
+     ═══════════════════════════════════════════════════════════════════ -->
+<script>
+const PLAN = {
+
+  // ── WEEK META ──────────────────────────────────────────────────────
+  weekNumber:   8,
+  dateRange:    "2–8 June 2026",
+  lastUpdated:  "8 June 2026",
+  daysToRace:   173,
+  phase:        "Phase 1: Aerobic Rebuild",
+  phaseDetail:  "Apr 13 – Jun 29 · Weeks 1–11 · Zone 2 base · Quality work now active",
+  campaignPct:  25,        // weekNumber ÷ 32 × 100
+  status:       "on-track", // "on-track" | "lagging" | "overdoing"
+
+  // ── COACH SUMMARY ─────────────────────────────────────────────────
+  coachSummary: "Week 8 closed strong at 41 km, built the right way — through the long run, not padded mid-week volume. Saturday's 22 km road long run was the headline: 3:40 at 125 bpm average, 73% in Zone 2, zero time in Zone 4/5, and a perceived effort of just 3/10 in 29°C heat. That is the aerobic engine Phase 1 exists to build, working exactly as intended. Thursday's threshold session was the best quality work of the campaign — 6 × 4 min with intervals holding ~330W and 5:16–5:20/km pace, run by feel at a true 7/10 after the prescribed power target proved far too low. The standout result: the Garmin Training Status flipped back to PRODUCTIVE, VO2 max recovered to 43, and Acute Training Load reads Optimal at 349. The multi-week 'Unproductive / High Aerobic Shortage' flag we had been escalating is now resolved — the escalated quality dose plus the big aerobic Saturday did the job. Two threshold sessions in a row peaking at 164–169 bpm at sub-maximal effort strongly suggest the 177 max HR is set too low; the dedicated max HR test is locked for this Tuesday (June 9) to reset every zone. Hydration on the long run is adequate (1.5 L taken, ~410 ml/hr) but under-logged and at the low end — the target nudges toward 500–600 ml/hr with sodium, logged, as Bangalore Ultra rehearsal. Week 9 carries the max HR test Tuesday and the deferred Nandi Hills long run Saturday.",
+
+  // ── FLAGS ─────────────────────────────────────────────────────────
+  flags: [
+    { type: "good", text: "RESOLVED: Garmin Training Status back to Productive, VO2 max recovered to 43, ATL Optimal at 349. The multi-week High Aerobic Shortage escalation worked — flag cleared." },
+    { type: "good", text: "Best long run of the campaign: 22 km at 125 bpm, 73% Zone 2, 3/10 effort in 29°C. Aerobic base is building exactly as Phase 1 intends." },
+    { type: "warn", text: "Threshold power target reset: actual interval power is ~330W, not the 260–270W prescribed. Run quality by FEEL (7/10) until the max HR test recalibrates all zones." },
+    { type: "info", text: "Max HR test locked for Tuesday June 9. Two sessions peaking 164–169 bpm at sub-max effort indicate true max is above 177 — test resets every HR and power zone." },
+    { type: "info", text: "Hydration adequate but under-logged: 1.5 L on the 22 km (~410 ml/hr). Nudge toward 500–600 ml/hr with sodium and LOG it — Bangalore Ultra rehearsal." },
+    { type: "warn", text: "Brooks Caldera 7 still active in Garmin Gear at 2,540 km (Exceeded max use). Retire it in Gear settings so it stops auto-attaching to runs." },
+  ],
+
+  // ── CURRENT WEEK METRICS ──────────────────────────────────────────
+  current: {
+    weeklyKm:    41.0,
+    vo2max:      43,
+    rhr:         47,
+    weight:      77.0,
+    cadence:     164,
+    avgHR:       125,
+    sleep:       7.3,
+    protein:     115,
+    bodyBattery: 80,
+  },
+
+  // ── HISTORY (append one entry per week — never remove) ────────────
+  history: [
+    { week: 1, label: "W1", km: 33.7, vo2: 41, cadence: 154, weight: 79.2, rhr: 52, avgHR: 124, sleep: 7.3, protein: 80  },
+    { week: 2, label: "W2", km: 39.4, vo2: 41, cadence: 157, weight: 79.2, rhr: 52, avgHR: 120, sleep: 6.5, protein: 70  },
+    { week: 3, label: "W3", km: 41.4, vo2: 43, cadence: 159, weight: 78.6, rhr: 49, avgHR: 121, sleep: 7.5, protein: 80  },
+    { week: 4, label: "W4", km: 43.0, vo2: 43, cadence: 166, weight: 78.8, rhr: 49, avgHR: 120, sleep: 7.2, protein: 80  },
+    { week: 5, label: "W5", km: 34.1, vo2: 43, cadence: 164, weight: 76.6, rhr: 52, avgHR: 120, sleep: 7.0, protein: 110 },
+    { week: 6, label: "W6", km: 27.0, vo2: 43, cadence: 167, weight: 76.0, rhr: 52, avgHR: 143, sleep: 7.0, protein: 110 },
+    { week: 7, label: "W7", km: 33.4, vo2: 41, cadence: 166, weight: 76.5, rhr: 52, avgHR: 124, sleep: 7.3, protein: 115 },
+    { week: 8, label: "W8", km: 41.0, vo2: 43, cadence: 164, weight: 77.0, rhr: 47, avgHR: 125, sleep: 7.3, protein: 115 },
+  ],
+
+  // ── NEXT WEEK PLAN ────────────────────────────────────────────────
+  nextWeek: {
+    label: "Week 9 · 8–14 June 2026",
+    theme: "Max HR test + Nandi Hills · build to 25 km",
+    note: "A demanding week by design, anchored by two events locked weeks ago: the max HR field test Tuesday and the deferred monthly Nandi Hills long run Saturday. Thursday's quality is deliberately dialled back to easy — you do not stack a maximal test, a hard threshold, and a Nandi climb in one week. Tuesday's test resets every HR and power zone; expect the new max to land above 177, after which all bands recalibrate. Long-run progression continues toward the Phase 1 cap of 28 km in Week 11.",
+    days: [
+      { day: "Mon", type: "rest",     label: "Rest",                                detail: "Complete rest. Check RHR and sleep on waking — Tuesday is a maximal effort and wants fresh legs." },
+      { day: "Tue", type: "run",      label: "MAX HR FIELD TEST",                   detail: "The locked test. 2 km easy warmup (HR ≤120) → 1.6 km progressive build: 400m at tempo, 400m at threshold, final 800m absolute all-out to genuine failure → 2 km easy cooldown. ~6 km total. Run it on a cool morning on flat road. Garmin records the peak — this becomes your confirmed max HR and resets every zone above Zone 2. Adidas EVO SL. This is why Thursday is easy." },
+      { day: "Wed", type: "strength", label: "Strength · gym + home",               detail: "Lower body: Bulgarian split squats, RDLs, step-ups, single-leg calf raises (keep 3 sets, plantar precaution). Core + mobility." },
+      { day: "Thu", type: "run",      label: "Easy + strides · 8 km",               detail: "Deliberately easy — NOT a threshold session this week. 8 km strict Zone 2 (HR ≤120) + 5 × 20-sec strides with 60-sec walk recovery near the end. Asics Novablast 5. Tuesday's test and Saturday's Nandi are the week's hard work; this run stays light." },
+      { day: "Fri", type: "rest",     label: "Rest",                                detail: "Complete rest before the 4:30 AM Nandi start. Lay out gear, breakfast, and hydration the night before." },
+      { day: "Sat", type: "run",      label: "NANDI HILLS long run · ~20–22 km",    detail: "4:30 AM start, the full trip — 7 km climb and the same descent. Your best Malnad terrain simulator and the first real hill session of the build. PACE THE CLIMBS BY POWER, not HR — hold a steady wattage on the ascent (we'll set your personal climbing range from this first Nandi data). HR ceiling 135 on sustained climbs, 125 on flats and descents. LOG fluid intake — target 500–600 ml/hr with a sodium tab. Glycerin Max, or the Speedgoats if they've arrived." },
+      { day: "Sun", type: "recovery", label: "Optional easy 4 km or rest",          detail: "Legs will be worked from the Nandi descents. If body battery >70 AM and legs feel good, an easy 4 km shakeout; otherwise rest." },
+    ],
+    nutrition: "Protein hold at 120–130 g from whole foods — eggs at breakfast, double chicken at lunch, thick dal at dinner. KEY THIS WEEK: log fluid on the Nandi long run and nudge intake toward 500–600 ml/hr with a sodium tab (last week's 1.5 L went unrecorded). Nandi's early start makes a real pre-run breakfast and bedside electrolytes non-negotiable. This is direct rehearsal for the Bangalore Ultra fuelling plan.",
+  },
+
+  // ── ADAPTATION RULES (visible on page — permanent protocol) ──────
+  adaptationRules: [
+    { trigger: "RHR ≥ 55 bpm on Monday AM",                     action: "Flag recovery concern. Reduce Thursday run to 6 km easy only. Investigate sleep and stress before prescribing next week." },
+    { trigger: "Avg sleep < 6.5 hrs for the week",              action: "Reduce Saturday long run target by 15%. Sleep is the training. Do not compensate with longer weekday runs." },
+    { trigger: "Body battery < 70 on Monday AM",                action: "Tuesday HR ceiling drops from 120 to 115 bpm." },
+    { trigger: "Cadence < 162 spm on any run",                  action: "Add 5 × 1-min metronome drill at 170 spm to next Tuesday's plan. Note it explicitly." },
+    { trigger: "Protein < 90 g/day two consecutive weeks",      action: "Escalate: provide concrete meal-by-meal plan for that specific week — not just a target number." },
+    { trigger: "HR elevated 5+ bpm at same pace vs prior week", action: "Do not increase load. Investigate root cause: sleep, heat, illness, or stress. Hold volume flat." },
+    { trigger: "Illness or pain flagged in check-in",           action: "Volume does not increase that week regardless of other metrics. Recovery plan replaces training plan." },
+    { trigger: "Same Garmin flag two consecutive weeks",        action: "Concrete plan change in week 3 — not commentary. Notice → watch → act. Applies to High Aerobic Shortage, Heat Acclimation decreasing, Training Status decline." },
+  ],
+
+  // ── ARCHIVE LINKS (append each week — never remove) ──────────────
+  archive: [
+    { week: 1, label: "Week 1 · Apr 13", url: "https://ananthrunning.com/week-01" },
+    { week: 2, label: "Week 2 · Apr 20", url: "https://ananthrunning.com/reports/week-02.html" },
+    { week: 3, label: "Week 3 · Apr 27", url: "https://ananthrunning.com/reports/week-03.html" },
+    { week: 4, label: "Week 4 · May 4",  url: "https://ananthrunning.com/reports/week-04.html" },
+    { week: 5, label: "Week 5 · May 11", url: "https://ananthrunning.com/reports/week-05.html" },
+    { week: 6, label: "Week 6 · May 18", url: "https://ananthrunning.com/reports/week-06.html" },
+    { week: 7, label: "Week 7 · May 25", url: "https://ananthrunning.com/reports/week-07.html" },
+  ],
+};
+</script>
+<!-- ═══════════════════════════════════════════════════════════════════
+     END PLAN BLOCK
+     ═══════════════════════════════════════════════════════════════════ -->
+
+<style>
+/* ── RESET ───────────────────────────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+
+:root {
+  --cream:     #F7F4EF;
+  --green:     #1B4332;
+  --green-mid: #2D6A4F;
+  --green-lt:  #D8F3DC;
+  --amber:     #92400E;
+  --amber-lt:  #FEF3C7;
+  --red:       #991B1B;
+  --red-lt:    #FEE2E2;
+  --blue:      #1E40AF;
+  --blue-lt:   #EFF6FF;
+  --ink:       #1A1A1A;
+  --muted:     #6B7280;
+  --border:    #E5DDD0;
+  --card:      #FFFFFF;
+}
+
+body {
+  font-family: 'Source Sans 3', sans-serif;
+  background: var(--cream);
+  color: var(--ink);
+  font-size: 16px;
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ── LAYOUT ──────────────────────────────────────────────────────── */
+.wrap    { max-width: 900px; margin: 0 auto; padding: 0 1.5rem; }
+.section { padding: 3.5rem 0; border-top: 1px solid var(--border); }
+
+/* ── TYPE ────────────────────────────────────────────────────────── */
+h1, h2, h3 { font-family: 'Playfair Display', serif; line-height: 1.2; }
+h2          { font-size: clamp(1.5rem, 3vw, 2.1rem); margin-bottom: 1.5rem; }
+.eyebrow {
+  display: block;
+  font-family: 'DM Mono', monospace;
+  font-size: 0.65rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--green);
+  margin-bottom: 0.5rem;
+}
+
+/* ── HERO (clean split banner) ───────────────────────────────────── */
+.hero {
+  background: var(--cream);
+  color: var(--ink);
+  border-bottom: 1px solid var(--border);
+  padding: 0;
+}
+.hero-grid {
+  max-width: 900px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0;
+  align-items: stretch;
+}
+@media (max-width: 720px) {
+  .hero-grid { grid-template-columns: 1fr; }
+}
+.hero-photo {
+  position: relative;
+  min-height: 320px;
+  background: #E5DDD0;
+}
+.hero-photo img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 30%;
+}
+@media (max-width: 720px) {
+  .hero-photo { min-height: 260px; order: -1; }
+}
+.hero-text {
+  padding: 2.5rem 1.5rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.hero-label {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.66rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--green);
+  margin-bottom: 0.6rem;
+}
+.hero-name {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(1.8rem, 5vw, 2.8rem);
+  font-weight: 700;
+  line-height: 1.05;
+  letter-spacing: -0.01em;
+  color: var(--ink);
+}
+.hero-sub { font-size: 0.95rem; color: var(--muted); margin-top: 0.4rem; }
+
+/* status — green is the accent that stands out on the clean banner */
+.status-pill {
+  align-self: flex-start;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.35rem 0.95rem;
+  border-radius: 999px;
+  font-family: 'DM Mono', monospace;
+  font-size: 0.7rem;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  margin-top: 1.25rem;
+  font-weight: 500;
+}
+.pill-dot { width: 7px; height: 7px; border-radius: 50%; background: currentColor; }
+.pill-on-track  { background: var(--green-lt); border: 1px solid var(--green-mid); color: var(--green); }
+.pill-lagging   { background: var(--amber-lt); border: 1px solid var(--amber);     color: var(--amber); }
+.pill-overdoing { background: var(--red-lt);   border: 1px solid var(--red);       color: var(--red); }
+
+.hero-stats {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.75rem;
+  margin-top: 1.75rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--border);
+}
+.hstat-val   { display: block; font-family: 'DM Mono', monospace; font-size: 1.8rem; line-height: 1; color: var(--green); }
+.hstat-label { font-size: 0.68rem; text-transform: uppercase; letter-spacing: 0.08em; color: var(--muted); margin-top: 0.3rem; }
+
+.progress-wrap { margin-top: 1.75rem; }
+.progress-labels {
+  display: flex;
+  justify-content: space-between;
+  font-family: 'DM Mono', monospace;
+  font-size: 0.62rem;
+  color: var(--muted);
+  margin-bottom: 0.4rem;
+}
+.progress-track { height: 4px; background: var(--border); border-radius: 2px; overflow: hidden; }
+.progress-fill  { height: 100%; background: var(--green-mid); border-radius: 2px; transition: width 1.2s cubic-bezier(.4,0,.2,1); }
+
+.phases-row { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 1.5rem; }
+.phase-chip {
+  padding: 0.28rem 0.8rem;
+  border-radius: 4px;
+  font-family: 'DM Mono', monospace;
+  font-size: 0.64rem;
+  letter-spacing: 0.04em;
+}
+.phase-now    { background: var(--green-lt); border: 1px solid var(--green-mid); color: var(--green); }
+.phase-future { background: transparent;     border: 1px solid var(--border);    color: var(--muted); }
+
+/* ── FLAGS ───────────────────────────────────────────────────────── */
+.flags { display: flex; flex-direction: column; gap: 0.55rem; margin-bottom: 1.75rem; }
+.flag {
+  display: flex;
+  gap: 0.8rem;
+  align-items: flex-start;
+  padding: 0.7rem 1rem;
+  border-radius: 6px;
+  font-size: 0.9rem;
+  line-height: 1.45;
+}
+.flag-icon { flex-shrink: 0; font-size: 0.85rem; margin-top: 0.05rem; }
+.flag-warn { background: var(--amber-lt); color: var(--amber); border-left: 3px solid currentColor; }
+.flag-info { background: var(--blue-lt);  color: var(--blue);  border-left: 3px solid currentColor; }
+.flag-good { background: var(--green-lt); color: var(--green); border-left: 3px solid currentColor; }
+
+.coach-text {
+  font-family: 'Playfair Display', serif;
+  font-style: italic;
+  font-size: 1.05rem;
+  line-height: 1.8;
+  border-left: 3px solid var(--green);
+  padding-left: 1.25rem;
+  color: #2D3748;
+}
+
+/* ── METRICS ─────────────────────────────────────────────────────── */
+.metrics-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+  gap: 0.875rem;
+  margin-bottom: 2rem;
+}
+.mcard {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 0.9rem 1rem 0.8rem;
+}
+.mval {
+  display: block;
+  font-family: 'DM Mono', monospace;
+  font-size: 1.75rem;
+  font-weight: 500;
+  color: var(--green);
+  line-height: 1;
+}
+.munit  { font-size: 0.82rem; color: var(--muted); font-family: 'DM Mono', monospace; }
+.mlabel { font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.07em; color: var(--muted); margin-top: 0.3rem; }
+
+/* ── CHARTS ──────────────────────────────────────────────────────── */
+.charts-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+@media (max-width: 560px) { .charts-grid { grid-template-columns: 1fr; } }
+
+.chart-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 1.1rem 1.1rem 0.9rem;
+}
+.chart-label {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.65rem;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--muted);
+  margin-bottom: 0.75rem;
+}
+.chart-area { position: relative; height: 130px; }
+
+/* ── PLAN ────────────────────────────────────────────────────────── */
+.plan-meta {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.78rem;
+  color: var(--green);
+  letter-spacing: 0.04em;
+  margin-bottom: 0.4rem;
+}
+.plan-note { font-size: 0.93rem; color: var(--muted); margin-bottom: 1.5rem; line-height: 1.55; }
+
+.days { display: flex; flex-direction: column; gap: 0.65rem; }
+.day-row {
+  display: grid;
+  grid-template-columns: 46px 1fr;
+  gap: 0.75rem;
+  align-items: start;
+}
+.day-pill {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.67rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  text-align: center;
+  padding: 0.32rem 0.2rem;
+  border-radius: 4px;
+  line-height: 1.3;
+}
+.t-rest     { background: #F3F4F6; color: var(--muted); }
+.t-run      { background: var(--green-lt); color: var(--green); }
+.t-race     { background: var(--red-lt); color: var(--red); }
+.t-recovery { background: var(--amber-lt); color: var(--amber); }
+.t-strength { background: #EDE9FE; color: #6D28D9; }
+.t-trail    { background: #D1FAE5; color: #065F46; }
+
+.day-title  { font-weight: 600; font-size: 0.93rem; margin-bottom: 0.15rem; }
+.day-detail { font-size: 0.85rem; color: var(--muted); line-height: 1.5; }
+
+.nutrition-box {
+  margin-top: 1.5rem;
+  padding: 1rem 1.25rem;
+  background: var(--green-lt);
+  border-radius: 6px;
+  font-size: 0.9rem;
+  color: var(--green);
+  line-height: 1.65;
+}
+
+/* ── ADAPTATION RULES ────────────────────────────────────────────── */
+.rules-intro { font-size: 0.9rem; color: var(--muted); line-height: 1.6; margin-bottom: 1.5rem; }
+.rules-table { width: 100%; border-collapse: collapse; }
+.rules-table th {
+  text-align: left;
+  font-family: 'DM Mono', monospace;
+  font-size: 0.65rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--muted);
+  padding: 0 0 0.75rem;
+  border-bottom: 2px solid var(--border);
+}
+.rules-table td {
+  padding: 0.8rem 0;
+  border-bottom: 1px solid var(--border);
+  vertical-align: top;
+  font-size: 0.875rem;
+  line-height: 1.5;
+}
+.rules-table td:first-child { padding-right: 2rem; width: 45%; }
+.rule-if   { font-family: 'DM Mono', monospace; font-size: 0.62rem; color: var(--amber); letter-spacing: 0.1em; text-transform: uppercase; display: block; margin-bottom: 0.2rem; }
+.rule-then { font-family: 'DM Mono', monospace; font-size: 0.62rem; color: var(--green); letter-spacing: 0.1em; text-transform: uppercase; display: block; margin-bottom: 0.2rem; }
+@media (max-width: 600px) {
+  .rules-table thead { display: none; }
+  .rules-table tr { display: block; border-bottom: 1px solid var(--border); padding: 0.75rem 0; }
+  .rules-table td { display: block; border: none; padding: 0.2rem 0; width: 100% !important; }
+}
+
+/* ── STORY ───────────────────────────────────────────────────────── */
+.lede {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(1.05rem, 2.5vw, 1.3rem);
+  line-height: 1.75;
+  margin-bottom: 1.25rem;
+}
+.body-text { font-size: 0.97rem; line-height: 1.8; color: #374151; margin-bottom: 1rem; }
+
+.calendar { margin-top: 2.5rem; }
+.calendar h3 { font-size: 1.15rem; margin-bottom: 1rem; }
+.cal-row {
+  display: grid;
+  grid-template-columns: 100px 1fr;
+  gap: 1rem;
+  padding: 0.8rem 0;
+  border-bottom: 1px solid var(--border);
+  align-items: start;
+}
+.cal-row:first-of-type { border-top: 1px solid var(--border); }
+.cal-date  { font-family: 'DM Mono', monospace; font-size: 0.73rem; color: var(--muted); padding-top: 0.1rem; }
+.cal-event { font-weight: 600; font-size: 0.93rem; }
+.cal-info  { font-size: 0.83rem; color: var(--muted); margin-top: 0.15rem; }
+.badge {
+  display: inline-block;
+  font-family: 'DM Mono', monospace;
+  font-size: 0.6rem;
+  padding: 0.12rem 0.45rem;
+  border-radius: 999px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  margin-left: 0.4rem;
+  vertical-align: middle;
+}
+.b-a    { background: var(--red-lt);   color: var(--red); }
+.b-b    { background: var(--amber-lt); color: var(--amber); }
+.b-opt  { background: #F3F4F6;         color: var(--muted); }
+.b-done { background: var(--green-lt); color: var(--green); }
+.b-goal { background: var(--green);    color: #fff; }
+
+/* ── COMMENTS ────────────────────────────────────────────────────── */
+.comments-intro { font-size: 0.93rem; color: var(--muted); margin-bottom: 1.75rem; line-height: 1.6; }
+.form-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 1.5rem;
+  margin-bottom: 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.7rem;
+}
+.form-card input,
+.form-card textarea {
+  padding: 0.7rem 1rem;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  font-family: 'Source Sans 3', sans-serif;
+  font-size: 0.93rem;
+  background: var(--cream);
+  color: var(--ink);
+  transition: border-color 0.15s;
+  resize: vertical;
+}
+.form-card input:focus,
+.form-card textarea:focus { outline: none; border-color: var(--green); }
+.form-card textarea { min-height: 80px; }
+.btn-send {
+  align-self: flex-start;
+  background: var(--green);
+  color: #fff;
+  border: none;
+  padding: 0.65rem 1.5rem;
+  border-radius: 6px;
+  font-family: 'Source Sans 3', sans-serif;
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.15s, opacity 0.15s;
+}
+.btn-send:hover    { background: var(--green-mid); }
+.btn-send:disabled { opacity: 0.45; cursor: not-allowed; }
+.form-status { font-size: 0.8rem; color: var(--green); font-family: 'DM Mono', monospace; }
+
+.cmts-list { display: flex; flex-direction: column; gap: 0.875rem; }
+.cmt {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 1rem 1.25rem;
+}
+.cmt-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  margin-bottom: 0.45rem;
+}
+.cmt-name { font-weight: 600; font-size: 0.9rem; }
+.cmt-date { font-family: 'DM Mono', monospace; font-size: 0.68rem; color: var(--muted); }
+.cmt-msg  { font-size: 0.93rem; line-height: 1.6; color: #374151; }
+.cmts-empty { font-size: 0.93rem; color: var(--muted); font-style: italic; }
+
+/* ── ARCHIVE ─────────────────────────────────────────────────────── */
+.archive-row { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 1rem; }
+.arc-link {
+  display: inline-block;
+  padding: 0.32rem 0.85rem;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  font-family: 'DM Mono', monospace;
+  font-size: 0.73rem;
+  color: var(--green);
+  text-decoration: none;
+  transition: border-color 0.15s;
+}
+.arc-link:hover   { border-color: var(--green); }
+.arc-link.current { background: var(--green); color: #fff; border-color: var(--green); }
+
+/* ── FOOTER ──────────────────────────────────────────────────────── */
+.site-footer {
+  background: var(--ink);
+  color: rgba(255,255,255,.4);
+  padding: 1.25rem 0;
+  margin-top: 4rem;
+  font-family: 'DM Mono', monospace;
+  font-size: 0.72rem;
+}
+.footer-inner {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+@media (max-width: 640px) {
+  .hero-stats { gap: 1.5rem; }
+  .metrics-grid { grid-template-columns: repeat(3, 1fr); }
+  .cal-row { grid-template-columns: 80px 1fr; }
+}
+</style>
+</head>
+
+<body>
+
+<!-- ── HERO ──────────────────────────────────────────────────────────── -->
+<header class="hero">
+  <div class="hero-grid">
+    <div class="hero-photo">
+      <img src="media/banner-img.png" alt="Ananth running the Bengaluru Half Marathon">
+    </div>
+    <div class="hero-text">
+      <div class="hero-label">Malnad Ultra 100K · Training Journal · 2026</div>
+      <div class="hero-name">Ananth S Kumar</div>
+      <div class="hero-sub">47 · North Bengaluru · Running to the Western Ghats</div>
+
+      <div id="hero-status"></div>
+
+      <div class="hero-stats">
+        <div>
+          <span class="hstat-val" id="h-days">—</span>
+          <div class="hstat-label">Days to race</div>
+        </div>
+        <div>
+          <span class="hstat-val" id="h-week">—</span>
+          <div class="hstat-label">Week of 32</div>
+        </div>
+        <div>
+          <span class="hstat-val" id="h-phase">—</span>
+          <div class="hstat-label">Phase</div>
+        </div>
+      </div>
+
+      <div class="progress-wrap">
+        <div class="progress-labels">
+          <span>Start · Apr 13</span>
+          <span id="h-pct">—%</span>
+          <span>Race · Nov 28</span>
+        </div>
+        <div class="progress-track">
+          <div class="progress-fill" id="progress-fill" style="width:0%"></div>
+        </div>
+      </div>
+
+      <div class="phases-row">
+        <div class="phase-chip phase-now">Phase 1 · Wks 1–11</div>
+        <div class="phase-chip phase-future">Phase 2 · Wks 12–22</div>
+        <div class="phase-chip phase-future">Phase 3 · Wks 23–32</div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- ── 1. PROGRESS SUMMARY ───────────────────────────────────────────── -->
+<section class="section" id="sec-summary">
+  <div class="wrap">
+    <span class="eyebrow">Week <span id="s-week">—</span> · <span id="s-dates">—</span></span>
+    <h2>Progress this week</h2>
+    <div class="flags" id="flags"></div>
+    <div class="coach-text" id="coach-text"></div>
+  </div>
+</section>
+
+<!-- ── 2. KEY METRICS ────────────────────────────────────────────────── -->
+<section class="section" id="sec-metrics">
+  <div class="wrap">
+    <span class="eyebrow">Numbers</span>
+    <h2>Key metrics</h2>
+    <div class="metrics-grid" id="metrics-grid"></div>
+    <div class="charts-grid">
+      <div class="chart-card">
+        <div class="chart-label">Weekly volume (km)</div>
+        <div class="chart-area"><canvas id="c-vol"></canvas></div>
+      </div>
+      <div class="chart-card">
+        <div class="chart-label">VO₂ Max (Garmin)</div>
+        <div class="chart-area"><canvas id="c-vo2"></canvas></div>
+      </div>
+      <div class="chart-card">
+        <div class="chart-label">Cadence (spm) — target 170</div>
+        <div class="chart-area"><canvas id="c-cad"></canvas></div>
+      </div>
+      <div class="chart-card">
+        <div class="chart-label">Weight (kg) — target 73–74</div>
+        <div class="chart-area"><canvas id="c-wt"></canvas></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── 3. NEXT WEEK PLAN ─────────────────────────────────────────────── -->
+<section class="section" id="sec-plan">
+  <div class="wrap">
+    <span class="eyebrow">Training plan</span>
+    <h2 id="plan-title">Next week</h2>
+    <div class="plan-meta" id="plan-theme"></div>
+    <div class="plan-note" id="plan-note"></div>
+    <div class="days" id="days-list"></div>
+    <div class="nutrition-box" id="nutrition-box"></div>
+  </div>
+</section>
+
+<!-- ── 4. ADAPTATION RULES ──────────────────────────────────────────── -->
+<section class="section" id="sec-rules">
+  <div class="wrap">
+    <span class="eyebrow">Coach's protocol</span>
+    <h2>Adaptation rules</h2>
+    <p class="rules-intro">These rules govern how the training plan responds to Ananth's weekly body signals. They are applied before every new week is written — automatically, without negotiation.</p>
+    <table class="rules-table">
+      <thead>
+        <tr>
+          <th>If this is observed</th>
+          <th>Then this happens</th>
+        </tr>
+      </thead>
+      <tbody id="rules-tbody"></tbody>
+    </table>
+  </div>
+</section>
+
+<!-- ── 5. THE STORY ──────────────────────────────────────────────────── -->
+<section class="section" id="sec-story">
+  <div class="wrap">
+    <span class="eyebrow">What he is attempting</span>
+    <h2>A hundred kilometres through the Western Ghats</h2>
+
+    <p class="lede">The Malnad Ultra 100K is one of India's most demanding trail running events — 100 kilometres of mountain trail through the coffee estates and forests of Karnataka's Malnad region, gaining and losing 3,410 metres in elevation in a single continuous push lasting up to 21 hours.</p>
+
+    <p class="body-text">The course runs as two identical 50-kilometre loops through dense forest, river crossings, and unrelenting climbs in the Western Ghats near Chikmagalur. The first loop must be completed by 4:30 PM; the second begins in the late afternoon and runs deep into the night under a mandatory headlamp. The cut-off is 3:30 AM the following morning.</p>
+
+    <p class="body-text">Ananth is 47 and lives in North Bengaluru. He completed the Malnad 50K in November 2025, earning his qualification for the 100K. This 32-week campaign — three phases, five races — is the methodical preparation for what comes next.</p>
+
+    <p class="body-text">At 47 the body is capable of extraordinary endurance performance, but it recovers on its own schedule and adapts more deliberately than it did at 30. The plan is built around that reality: Zone 2 aerobic discipline every Tuesday and Thursday, long runs every Saturday, one strength session mid-week, sleep protected as a training variable, and protein tracked like a metric. Every early morning, every held-back heart rate, every protein-rich meal is part of the same plan.</p>
+
+    <p class="body-text">The only finishing time that matters for a first 100K is the one that says Finisher. Everything before November 28 is preparation.</p>
+
+    <div class="calendar">
+      <h3 class="serif-">The road to Malnad — race calendar</h3>
+      <div id="race-cal"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ── 6. SUPPORT / COMMENTS ─────────────────────────────────────────── -->
+<section class="section" id="sec-comments">
+  <div class="wrap">
+    <span class="eyebrow">Support Ananth</span>
+    <h2>Leave a message</h2>
+    <p class="comments-intro">Messages from friends, family, and fellow runners — visible to everyone, updated in real time. A long run at 5 AM is easier when you know people are cheering.</p>
+
+    <div class="form-card">
+      <input type="text" id="c-name" placeholder="Your name" maxlength="60">
+      <textarea id="c-msg"  placeholder="Your message for Ananth…" maxlength="500"></textarea>
+      <button class="btn-send" onclick="sendComment()">Send message</button>
+      <div class="form-status" id="c-status"></div>
+    </div>
+
+    <div class="cmts-list" id="cmts-list">
+      <div class="cmts-empty">Loading messages…</div>
+    </div>
+  </div>
+</section>
+
+<!-- ── ARCHIVE ───────────────────────────────────────────────────────── -->
+<section class="section" id="sec-archive">
+  <div class="wrap">
+    <span class="eyebrow">Previous weeks</span>
+    <h2 style="margin-bottom:0.75rem;">Week archive</h2>
+    <div class="archive-row" id="arc-row"></div>
+  </div>
+</section>
+
+<!-- ── FOOTER ────────────────────────────────────────────────────────── -->
+<footer class="site-footer">
+  <div class="wrap footer-inner">
+    <span>Malnad Ultra 100K · Training Journal · Ananth S Kumar · Bengaluru</span>
+    <span>Updated <span id="f-updated">—</span> · Garmin Forerunner 955 Solar · <a href="https://malnadultra.com/" style="color:inherit;">malnadultra.com</a></span>
+  </div>
+</footer>
+
+<!-- ── RENDER & CHARTS ────────────────────────────────────────────────── -->
+<script>
+/* ─────────────────────────── RENDER ─────────────────────────────── */
+function render() {
+  const p = PLAN;
+
+  // Hero
+  document.getElementById('h-days').textContent  = p.daysToRace;
+  document.getElementById('h-week').textContent  = p.weekNumber;
+  document.getElementById('h-phase').textContent = '1';
+  document.getElementById('h-pct').textContent   = p.campaignPct + '%';
+  setTimeout(() => {
+    document.getElementById('progress-fill').style.width = p.campaignPct + '%';
+  }, 100);
+
+  const pillMap = {
+    'on-track':  ['pill-on-track',  '● On track'],
+    'lagging':   ['pill-lagging',   '● Attention needed'],
+    'overdoing': ['pill-overdoing', '● Overreaching — pull back'],
+  };
+  const [cls, lbl] = pillMap[p.status] || pillMap['on-track'];
+  document.getElementById('hero-status').innerHTML =
+    `<div class="status-pill ${cls}">${lbl}</div>`;
+
+  // Summary
+  document.getElementById('s-week').textContent = p.weekNumber;
+  document.getElementById('s-dates').textContent = p.dateRange;
+  document.getElementById('coach-text').textContent = p.coachSummary;
+
+  const flagIcon = { warn: '⚠', info: 'ℹ', good: '✓' };
+  document.getElementById('flags').innerHTML = p.flags.map(f =>
+    `<div class="flag flag-${f.type}">
+       <span class="flag-icon">${flagIcon[f.type]||'·'}</span>
+       <span>${f.text}</span>
+     </div>`
+  ).join('');
+
+  // Metrics
+  const m = p.current;
+  const cards = [
+    [m.weeklyKm,    'km',   'Week volume'],
+    [m.vo2max,      '',     'VO₂ Max'],
+    [m.rhr,         'bpm',  'Resting HR'],
+    [m.weight,      'kg',   'Weight'],
+    [m.cadence,     'spm',  'Cadence'],
+    [m.avgHR,       'bpm',  'Avg run HR'],
+    [m.sleep,       'hrs',  'Avg sleep'],
+    [m.protein,     'g',    'Daily protein'],
+    [m.bodyBattery, '/100', 'Body battery'],
+  ];
+  document.getElementById('metrics-grid').innerHTML = cards.map(([v,u,l]) =>
+    `<div class="mcard">
+       <span class="mval">${v}<span class="munit">${u}</span></span>
+       <div class="mlabel">${l}</div>
+     </div>`
+  ).join('');
+
+  // Plan
+  document.getElementById('plan-title').textContent = p.nextWeek.label;
+  document.getElementById('plan-theme').textContent = p.nextWeek.theme;
+  document.getElementById('plan-note').textContent  = p.nextWeek.note;
+  document.getElementById('days-list').innerHTML = p.nextWeek.days.map(d =>
+    `<div class="day-row">
+       <div class="day-pill t-${d.type}">${d.day}</div>
+       <div>
+         <div class="day-title">${d.label}</div>
+         <div class="day-detail">${d.detail}</div>
+       </div>
+     </div>`
+  ).join('');
+  document.getElementById('nutrition-box').innerHTML =
+    `<strong>Nutrition this week:</strong> ${p.nextWeek.nutrition}`;
+
+  // Adaptation rules
+  document.getElementById('rules-tbody').innerHTML = p.adaptationRules.map(r =>
+    `<tr>
+       <td><span class="rule-if">If</span>${r.trigger}</td>
+       <td><span class="rule-then">Then</span>${r.action}</td>
+     </tr>`
+  ).join('');
+
+  // Race calendar
+  const races = [
+    ['May 24, 2026',  'Freedom Bengaluru Half Marathon ✓', '21.1 km · Road · Completed in 2:47:50 (max HR 177)',     'Done', 'b-done'],
+    ['Jul 26, 2026',  'Bangalore Ultra 50K',             '50 km · Road · Nutrition rehearsal · 65% effort',        'B',    'b-b'],
+    ['Aug 9, 2026',   'Nandi Hills Monsoon Run 10K',     '10 km · Road · 191 m · Training run with bib',           'Train','b-opt'],
+    ['Sep 27, 2026',  'Wipro Bengaluru Marathon',        '42.2 km · Road · Malnad time predictor',                 'A',    'b-a'],
+    ['Oct 31, 2026',  'Jawadhu Hills 50K',               '50 km · Trail · 1,160 m · SITG · 70% effort, conditional','Opt',  'b-opt'],
+    ['Nov 28, 2026',  'Malnad Ultra 100K',               '100 km · Trail · 3,410 m elevation · Goal: Finish',      'Goal', 'b-goal'],
+  ];
+  document.getElementById('race-cal').innerHTML = races.map(([dt,nm,info,bd,bc]) =>
+    `<div class="cal-row">
+       <div class="cal-date">${dt}</div>
+       <div>
+         <div class="cal-event">${nm}<span class="badge ${bc}">${bd}</span></div>
+         <div class="cal-info">${info}</div>
+       </div>
+     </div>`
+  ).join('');
+
+  // Archive
+  const arcs = [
+    ...PLAN.archive.map(a =>
+      `<a href="${a.url}" class="arc-link">${a.label}</a>`
+    ),
+    `<span class="arc-link current">Week ${p.weekNumber} · ${p.dateRange} — current</span>`,
+  ];
+  document.getElementById('arc-row').innerHTML = arcs.join('');
+
+  // Footer
+  document.getElementById('f-updated').textContent = p.lastUpdated;
+}
+
+/* ─────────────────────────── CHARTS ─────────────────────────────── */
+function initCharts() {
+  const h      = PLAN.history;
+  const labels = h.map(w => w.label);
+
+  const base = {
+    responsive: true,
+    maintainAspectRatio: false,
+    animation: { duration: 700 },
+    plugins: { legend: { display: false } },
+    scales: {
+      x: {
+        grid: { display: false },
+        ticks: { font: { family: 'DM Mono', size: 10 }, color: '#9CA3AF' },
+      },
+      y: {
+        grid: { color: '#F3F4F6' },
+        ticks: { font: { family: 'DM Mono', size: 10 }, color: '#9CA3AF' },
+      },
+    },
+  };
+
+  // Volume — bar
+  new Chart(document.getElementById('c-vol'), {
+    type: 'bar',
+    data: {
+      labels,
+      datasets: [{
+        data: h.map(w => w.km),
+        backgroundColor: h.map((w, i) => i === h.length - 1 ? '#1B4332' : '#D8F3DC'),
+        borderRadius: 3,
+      }],
+    },
+    options: { ...base },
+  });
+
+  // VO2 Max — line
+  new Chart(document.getElementById('c-vo2'), {
+    type: 'line',
+    data: {
+      labels,
+      datasets: [{
+        data: h.map(w => w.vo2),
+        borderColor: '#2D6A4F',
+        backgroundColor: 'rgba(45,106,79,0.07)',
+        tension: 0.35,
+        pointRadius: 4,
+        pointBackgroundColor: '#2D6A4F',
+        fill: true,
+      }],
+    },
+    options: { ...base, scales: { ...base.scales, y: { ...base.scales.y, min: 38, suggestedMax: 52 } } },
+  });
+
+  // Cadence — line + target
+  new Chart(document.getElementById('c-cad'), {
+    type: 'line',
+    data: {
+      labels,
+      datasets: [
+        {
+          data: h.map(w => w.cadence),
+          borderColor: '#B45309',
+          backgroundColor: 'rgba(180,83,9,0.07)',
+          tension: 0.35,
+          pointRadius: 4,
+          pointBackgroundColor: '#B45309',
+          fill: true,
+        },
+        {
+          data: h.map(() => 170),
+          borderColor: '#D97706',
+          borderDash: [5, 4],
+          pointRadius: 0,
+          tension: 0,
+        },
+      ],
+    },
+    options: { ...base, scales: { ...base.scales, y: { ...base.scales.y, min: 148, max: 178 } } },
+  });
+
+  // Weight — line + target
+  new Chart(document.getElementById('c-wt'), {
+    type: 'line',
+    data: {
+      labels,
+      datasets: [
+        {
+          data: h.map(w => w.weight),
+          borderColor: '#6B7280',
+          backgroundColor: 'rgba(107,114,128,0.07)',
+          tension: 0.35,
+          pointRadius: 4,
+          pointBackgroundColor: '#6B7280',
+          fill: true,
+        },
+        {
+          data: h.map(() => 73.5),
+          borderColor: '#1B4332',
+          borderDash: [5, 4],
+          pointRadius: 0,
+          tension: 0,
+        },
+      ],
+    },
+    options: { ...base, scales: { ...base.scales, y: { ...base.scales.y, min: 70, max: 82 } } },
+  });
+}
+
+/* ────────────────────────── COMMENTS (Supabase) ─────────────────── */
+const SUPA_URL = 'https://wiowwmtnpihfuvximjsg.supabase.co';
+const SUPA_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Indpb3d3bXRucGloZnV2eGltanNnIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzcyOTIxMjcsImV4cCI6MjA5Mjg2ODEyN30.qOrdQQoa8oHu-lvg-htDcWSAB36YQZ1-1BlkbjhXlMs';
+const db = supabase.createClient(SUPA_URL, SUPA_KEY);
+
+async function loadComments() {
+  const el = document.getElementById('cmts-list');
+  try {
+    const { data, error } = await db
+      .from('messages')
+      .select('name, message, created_at')
+      .order('created_at', { ascending: false });
+
+    if (error) throw error;
+
+    if (!data || !data.length) {
+      el.innerHTML = '<div class="cmts-empty">No messages yet — be the first to cheer Ananth on!</div>';
+    } else {
+      el.innerHTML = data.map(c => {
+        const date = new Date(c.created_at).toLocaleDateString('en-IN', {
+          day: 'numeric', month: 'short', year: 'numeric'
+        });
+        return `<div class="cmt">
+           <div class="cmt-top">
+             <span class="cmt-name">${esc(c.name)}</span>
+             <span class="cmt-date">${date}</span>
+           </div>
+           <div class="cmt-msg">${esc(c.message)}</div>
+         </div>`;
+      }).join('');
+    }
+  } catch {
+    el.innerHTML = '<div class="cmts-empty">Messages unavailable — try refreshing.</div>';
+  }
+}
+
+async function sendComment() {
+  const nameEl = document.getElementById('c-name');
+  const msgEl  = document.getElementById('c-msg');
+  const stEl   = document.getElementById('c-status');
+  const btn    = document.querySelector('.btn-send');
+
+  const name    = nameEl.value.trim();
+  const message = msgEl.value.trim();
+  if (!name || !message) { stEl.textContent = 'Please add your name and a message.'; return; }
+
+  btn.disabled     = true;
+  stEl.textContent = 'Sending…';
+
+  try {
+    const { error } = await db
+      .from('messages')
+      .insert([{ name, message }]);
+
+    if (error) throw error;
+
+    nameEl.value     = '';
+    msgEl.value      = '';
+    stEl.textContent = '✓ Sent — thank you!';
+    await loadComments();
+  } catch {
+    stEl.textContent = 'Could not send — please try again.';
+  }
+  btn.disabled = false;
+}
+
+function esc(s) {
+  return String(s)
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;');
+}
+
+/* ─────────────────────────── INIT ───────────────────────────────── */
+render();
+initCharts();
+loadComments();
+</script>
+
+</body>
+</html>
