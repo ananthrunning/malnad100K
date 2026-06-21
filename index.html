@@ -27,18 +27,56 @@ const PLAN = {
   campaignPct:  34,        // weekNumber ÷ 32 × 100
   status:       "on-track", // "on-track" | "lagging" | "overdoing"
 
-  // ── COACH SUMMARY ─────────────────────────────────────────────────
-  coachSummary: "Week 10 closed the books on the plateau. Volume landed at ~48 km (10.04 threshold + 10 easy + 23.03 Nandi + 5.11 Sunday) — the clean break above the six-week ~41 km wall that had defined the campaign through illness, the HM, and the root canal. And it wasn't padded: the Saturday Nandi long run carried 954 m of ascent, so the real training stress sits well above what the flat kilometre count implies. The headline was a genuine performance milestone — the full road uphill climbed without stopping for the first time ever, exactly the aerobic adaptation Phase 1 exists to produce. Sunday's recovery 5.11 km was textbook: 123 bpm average, 168 cadence (now consistently above the 162 floor and closing on the 170+ target unprompted), Zone 2 respected. The supporting data all confirms the engine is real: Training Status holds Productive with Load Focus High Aerobic, Acute Training Load 472 Optimal, Heat Acclimation increasing (52%) as Bengaluru summer does its quiet work. Recovery markers backed a normal week — Body Battery peaking 84–88, stress low-moderate (avg 40), Sunday net Body Battery impact only -8, weight 76–77 kg trending toward the 73–74 race target. The VO2 number reading 42 is not a flag: it rises only off threshold/interval/tempo and decays across pure-Z2 weeks — normal sawtooth, not fitness loss. The one live issue is hydration/sodium, now a 3+ week pattern (42% replacement at Nandi with the cramp signature, under-logging on every long run, the same depletion mechanism that broke the Malnad 50K). Per Rule 9 that stops being commentary and becomes a built-in plan change: Week 11's road long run is now a full hydration dress-rehearsal. Week 11 is the Phase 1 capstone — consolidate the volume break-through at a verified 50 km, hold Zone 2 discipline on the corrected 125 bpm road ceiling, and close the aerobic block clean. Phase 2 quality begins Jun 30.",
+  // ── HEADLINE ──────────────────────────────────────────────────────
+  headline: "A really good week. You finally pushed clear of the volume that's been holding you back for six weeks, climbed the full Nandi road without stopping for the first time, and Garmin still has you sitting Productive. The aerobic base is doing exactly what we built it to do.",
 
-  // ── FLAGS ─────────────────────────────────────────────────────────
+  // ── COACH SUMMARY ─────────────────────────────────────────────────
+  coachSummary: "Let's talk about what this week actually means. For six weeks your volume sat stuck around 41 km, and every week had a perfectly good reason. This week you ran 48 km, and it wasn't padding. The biggest chunk of it was Nandi, with 954 m of climbing in it, so your legs did a lot more work than the number on its own suggests. That's the plateau properly behind you now.\n\nThe Nandi run is the one I want you to feel good about. You climbed the entire road section without stopping, and that's never happened before. That is the aerobic engine we've spent the whole of Phase 1 building, showing up exactly when it counts. Sunday's recovery run backed it up nicely too: easy heart rate, cadence at 168, all very controlled. Nothing forced.\n\nYour body is handling the load well. Body Battery recovered into the mid-80s most days, stress stayed low, and your resting numbers are steady. Garmin reads Productive with your training load sitting right where we want it. The VO2 number showing 42 looks like a dip, but it isn't one. That number only climbs after hard sessions and quietly drifts down through easy weeks, so a low reading in an aerobic block is completely normal and tells you nothing worrying.\n\nThe one thing we genuinely need to fix is hydration, and it's now showed up three weeks running. At Nandi you replaced less than half the fluid you lost, and the side and calf cramps late in the run are the giveaway that you're going short on sodium, not just water. This is the same thing that unravelled your Malnad 50K last year. It has never been your fitness. It's the fuelling. So rather than keep noting it, we're doing something about it this week.\n\nSaturday's long run becomes a full hydration rehearsal. You'll drink to a schedule from the very start and take your SaltCaps on the clock, exactly the way you'll need to at the Bangalore Ultra in July. Get this dialled in now and it stops being the thing that can wreck race day.\n\nThis is the last week of Phase 1. Next week the quality work begins and the long runs start stretching out. So Week 11 is about consolidating: hold the volume at 50 km, keep the easy runs genuinely easy, and finish the base phase clean.",
+
+  // ── RUN BREAKDOWN (how each session went vs the plan) ─────────────
+  runBreakdown: [
+    {
+      day: "Tue · Threshold",
+      title: "Threshold session",
+      stats: "10.04 km · quality work",
+      verdict: "hit",
+      verdictLabel: "On plan",
+      note: "The plan was a threshold session before the root canal so the tooth wouldn't get in the way, and that's exactly how it ran. You did the hard work on fresh legs and kept the leg strength light afterward, which was the right call on a quality day.",
+    },
+    {
+      day: "Thu · Easy",
+      title: "Easy recovery run",
+      stats: "10 km · Zone 2",
+      verdict: "hit",
+      verdictLabel: "On plan",
+      note: "Easy aerobic, banking base between the two hard days. Heart rate stayed controlled and the tooth held up fine after Wednesday's procedure. Nothing to flag, which is exactly what an easy day should be.",
+    },
+    {
+      day: "Sat · Nandi Hills",
+      title: "Nandi Hills long run",
+      stats: "23.03 km · 954 m climb",
+      verdict: "over",
+      verdictLabel: "Beat the plan",
+      note: "Planned around 18 km and you ran 23, with the standout moment being the full road climb without a single stop. That's a first. The only blemish was hydration: you replaced under half your sweat loss and cramped late, which is the thing we're fixing this week.",
+    },
+    {
+      day: "Sun · Recovery",
+      title: "Recovery run",
+      stats: "5.11 km · 123 bpm · 168 spm",
+      verdict: "hit",
+      verdictLabel: "On plan",
+      note: "Textbook easy run to close the week. Low heart rate, smooth cadence, and a small Body Battery cost. Did its recovery job and kept the weekly volume where we wanted it.",
+    },
+  ],
+
   flags: [
-    { type: "good", text: "PLATEAU BROKEN: Week 10 ~48 km is the clean break above the six-week ~41 km wall — and vertical-loaded (954 m at Nandi), so real stress is higher than the flat count. Milestone: full road uphill climbed without stopping for the first time ever." },
-    { type: "warn", text: "HYDRATION/SODIUM — now a 3+ week pattern (42% replacement at Nandi, cramp signature, under-logging every long run; same mechanism that broke the Malnad 50K). Per Rule 9 this escalates from commentary to action: Sat Week 11 road long run is a FULL hydration rehearsal — 550 ml/hr + ~500 mg sodium/hr from the gun, SaltCaps 2/hr, all LOGGED. Direct Bangalore Ultra (Jul 26) dress-rehearsal." },
-    { type: "good", text: "SALTCAPS ACQUIRED: Unived SaltCaps (214 mg sodium/cap) — the right race-day tool (zero sugar, decoupled from fluid, fixes the under-drink failure mode). Validate gut tolerance at Saturday's rehearsal; watch cumulative magnesium sulphate over the long day. Func. Lab powder (1000 mg/sachet, zero sugar, Mg gluconate) is the drink-it backup." },
-    { type: "info", text: "VO2 reads 42 — NOT a flag. Garmin raises it only off threshold/interval/tempo and decays it across pure-Z2 weeks. Normal sawtooth in an aerobic block, not fitness loss. Training Status Productive, ATL 472 Optimal tell the true story." },
-    { type: "good", text: "CADENCE holding 165–169 spm unprompted (Sunday 168 avg / 173 max) — above the 162 floor, closing on 170+. Largely achieved; maintain, don't force. No metronome drill triggered." },
-    { type: "warn", text: "Brooks Caldera 7 STILL active in Garmin Gear (retired at 2,540 km, wrong last shape). Recurring unresolved flag — retire it in Gear settings so it stops auto-attaching to runs." },
-    { type: "info", text: "PHASE TRANSITION: Week 11 is the FINAL Phase 1 week. Phase 2 (Quality) begins Jun 30 — Thursdays convert to quality work, long runs extend toward 35 km, back-to-back weekends begin, Nandi biases twice-monthly. Week 11 consolidates; no Phase 2 quality introduced early." },
+    { type: "warn", text: "Hydration is the one to fix, and it's now three weeks running. At Nandi you replaced under half your sweat loss and cramped late, the same thing that cost you the Malnad 50K. Saturday's long run is a full rehearsal: drink to a schedule from the start, SaltCaps 2 per hour, all logged. This is your Bangalore Ultra dress run." },
+    { type: "warn", text: "Brooks Caldera 7 is still showing as active in your Garmin Gear settings even though it's retired. Worth retiring it there so your mileage tracking on the other shoes stays clean. Quick fix when you get a moment." },
+    { type: "good", text: "The plateau is properly behind you. Week 10's 48 km cleared the six-week wall, and with 954 m of Nandi climbing in it your legs did even more than the number shows. Climbing the full road without stopping was a real first." },
+    { type: "good", text: "SaltCaps sorted. The Unived caps are the right race-day tool, no sugar and easy to dose on the clock. The Func. Lab powder is your drink-it backup. Both get their first proper test on Saturday." },
+    { type: "good", text: "Cadence is holding at 165 to 169 on its own now, no metronome needed. That's a habit that's stuck, and it matters for protecting your legs on Malnad's long descents." },
+    { type: "info", text: "VO2 reading 42 is nothing to worry about. That number only climbs after hard sessions and drifts down through easy weeks, so a low reading in an aerobic block is normal. Your Productive status tells the real story." },
+    { type: "info", text: "Next week is the last of Phase 1. From June 30 the quality work starts and long runs stretch toward 35 km. Week 11 just consolidates what you've built." },
   ],
 
   // ── CURRENT WEEK METRICS ──────────────────────────────────────────
@@ -278,30 +316,84 @@ h2          { font-size: clamp(1.5rem, 3vw, 2.1rem); margin-bottom: 1.5rem; }
 .phase-future { background: transparent;     border: 1px solid var(--border);    color: var(--muted); }
 
 /* ── FLAGS ───────────────────────────────────────────────────────── */
-.flags { display: flex; flex-direction: column; gap: 0.55rem; margin-bottom: 1.75rem; }
+.flags { display: flex; flex-direction: column; gap: 0.4rem; margin-top: 0.5rem; }
 .flag {
   display: flex;
-  gap: 0.8rem;
+  gap: 0.6rem;
   align-items: flex-start;
-  padding: 0.7rem 1rem;
-  border-radius: 6px;
-  font-size: 0.9rem;
-  line-height: 1.45;
+  padding: 0.5rem 0.75rem;
+  border-radius: 5px;
+  font-size: 0.82rem;
+  line-height: 1.4;
 }
-.flag-icon { flex-shrink: 0; font-size: 0.85rem; margin-top: 0.05rem; }
+.flag-icon { flex-shrink: 0; font-size: 0.78rem; margin-top: 0.05rem; }
 .flag-warn { background: var(--amber-lt); color: var(--amber); border-left: 3px solid currentColor; }
 .flag-info { background: var(--blue-lt);  color: var(--blue);  border-left: 3px solid currentColor; }
 .flag-good { background: var(--green-lt); color: var(--green); border-left: 3px solid currentColor; }
 
-.coach-text {
+.week-headline {
   font-family: 'Playfair Display', serif;
-  font-style: italic;
-  font-size: 1.05rem;
-  line-height: 1.8;
-  border-left: 3px solid var(--green);
-  padding-left: 1.25rem;
+  font-weight: 600;
+  font-size: 1.5rem;
+  line-height: 1.35;
+  color: var(--green);
+  margin-bottom: 1.25rem;
+}
+@media (max-width: 640px) { .week-headline { font-size: 1.25rem; } }
+
+.run-breakdown {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+  gap: 0.85rem;
+  margin-bottom: 1.75rem;
+}
+.run-card {
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: 0.95rem 1.1rem;
+}
+.run-card-head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 0.5rem;
+  margin-bottom: 0.4rem;
+}
+.run-day {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.72rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--muted);
+}
+.run-verdict {
+  font-size: 0.7rem;
+  font-weight: 600;
+  padding: 0.12rem 0.5rem;
+  border-radius: 999px;
+}
+.rv-hit  { background: var(--green-lt); color: var(--green); }
+.rv-over { background: var(--blue-lt);  color: var(--blue); }
+.rv-note { background: var(--amber-lt); color: var(--amber); }
+.run-title { font-weight: 600; font-size: 0.96rem; color: var(--ink); margin-bottom: 0.3rem; }
+.run-stats {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.78rem;
+  color: var(--green-mid);
+  margin-bottom: 0.45rem;
+}
+.run-note { font-size: 0.86rem; line-height: 1.5; color: #2D3748; }
+
+.coach-text {
+  font-family: 'Source Sans 3', sans-serif;
+  font-size: 1.02rem;
+  line-height: 1.7;
   color: #2D3748;
 }
+.coach-text p { margin-bottom: 0.9rem; }
+.coach-text p:last-child { margin-bottom: 0; }
 
 /* ── METRICS ─────────────────────────────────────────────────────── */
 .metrics-grid {
@@ -621,9 +713,11 @@ h2          { font-size: clamp(1.5rem, 3vw, 2.1rem); margin-bottom: 1.5rem; }
 <section class="section" id="sec-summary">
   <div class="wrap">
     <span class="eyebrow">Week <span id="s-week">—</span> · <span id="s-dates">—</span></span>
-    <h2>Progress this week</h2>
-    <div class="flags" id="flags"></div>
+    <div class="week-headline" id="week-headline"></div>
+    <div class="run-breakdown" id="run-breakdown"></div>
     <div class="coach-text" id="coach-text"></div>
+    <span class="eyebrow" style="margin-top:1.75rem;">On the radar</span>
+    <div class="flags" id="flags"></div>
   </div>
 </section>
 
@@ -771,7 +865,23 @@ function render() {
   // Summary
   document.getElementById('s-week').textContent = p.weekNumber;
   document.getElementById('s-dates').textContent = p.dateRange;
-  document.getElementById('coach-text').textContent = p.coachSummary;
+  document.getElementById('week-headline').textContent = p.headline;
+
+  const vClass = { hit: 'rv-hit', over: 'rv-over', note: 'rv-note' };
+  document.getElementById('run-breakdown').innerHTML = (p.runBreakdown || []).map(r =>
+    `<div class="run-card">
+       <div class="run-card-head">
+         <span class="run-day">${r.day}</span>
+         <span class="run-verdict ${vClass[r.verdict]||'rv-hit'}">${r.verdictLabel}</span>
+       </div>
+       <div class="run-title">${r.title}</div>
+       <div class="run-stats">${r.stats}</div>
+       <div class="run-note">${r.note}</div>
+     </div>`
+  ).join('');
+
+  document.getElementById('coach-text').innerHTML =
+    p.coachSummary.split('\n\n').map(para => `<p>${para}</p>`).join('');
 
   const flagIcon = { warn: '⚠', info: 'ℹ', good: '✓' };
   document.getElementById('flags').innerHTML = p.flags.map(f =>
