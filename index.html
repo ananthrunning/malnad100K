@@ -701,10 +701,10 @@ h2          { font-size: clamp(1.5rem, 3vw, 2.1rem); margin-bottom: 1.5rem; }
         </div>
       </div>
 
-      <div class="phases-row">
-        <div class="phase-chip phase-now">Phase 1 · Wks 1–11</div>
-        <div class="phase-chip phase-future">Phase 2 · Wks 12–22</div>
-        <div class="phase-chip phase-future">Phase 3 · Wks 23–32</div>
+      <div class="phases-row" id="phases-row">
+        <div class="phase-chip" data-phase="1">Phase 1 · Wks 1–11</div>
+        <div class="phase-chip" data-phase="2">Phase 2 · Wks 12–22</div>
+        <div class="phase-chip" data-phase="3">Phase 3 · Wks 23–32</div>
       </div>
     </div>
   </div>
@@ -848,7 +848,13 @@ function render() {
   // Hero
   document.getElementById('h-days').textContent  = p.daysToRace;
   document.getElementById('h-week').textContent  = p.weekNumber;
-  document.getElementById('h-phase').textContent = '1';
+  const activePhase = p.weekNumber <= 11 ? 1 : (p.weekNumber <= 22 ? 2 : 3);
+  document.getElementById('h-phase').textContent = String(activePhase);
+  document.querySelectorAll('#phases-row .phase-chip').forEach(chip => {
+    const isNow = Number(chip.dataset.phase) === activePhase;
+    chip.classList.toggle('phase-now', isNow);
+    chip.classList.toggle('phase-future', !isNow);
+  });
   document.getElementById('h-pct').textContent   = p.campaignPct + '%';
   setTimeout(() => {
     document.getElementById('progress-fill').style.width = p.campaignPct + '%';
