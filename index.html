@@ -18,86 +18,86 @@
 const PLAN = {
 
   // ── WEEK META ─────────────────────────────────────────────────
-  weekNumber:   14,
-  dateRange:    "14 – 20 Jul 2026",
-  lastUpdated:  "19 July 2026",
-  daysToRace:   132,
+  weekNumber:   15,
+  dateRange:    "21 – 27 Jul 2026",
+  lastUpdated:  "27 July 2026",
+  daysToRace:   124,
   phase:        "Phase 2: Build & Specificity — ACTIVE",
-  phaseDetail:  "Phase 2 opened Jun 30 · Weeks 12–22 · Bangalore Ultra 50K Jul 26 (7 days) · marathon predictor Sep 27",
-  campaignPct:  44,        // weekNumber ÷ 32 × 100
-  status:       "on-track", // "on-track" | "lagging" | "overdoing"
+  phaseDetail:  "Phase 2 opened Jun 30 · Weeks 12–22 · Bangalore Ultra 50K done · Bengaluru Marathon Sep 27 · Jawadhu 50K Oct 31",
+  campaignPct:  47,        // weekNumber ÷ 32 × 100
+  status:       "lagging", // honest: the race exposed a real gap
 
   // ── HEADLINE ────────────────────────────────────────────────
-  headline: "A vacation week in the deep south, and it turned out to be worth more than the paper plan it replaced. 35.61 km across four runs, plus a 255 m hike and a lot of pool time. Saturday in Madurai was the standout — seven hill repeats, 350 m of climb, 246 W at 133 bpm in 34°C. Sunday backed it up with a completely undrifted 8 km, which quietly settled an argument: the Sunday back-to-back has been prescribed too short for weeks, and that is a coaching error, not an athlete one. Volume was well down. Nothing else was.",
+  headline: "Fifty kilometres, finished. And a wall at thirty-four that told the truth about everything.",
+
+  // ── SPECIAL REPORT (Bangalore Ultra 50K) ─────────────────────
+  specialReport: {
+    kicker: "Race Report · Bangalore Ultra 50K · 26 July 2026 · GKVK Campus",
+    title: "The first fifty",
+    result: "50.03 km · 6:49:51 · 8:11/km avg · 140 bpm · 352 m ascent · 22–23°C",
+    body: "He finished. That is the first thing, and on a morning that is his first-ever 50 in one go, it is not a small thing. Six hours, forty-nine minutes, fifty-one seconds. He crossed the line with the tank reading one per cent, which is another way of saying he left nothing on the course.\n\nBut the splits tell you where the race actually turned, and it is worth being honest about it because he was. The first ten kilometres came out at 7:58, 7:44, 7:32, 7:08, 7:31, 7:34, 7:14, 7:29, 7:25, 7:14. He had said, that very morning, that loop one would be deliberate — 1:20 to 1:30, the slowest of the day. Instead he was dipping under 7:15 on fresh legs in the first hour. Free speed, at a heart rate that felt like nothing. The trap we had named out loud before the gun, and he ran straight into it, the way almost everyone does the first time.\n\nThrough the middle he held. Kilometres eleven to thirty sat mostly in the 7:30s and 8:00s, which is a respectable place to be. And then, somewhere around thirty-four, the road stopped giving anything back. The last third reads like a different runner: 8:15, 8:00, 8:18, 8:27, 9:44, and then a closing stretch of nines and one lonely 9:56. A positive split, and not a polite one — roughly three-ten out, three-forty back.\n\nThe honest reading is not that he paced it badly, though the early kilometres did not help. It is that the wall at thirty-four is the edge of what the training had built. His longest run before this was thirty. His biggest weeks topped out in the high fifties. You cannot ask legs to hold form at kilometre forty-two when they have visited that country exactly once. The wall was not a failure of will. It was a map. It showed, to the metre, where the base currently ends.\n\nWhat held up: the fuelling. Nearly seven hours, no GI trouble, gels and Func. Lab and capsules going down clean — and crucially, no cramp during the race, which for a man with his salt history is the result that matters. He had planned a drop bag at the start-finish each loop, found there was nowhere to leave it, and improvised the whole supply on the move. That is a good sign about the kit and a good sign about the head. A mild hamstring twinge came that evening, hours later, at a movie, on an active day. Noted, not feared.\n\nSo: a finish, a lesson, and a number. Kilometre thirty-four is the line to push outward between now and November. Everything in the rebuild aims at moving it."
+  },
 
   // ── COACH SUMMARY ──────────────────────────────────────────
-  coachSummary: "Week 14 was the vacation week, and I want to be straight about how to read it: 35.61 km is a long way short of where a Phase 2 week should sit, and that is fine, because the week was declared a break before it started. What is more interesting is what you actually did with it.\n\nFour runs, all in the south, all warm. Tuesday in Kanyakumari — 7.76 km along the coast, HR 118, cadence holding at 165, with some walking where street dogs and an unplanned bit of trail got in the way. Thursday in Vilavancode was the same HR for 53 seconds per kilometre faster, and 200 W against Tuesday's 185. Same cardiac cost, more output, two days apart. That is what a working aerobic base looks like on holiday.\n\nThursday also had a hike stacked behind it — Kaali mala, 3.59 km, 255 m up and 261 m down, at an average heart rate of 97. Two hours after a run. That descent is the most Malnad-specific thing in the whole week: eccentric quad load at almost no metabolic cost. Body Battery moved 9 points. The gradient briefly pushed HR to 153 on a WALK, which is a neat illustration of exactly why we anchor graded terrain to power and RPE rather than heart rate.\n\nSaturday in Madurai was the real session. 13.13 km, seven clean hill repeats, 350 m of total climb, 16 seconds of walking across an hour and 48 minutes, in 31–34°C. Average 246 W at 133 bpm. Compare that to Thursday's flat 200 W at 118 and the shape of it becomes clear: 46 more watts and 350 m of vertical for 15 beats. In the hottest conditions of the week. Cadence 164 with a continuous run trace, which also confirmed that Thursday's 152 reading was walk-break dilution rather than any form problem.\n\nThen Sunday, back home at Manyata. 8.07 km, HR climbing to 123 and then sitting there, flat, for the last five kilometres. Power 216 W with laps 4 through 9 pinned at 222–228. No drift at all, the day after a session Garmin scored at 3.4 aerobic Training Effect and 101 exercise load, and after travelling back from Madurai.\n\nThat Sunday run is the week's most useful piece of information, and it is a correction to me rather than to you. I had written that Sunday should be 'genuinely easy or nothing' on the strength of Saturday's Body Battery and Training Effect. You then ran a strong, completely undrifted back-to-back. The load models are calibrated to a generic athlete; they do not know your heat acclimation or your training history. Your own HR-and-power data is the better instrument, and it has been telling the same story all week.\n\nThe consequence is bigger than one Sunday. The Master Plan wants Phase 2 back-to-backs at 15–20 km. You have been running 8. I have been protecting a recovery that the data says does not need protecting, and I have been doing it for weeks. The back-to-back is the single most race-specific session in the plan, and under-prescribing it is the kind of individually-reasonable weekly decision that Rule 9 exists to catch. Named now, and it gets fixed from Week 16.\n\nThe other thing that surfaced this week came out of a proper read of Sarah McCormack's inov-8 100K plan — the comparator benchmarked back in Week 11. Her peak weeks run 85–91 km, so the Master Plan's 75–85 target is broadly right. But her long runs go 40K, then 45K, then 50K, then 45K again, with climb scaled as an explicit percentage of race ascent, rising to 50%. Ours caps at 38–40 km with vertical sourced from whatever monthly Nandi happens to deliver. That is a real gap, it was flagged in Week 11 and deferred, and deferring it was the wrong call.\n\nSo two decisions came out of the conversation. Jawadhu Hills on October 31 is now CONFIRMED rather than conditional — it carries the 50 km long run with genuine trail vertical under race conditions, and there is nowhere else in the calendar that offers that. And the cardiac screening plus the iron panel move to August, before peak volume, not alongside it.\n\nNothing in the recovery markers is concerning. Body Battery net impact stayed modest all week, the hike cost 9 points, Sunday's back-to-back was clean. Heat exposure across seven days at 28–34°C is genuine acclimation banked ahead of a July race.\n\nWeek 15 is Ultra week. Two tempo sessions at race rhythm — Tuesday short, Thursday the full rehearsal with fuelling — then a shakeout and the race. Nothing else.",
+  coachSummary: "Let me say the useful thing plainly, because he earned plain talk this week: the fifty got done, and the fifty also showed us we have been coaching the wrong thing.\n\nFor months the check-ins have circled hydration and sodium — sweat rates, replacement percentages, sachet timing. All real, all worth some attention. But it was never the thing that decides a 100K, and the race proved it. The fuelling held for seven hours. The legs did not. The single biggest lever on whether he stands at the Malnad finish is kilometres run and time on feet, and that is the axis that has quietly lagged the whole campaign. The volume plateau at forty-one was named back in the spring. The long-run ceiling below the McCormack benchmark was flagged in Week 11 and again in Week 14. Both were true, both were deferred, and the deferral is on me. Sunday turned a paper gap into a felt one.\n\nHe said it himself, better than I had: no way he could contemplate a hundred at the end of that. Correct — and he was never meant to be able to, off this base. That reaction is the right one. The confidence does not come from Sunday. It comes from the first time he runs thirty-eight and finishes strong instead of shattered. That is a training outcome, and it is entirely buildable in the weeks we have.\n\nOn VO2max: he is right there too, and I had it half-wrong. Yes, Garmin's number sawtooths and dips in easy blocks. But a depressed reading still sits on a real ceiling, and a higher ceiling means every kilometre costs fewer beats and less glycogen — the wall at thirty-four arrives later and hurts less. Not the determining factor, but not something to let drift either. The fix is exactly the simple prescription he described: mostly easy volume, a protected weekly session of tempo or threshold, a little stride work to keep the top end honest. One plan, two jobs — the easy running builds durability, the quality holds the roof up.\n\nSo Rev 3, coming after this recovery week, has one spine: volume and the long run, climbing deliberately, with quality protected rather than displaced. The standard we agreed on is clean and I am writing it down so it can be checked against: by the Bengaluru Marathon, forty-two kilometres should feel controlled. By Jawadhu, fifty on trail should feel like a hard training day and not a race that empties him. Distance and hills, by then, should not be the thing he fears.\n\nThis week asks nothing. He ran a max-effort fifty on legs that were not ready for it, and the back third took real eccentric damage — the quad tightness is the tell. Week 16 is pure absorption: a little easy running, no quality, no long run, protein at every meal to feed the repair. The build starts Week 17. The race did its job. It gave us the truth and the target in the same morning.",
 
   // ── RUN BREAKDOWN (how each session went vs the plan) ─────────────
   runBreakdown: [
     {
-      day: "Tue · Easy",
-      title: "Kanyakumari coastal road",
-      stats: "7.76 km · 118 bpm · 185 W · 148 m ascent · 28.9–32°C",
+      day: "Tue · Tempo",
+      title: "Manyata — 3 km at race rhythm",
+      stats: "8.00 km · 130 bpm · 239 W · 166 spm · 26°C",
       verdict: "hit",
-      verdictLabel: "Clean aerobic",
-      note: "A holiday run and nothing more was asked of it. HR 118 average sat comfortably under the 125 road cap, never touching the ceiling; the 141 max was a brief spike on the one climbing kilometre. Cadence 165 unprompted. 185 W at 118 bpm on 148 m of rolling coastal terrain at 30°C is a favourable ratio — heat-exposed and the heart rate stayed genuinely low. Walk breaks clustered around the 41–50 minute mark, down to street dogs and an unexpected bit of trail. Performance Condition drifted to −6 late, which on a 118 bpm run reads as the walk breaks and a rising temperature rather than fatigue.",
+      verdictLabel: "Calibration, clean",
+      note: "A short tempo to find race feel on fresh legs, run in the EVO SL. The middle block shows clearly — stride opening to 0.95 m, ground contact dropping, power stepping to the mid-250s — and it drifted longer than the prescribed 3 km, closer to five. No harm. The number that mattered: 7:44/km produced at 130 bpm on flat road. Race pace at Zone 2 heart rate, which said the aerobic base for flat road was in good order. Cadence 166 unprompted. Everything where it should be.",
     },
     {
-      day: "Thu · Easy",
-      title: "Vilavancode — flat road",
-      stats: "6.65 km · 118 bpm · 200 W · 8:54/km · 29.6–31°C",
+      day: "Thu · Tempo",
+      title: "Manyata — the dress rehearsal",
+      stats: "10.01 km · 7:31/km · 6 km tempo · full fuelling · 21.7°C",
       verdict: "hit",
-      verdictLabel: "Better than Tuesday",
-      note: "Better on every axis that matters. Identical average HR to Tuesday, 53 seconds per kilometre faster, 200 W against 185. Genuine improvement in output at the same cardiac cost, two days apart. Performance Condition sat at zero throughout, which answers Tuesday's question — that −6 was an artefact, not fatigue, and the flag closes. The 152 cadence average looked alarming against a 165–169 baseline, but the trace shows long stretches around 180 with dropouts to zero: the average is diluted by walk time from dog avoidance. Confirmed as measurement, not form, when Saturday came back at 164.",
+      verdictLabel: "Fuelling proven",
+      note: "The real rehearsal, in the Glycerin Max. Thirteen seconds per kilometre quicker than Tuesday over two more kilometres, in cooler air, and it felt like more work — which is exactly what a heavier shoe and a faster pace should feel like, nothing to read into. The point of the day was the fuelling protocol, and he ran it clean: gels and sachet on the clock, no snags. That was the objective and it was met. His own read afterwards — could have gone slower and longer — was the correct instinct about Sunday.",
     },
     {
-      day: "Thu · Hike",
-      title: "Kaali mala — climb and descent",
-      stats: "3.59 km · 255 m up / 261 m down · 97 bpm avg · 153 max",
+      day: "Sat · Shakeout",
+      title: "Jakkur Lake — day before",
+      stats: "3.50 km · 116 bpm · 9:16/km · 23°C",
       verdict: "hit",
-      verdictLabel: "Most race-specific session",
-      note: "More useful than 'a hike'. 255 m of climb at an average of 97 bpm, two hours after the morning run, on a gradient averaging around 14% — steeper than the Nandi road. The descent is where the value sits: 261 m down at walking pace is eccentric quad loading at almost no cardiac or metabolic cost, and Body Battery moved only 9 points. Worth noting the 153 max HR — above the 140–150 climb guardrail, on a WALK. That is the grade doing it, and it is the clearest possible argument for anchoring graded terrain to power and RPE with HR as a guardrail only.",
+      verdictLabel: "Textbook",
+      note: "Short, slow, heart rate well under the cap. Exactly what the day before an ultra should look like. Legs woken up, nothing taxed. Nothing to analyse and nothing to fix.",
     },
     {
-      day: "Sat · Hills",
-      title: "Madurai — seven hill repeats",
-      stats: "13.13 km · 350 m ascent · 133 bpm · 246 W · 31–34°C · TE 3.4",
-      verdict: "hit",
-      verdictLabel: "Session of the week",
-      note: "The best and most race-relevant run of the week. Seven clean repeats in the elevation trace, roughly 50 m each, with 16 seconds of total walk time across 1:47:49. Cadence 164 on a near-continuous run trace. The headline number: 246 W at 133 bpm on 350 m of climbing in 31–34°C, against Thursday's 200 W at 118 bpm on the flat — 46 more watts and 350 m of vertical for 15 beats, in the hottest conditions of the week. HR 133 sits inside the Z2 band and above the 125 road cap, which is correct here because this is graded terrain. Recovery HR 20 bpm. TE 3.4 aerobic, exercise load 101, Body Battery −27: comfortably the hardest session of the week. Performance Condition held negative for 90 minutes, matching Tuesday's pattern — long and hot rather than short and cool. Reading it as heat. Rule 8 notice stage; escalates only if it repeats at the Ultra.",
-    },
-    {
-      day: "Sun · B2B",
-      title: "Manyata — back-to-back recovery",
-      stats: "8.07 km · 120 bpm · 216 W · flat · 22.2°C",
-      verdict: "hit",
-      verdictLabel: "Settled the argument",
-      note: "The cleanest run of the week, and the most informative. Day after a 3.4 TE / 101 load hill session, plus travel back from Madurai. HR climbed from 113 to a plateau at 123–124 and held there flat for the last five kilometres. Laps 4 through 9 pinned at 222–228 W. Zero drift across 40 minutes. Cadence 165, stride 0.73 m, one brief walk near 12:30. That is a fresh athlete, not a recovering one — and it directly contradicts the 'genuinely easy or nothing' call I made off Saturday's Body Battery reading. Logged as a coaching correction: the Sunday back-to-back has been under-prescribed at 8 km against a Phase 2 spec of 15–20 km, and the data does not support the caution behind it.",
+      day: "Sun · RACE",
+      title: "Bangalore Ultra 50K — the first fifty",
+      stats: "50.03 km · 6:49:51 · 140 bpm · 158 max · 352 m · 1% stamina",
+      verdict: "note",
+      verdictLabel: "Finished — and a lesson",
+      note: "Full report above. The short version: he finished his first 50, ran the first ten kilometres too fast on free speed, and hit the wall around thirty-four where the training's durability actually ends. Fuelling held for nearly seven hours with no cramp — the result that matters given his history — and he improvised the whole supply when the drop-bag plan fell through. A positive split, roughly three-ten out and three-forty back. Not a pacing story at heart; a volume story. The base tops out at kilometre thirty-four right now, and that is the number the rebuild goes after.",
     },
   ],
 
   flags: [
-    { type: "warn", text: "SUNDAY BACK-TO-BACK HAS BEEN UNDER-PRESCRIBED — and this one is mine, not yours. The Master Plan specifies Phase 2 back-to-backs at 15–20 km. You have been running 8. I have been protecting Sunday on the basis of Saturday's Garmin load scores, and this week produced the evidence that the caution was misplaced: 216 W at 120 bpm with no drift whatsoever, the day after a 3.4 TE session and a road trip. Body Battery and Training Effect are generic models; your own HR-and-power data is the better instrument and has been consistent all week. This is exactly the shape Rule 9 describes — individually reasonable weekly decisions compounding into a gap. ACTION: from Week 16 the Sunday B2B goes 14 km, then 16, 18, 20 across Weeks 17–19. Held, not re-explained." },
-    { type: "warn", text: "LONG-RUN CEILING AND VERTICAL ARE BOTH SHORT OF THE BENCHMARK. A proper read of Sarah McCormack's inov-8 100K plan (the comparator benchmarked in Week 11) shows her long runs going 40K, 45K, 50K and 45K, with climb prescribed as an explicit percentage of race ascent rising to 50%. For Malnad that would mean a 50 km long run carrying roughly 1,700 m of vertical. The Master Plan caps at 38–40 km with vertical sourced from monthly Nandi, which is around 450 m a trip. Her PEAK WEEKLY VOLUME is 85–91 km, so the 75–85 target is broadly right — the gap is long-run ceiling and climb, not weekly kilometres. This was flagged in Week 11 and deferred; deferring it was the wrong call. ACTION: Master Plan Rev 3 after the Ultra, with a long-run ladder to 50 km and scaled vertical targets." },
-    { type: "good", text: "JAWADHU HILLS 50K (OCT 31) IS NOW CONFIRMED — status changed from conditional, the Oct 15 decision gate is closed. It carries the Week 28–29 50 km long run with genuine trail vertical under race conditions, aid stations and all, and there is nowhere else in the calendar that offers that. Two consequences to hold: it sits four weeks after the Bengaluru Marathon and four weeks before Malnad, so it runs at roughly 70% effort as a rehearsal — RACE it and you compromise Malnad. And the calendar has no slack after it: Week 27 tapers in, Weeks 29–31 become the Malnad taper." },
-    { type: "good", text: "DURABILITY AND HEAT BOTH LOOK STRONG. Saturday's 246 W at 133 bpm on 350 m of climb in 34°C, backed by Sunday's completely undrifted 216 W at 120 bpm, is the durability signal that actually matters for a 17–19 hour race. Add 605 m of total vertical across the hike and the hill repeats, and seven consecutive days of 28–34°C exposure banked as acclimation ahead of a July race. The engine is not the limiter." },
-    { type: "info", text: "CADENCE — RULE 4 SUPPRESSED FOR THURSDAY, CONFIRMED AS ARTEFACT. Thursday's 6.65 km logged 152 spm average, below the 162 trigger. The trace shows sustained stretches near 180 with dropouts to zero, and 11:58 of walk time from dog avoidance folded into the average. Saturday came back at 164 on a near-continuous run trace and Tuesday at 165. Form is fine; the average was diluted. No drill prescribed." },
-    { type: "info", text: "IN-RUN HYDRATION AND SODIUM LOGGING — PERMANENTLY SUPPRESSED FOR TRAINING RUNS. Garmin reports fluid consumed as '--' because it is not logged, not because nothing was taken. This was raised as a behavioural gap on Thursday and it was an error of the same class as the retired weekday fluid-logging flag. Salts were taken. This will not be flagged again from Garmin's blank field alone; it re-opens only on an explicitly unfuelled rehearsal or an actual cramp." },
-    { type: "info", text: "CARDIAC SCREENING AND IRON PANEL — MOVE TO AUGUST. The Master Plan lists baseline cardiac screening (resting ECG plus physician review) as recommended before peak volume, and it is still pending alongside ferritin and full iron panel, CBC, TSH, electrolytes and creatinine/eGFR. Peak volume starts Week 23 in mid-September, and under the Rev 3 revision it is bigger than originally specified. The iron panel matters independently: chronic protein deficit plus rising volume is how low ferritin quietly ends a campaign. Book both in August, confirmed." },
+    { type: "warn", text: "THE REAL GAP IS VOLUME AND THE LONG RUN — and it has been all along. The fifty was finished off a base that peaked in the high fifties with a single 30 km long run. The wall at kilometre 34 is the edge of that base, not a pacing accident. This was named in the spring as the ~41 km plateau, flagged again in Week 11 and Week 14 against the McCormack benchmark, and deferred each time. Deferring it was the mistake, and it is the coach's, not the athlete's. ACTION: Master Plan Rev 3 is built around one spine — weekly volume that climbs and holds, and a long-run ladder that goes deep into the 40s toward 50, so that time-on-feet past 30 km is trained repeatedly rather than touched once." },
+    { type: "warn", text: "PACING: THE FIRST TEN KILOMETRES WERE TOO FAST. Loop one was meant to be the slowest of the day, deliberate, 1:20–1:30. Instead the splits dipped to 7:08–7:14 inside the first hour on fresh legs — the exact free-speed trap named before the gun. Thirty seconds a kilometre banked early was repaid at triple the rate after 34 km. Second-order to the volume gap, but real, and now felt rather than described. The rule for every long run from here: the first segment is the slowest, whatever the legs say." },
+    { type: "warn", text: "VO2MAX CANNOT BE LEFT TO DRIFT. The point stands that it is not the determining factor for a 21-hour race, and that Garmin's reading sawtooths in easy blocks. But a depressed reading still sits on a real ceiling, and lifting that ceiling makes every kilometre cheaper — the wall arrives later. The earlier framing over-used the artefact argument and let the number drift. ACTION in Rev 3: a protected weekly quality slot — tempo or threshold, non-negotiable — plus short strides (6–8 × 15 sec) after an easy run, near-zero fatigue cost, to hold the top end and economy." },
+    { type: "info", text: "FUELLING PASSED — this is the thing that is working. Nearly seven hours, no GI trouble, no cramp during the race, which for his sodium history is the outcome that counts. The drop-bag plan fell through with nowhere to stage a bag, and he improvised the entire supply on the move with gels, Func. Lab sachets and capsules. That proves the kit is portable enough to run self-supported — directly useful for Malnad, where aid is sparse. The lesson to carry: confirm crew and drop-bag access before a race rather than assuming it. Rehearse the self-supported version deliberately at Jawadhu and Nandi." },
+    { type: "info", text: "NO WEIGH-IN, SECOND RACE RUNNING. The before/after weigh-in is the single highest-value measurement of a long effort and the only real read on sweat rate — Garmin's number is a model, not a measurement. It has slipped twice now. Not a lecture: just put the scale by the door before the next long run. Two minutes, and it is the one piece of data these rehearsals were built to capture." },
+    { type: "info", text: "RECOVERY WEEK IS NON-NEGOTIABLE. Week 16 absorbs the race — roughly 20–25 km, all easy, no quality, no long run, no lower-body gym while the quads recover from the eccentric load. Protein at every meal to feed the repair, since the standing deficit (60–80 g actual vs 140 g target) is the one lever that slows recovery if it stays low. The build starts Week 17. One easy week costs nothing; a rushed return costs weeks." },
+    { type: "info", text: "AUGUST HEALTH TESTS STILL BOOKED. Ferritin and full iron panel first — chronic protein deficit plus rising volume is exactly how low ferritin ends a campaign quietly — plus CBC, TSH, electrolytes, creatinine/eGFR, and the cardiac repeat. All before peak volume in Week 23, which under Rev 3 is bigger than originally planned." },
   ],
 
   // ── CURRENT WEEK METRICS ─────────────────────────────────────
   current: {
-    weeklyKm:    35.61,
+    weeklyKm:    71.54,     // 8.00 + 10.01 + 3.50 + 50.03
     vo2max:      45,
     rhr:         50,
     weight:      77.0,
-    cadence:     164,
-    avgHR:       122,
-    sleep:       7.5,
+    cadence:     160,
+    avgHR:       138,
+    sleep:       7.3,
     protein:     105,
-    bodyBattery: 82,
+    bodyBattery: 60,
   },
 
   // ── HISTORY (append one entry per week — never remove) ────────────
@@ -116,24 +116,25 @@ const PLAN = {
     { week: 12, label: "W12", km: 57.08, vo2: 45, cadence: 165, weight: 77.2, rhr: 49, avgHR: 123, sleep: 7.4, protein: 105 },
     { week: 13, label: "W13", km: 55.23, vo2: 42, cadence: 169, weight: 77.2, rhr: 52, avgHR: 130, sleep: 7.1, protein: 105 },
     { week: 14, label: "W14", km: 35.61, vo2: 45, cadence: 164, weight: 77.0, rhr: 50, avgHR: 122, sleep: 7.5, protein: 105 },
+    { week: 15, label: "W15", km: 71.54, vo2: 45, cadence: 160, weight: 77.0, rhr: 50, avgHR: 138, sleep: 7.3, protein: 105 },
   ],
 
   // ── NEXT WEEK PLAN ───────────────────────────────────────
   nextWeek: {
-    label: "Week 15 · 21–27 Jul 2026",
-    theme: "ULTRA WEEK · two tempo rehearsals at race rhythm · Bangalore Ultra 50K on Sunday",
-    note: "Race week, and the shape of it changed on your suggestion rather than mine. The original taper had 4 × 30 sec strides on Thursday, which teaches nothing. Race pace of 7:30–7:45/km at HR 140–148 is a gear you have not touched since Week 13, and going into a 50 km having never rehearsed the actual rhythm is a real gap. So there are now two tempo sessions: Tuesday short for calibration on fresh legs, Thursday longer with the full fuelling protocol. If Tuesday shows 7:30–7:45 running hot — HR above 148 — Thursday's target comes down before you commit to it. Keep both tempos CONTINUOUS, not intervals, and do not let them drift faster than 7:30. The temptation on a short tempo is to run it well; the point is to run it at exactly race pace. Course verified: Krishimela Ground, GKVK Campus, four loops of 12.5 km, 92 m of gain per loop and 368 m total — not the flat road course we had been assuming, so run the rolling sections on effort and let pace vary. Cutoff is 7 hours; the published category times for 12.5K, 25K and 37.5K are separate races, not intermediate cutoffs for you. Ask at bib collection whether a loop-entry cutoff exists. Verified total: 6 + 10 + 4 = 20 km plus the race.",
-    qualityRotation: "The two tempo sessions ARE the week's quality, and they are rehearsal rather than development — race rhythm and fuelling, not fitness. No threshold work: the Ultra is the hard session. Quality resumes properly in Week 16 alongside the volume rebuild, and when threshold returns it runs to POWER (333 W) and HR (162), with pace logged rather than prescribed. Week 13's 5:19/km at 333 W stands as evidence that the 5:36 anchor is stale; a second confirmation formally revises it in Master Plan Rev 3.",
+    label: "Week 16 · 28 Jul – 3 Aug 2026",
+    theme: "RECOVERY · absorb the fifty · no quality, no long run · the build starts Week 17",
+    note: "This week has one job and it is to let the race sink in. He ran a max-effort 50 on a base that was not built for it, and the back third did real eccentric damage — the quad tightness is the receipt. So the whole week is deliberately small: roughly 20–25 km of easy running, nothing that asks anything of the legs, and no guilt about how little that is. The instinct after a big race is to protect fitness by keeping the volume up. That instinct is wrong here. One recovery week loses nothing; a rushed return loses a fortnight. Everything genuinely useful — the volume ladder, the long-run build, the protected quality slot — starts next week, in Rev 3. This week he rests, eats, and lets the legs come back. If the quads or the hamstring are still talking by Thursday, that run gets cut, not kept.",
+    qualityRotation: "None this week. No threshold, no tempo, no strides — the body is repairing, not adapting. Quality resumes in Week 17 as a protected weekly slot (tempo or threshold, plus short strides), sitting alongside the volume rebuild rather than being the first thing displaced when a week gets busy. When threshold returns it runs to power (333 W) and HR (162), pace logged not prescribed.",
     days: [
-      { day: "Mon", type: "rest",     label: "FULL REST",                       detail: "Complete rest. You have just come off a week with no rest days on paper and a lot of incidental activity — swims, hikes, football. Sleep 8 hours." },
-      { day: "Tue", type: "run",      label: "6 km · 3 km tempo at race pace",   detail: "1.5 km easy, then 3 km continuous at 7:30–7:45/km with HR 140–148, then 1.5 km easy. Glycerin Max 2 or EVO SL, your pick. The purpose is calibration: find out what that pace feels like on fresh legs in Bengaluru conditions and whether the HR lands where it should. Continuous, not intervals. Do not drift faster than 7:30." },
-      { day: "Wed", type: "strength", label: "Strength · upper and core only",   detail: "No lower-body loading this week. Push-ups, rows, planks, dead bugs, side planks. Movement quality and blood flow. Skip it without guilt if the day gets away from you." },
-      { day: "Thu", type: "run",      label: "10 km · 6 km tempo · FULL FUELLING", detail: "The dress rehearsal. 2 km easy warm-up, 6 km continuous at 7:30–7:45/km with HR 140–148, 2 km cool-down. Glycerin Max 2. Run the complete fuelling protocol alongside it: Func. Lab sachet timing in the bottle you will actually carry, and confirm the SaltCaps fallback is accessible. Three days out — far enough to absorb, close enough to be informative. Watch two things: whether 7:30–7:45 actually lands at 140–148, and whether the sachet logistics work. If HR runs high, the race pace target comes down, not the HR ceiling." },
-      { day: "Fri", type: "rest",     label: "FULL REST",                       detail: "Complete rest. Lay out race kit tonight rather than Saturday night." },
-      { day: "Sat", type: "run",      label: "Shakeout · 4 km very easy",       detail: "HR ≤120. Race kit, race shoes, nothing new. Twenty minutes of easy running to keep the legs awake. Bib collection at the expo — ask whether there is a loop-entry cutoff for the 50K, since that would be the number that actually constrains you rather than the published 7-hour finish." },
-      { day: "Sun", type: "run",      label: "BANGALORE ULTRA 50K",             detail: "Four loops of 12.5 km at GKVK Campus, 368 m total gain. Target 6:25–6:30 against a 7-hour cutoff. Loop 1 in about 1:38 — deliberately slow, HR ≤142, learn where the rises are. Loop 2 is your fastest at around 1:36, rhythm established and still cool. Loop 3 around 1:38 with the heat building: hold EFFORT and let pace slip. Loop 4 is whatever holds. Run the rolling sections on power and RPE, not pace — expect 20 sec/km of natural variation within each loop and do not correct for it. Walk every aid station deliberately, 30–45 seconds, and drink properly. You pass the start/finish four times, so plan resupply around those touchpoints rather than carrying everything from the gun. This is a rehearsal, not a time trial." },
+      { day: "Mon", type: "rest",     label: "FULL REST",                         detail: "Complete rest. Walk, mobility, nothing more. Sleep long." },
+      { day: "Tue", type: "run",      label: "Rest, or 3–4 km shakeout",          detail: "Only if the legs feel genuinely fine. If the quads are still tight, stay off them entirely. If you run, it is a flush — easy jog, pace irrelevant, whatever shoe is comfortable. Not a session." },
+      { day: "Wed", type: "strength", label: "Upper body and core only",          detail: "No lower-body loading — the quads are recovering from eccentric damage and this is not the week to add to it. Push-ups, rows, planks, dead bugs if you want to move. Skip it without a thought if the day gets away." },
+      { day: "Thu", type: "run",      label: "Easy 5–6 km · Z2",                  detail: "The first real easy run of the week, and still short. Manyata flat, HR under the 125 road cap, conversational throughout. If anything twinges — quad, hamstring, foot — cut it and walk home. Recovery is not linear and 47-year-old legs after a first 50 take their time." },
+      { day: "Fri", type: "rest",     label: "FULL REST",                         detail: "Complete rest." },
+      { day: "Sat", type: "run",      label: "Easy 8–10 km · Z2 · flat",          detail: "The week's longest, and it is just an easy road run — nowhere near a long run. HR under 125, no effort games, flat ground. If recovery has gone well this feels good. If it does not feel good, shorten it without argument." },
+      { day: "Sun", type: "run",      label: "Rest, or easy 4–5 km",             detail: "Optional. Badminton is fine if the legs are happy. If in doubt, rest — there is nothing to prove this week." },
     ],
-    nutrition: "The sodium plan is yours and it is coherent: 1000 mg Func. Lab roughly hourly as the primary vehicle, SaltCaps as the fallback when the drink runs out. That is the right ordering — drink is the vehicle, caps are the reserve.\n\nThe one thing to settle before Sunday is SUPPLY, not dosing. The fallback triggers on running out, not on how you feel. If the honest answer is two sachets and then caps for four hours, that is a different race from a sachet every hour throughout. Work out on Thursday how many sachets you can actually carry or stage, and know which race you are running before the gun.\n\nCaffeine: non-caffeinated gels throughout, as agreed. Caffeinated stays reserved for the Bengaluru Marathon and Malnad past 60 km.\n\nSleep is the taper. Eight hours nightly through the week, and protect Friday and Saturday nights in particular. Weight 77.0, tracking toward the 73–74 race target with no urgency.\n\nNothing new on race day. Nothing you have not run in training.",
+    nutrition: "Protein matters more this week than in a training week, not less. The muscle repair from the back third of Sunday runs on it, and the standing gap — 60–80 g actual against a 140 g target — is the one thing that will slow recovery if it stays low. So the single job this week is protein at every meal, deliberately: eggs or curd at breakfast, the non-veg lunch doing real work, a Cosmix shake to close the gap in the evening. Not a new target, just don't let 'earned rest' turn into an under-fed repair week.\n\nNo race fuelling to rehearse this week. Hydrate normally, salt the food, nothing to log.\n\nWeight sits at 77.0, tracking gently toward the 73–74 race target with no urgency at all. Sleep is the other half of recovery — eight hours where you can get them. Let the week be quiet.",
   },
 
   // ── ADAPTATION RULES (visible on page — permanent protocol) ──────
@@ -165,6 +166,7 @@ const PLAN = {
     { week: 12, label: "Week 12 · Jun 30", url: "https://ananthrunning.com/reports/week-12.html" },
     { week: 13, label: "Week 13 · Jul 7",  url: "https://ananthrunning.com/reports/week-13.html" },
     { week: 14, label: "Week 14 · Jul 14", url: "https://ananthrunning.com/reports/week-14.html" },
+    { week: 15, label: "Week 15 · Jul 21", url: "https://ananthrunning.com/reports/week-15.html" },
   ],
 };
 </script>
@@ -230,29 +232,7 @@ h2          { font-size: clamp(1.5rem, 3vw, 2.1rem); margin-bottom: 1.5rem; }
 .hero-grid {
   max-width: 900px;
   margin: 0 auto;
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 0;
-  align-items: stretch;
-}
-@media (max-width: 720px) {
-  .hero-grid { grid-template-columns: 1fr; }
-}
-.hero-photo {
-  position: relative;
-  min-height: 320px;
-  background: #E5DDD0;
-}
-.hero-photo img {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  object-position: center 30%;
-}
-@media (max-width: 720px) {
-  .hero-photo { min-height: 260px; order: -1; }
+  display: block;
 }
 .hero-text {
   padding: 2.5rem 1.5rem;
@@ -350,13 +330,66 @@ h2          { font-size: clamp(1.5rem, 3vw, 2.1rem); margin-bottom: 1.5rem; }
 
 .week-headline {
   font-family: 'Playfair Display', serif;
-  font-weight: 600;
-  font-size: 1.5rem;
-  line-height: 1.35;
+  font-weight: 700;
+  font-size: clamp(1.9rem, 4.5vw, 2.9rem);
+  line-height: 1.15;
+  letter-spacing: -0.015em;
   color: var(--green);
-  margin-bottom: 1.25rem;
+  margin: 0.4rem 0 1.75rem;
 }
-@media (max-width: 640px) { .week-headline { font-size: 1.25rem; } }
+@media (max-width: 640px) { .week-headline { font-size: 1.7rem; } }
+
+/* ── SPECIAL RACE REPORT ─────────────────────────────────────────── */
+.special-report {
+  background: var(--green);
+  color: var(--cream);
+  border-radius: 12px;
+  padding: 2rem 1.9rem 2.1rem;
+  margin: 0 0 2rem;
+}
+@media (max-width: 640px) { .special-report { padding: 1.6rem 1.35rem; } }
+.sr-kicker {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.66rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--green-lt);
+  margin-bottom: 0.9rem;
+}
+.sr-title {
+  font-family: 'Playfair Display', serif;
+  font-weight: 700;
+  font-size: clamp(1.6rem, 4vw, 2.3rem);
+  line-height: 1.1;
+  letter-spacing: -0.01em;
+  color: #fff;
+  margin-bottom: 0.7rem;
+}
+.sr-result {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.82rem;
+  color: var(--green-lt);
+  padding-bottom: 1.15rem;
+  margin-bottom: 1.15rem;
+  border-bottom: 1px solid rgba(216,243,220,0.22);
+}
+.sr-body p {
+  font-family: 'Source Sans 3', sans-serif;
+  font-size: 1.02rem;
+  line-height: 1.72;
+  color: #EDEAE3;
+  margin-bottom: 0.95rem;
+}
+.sr-body p:last-child { margin-bottom: 0; }
+.sr-body p:first-child::first-letter {
+  font-family: 'Playfair Display', serif;
+  font-weight: 700;
+  font-size: 3.1rem;
+  float: left;
+  line-height: 0.82;
+  padding: 0.08em 0.12em 0 0;
+  color: #fff;
+}
 
 .run-breakdown {
   display: grid;
@@ -681,9 +714,6 @@ h2          { font-size: clamp(1.5rem, 3vw, 2.1rem); margin-bottom: 1.5rem; }
 <!-- ── HERO ──────────────────────────────────────────────────────────── -->
 <header class="hero">
   <div class="hero-grid">
-    <div class="hero-photo">
-      <img src="media/banner-img.png" alt="Ananth running the Bengaluru Half Marathon">
-    </div>
     <div class="hero-text">
       <div class="hero-label">Malnad Ultra 100K · Training Journal · 2026</div>
       <div class="hero-name">Ananth S Kumar</div>
@@ -718,8 +748,8 @@ h2          { font-size: clamp(1.5rem, 3vw, 2.1rem); margin-bottom: 1.5rem; }
       </div>
 
       <div class="phases-row">
-        <div class="phase-chip phase-now">Phase 1 · Wks 1–11</div>
-        <div class="phase-chip phase-future">Phase 2 · Wks 12–22</div>
+        <div class="phase-chip phase-future">Phase 1 · Wks 1–11</div>
+        <div class="phase-chip phase-now">Phase 2 · Wks 12–22</div>
         <div class="phase-chip phase-future">Phase 3 · Wks 23–32</div>
       </div>
     </div>
@@ -731,6 +761,7 @@ h2          { font-size: clamp(1.5rem, 3vw, 2.1rem); margin-bottom: 1.5rem; }
   <div class="wrap">
     <span class="eyebrow">Week <span id="s-week">—</span> · <span id="s-dates">—</span></span>
     <div class="week-headline" id="week-headline"></div>
+    <div id="special-report"></div>
     <div class="run-breakdown" id="run-breakdown"></div>
     <div class="coach-text" id="coach-text"></div>
     <span class="eyebrow" style="margin-top:1.75rem;">On the radar</span>
@@ -864,7 +895,7 @@ function render() {
   // Hero
   document.getElementById('h-days').textContent  = p.daysToRace;
   document.getElementById('h-week').textContent  = p.weekNumber;
-  document.getElementById('h-phase').textContent = '1';
+  document.getElementById('h-phase').textContent = '2';
   document.getElementById('h-pct').textContent   = p.campaignPct + '%';
   setTimeout(() => {
     document.getElementById('progress-fill').style.width = p.campaignPct + '%';
@@ -883,6 +914,21 @@ function render() {
   document.getElementById('s-week').textContent = p.weekNumber;
   document.getElementById('s-dates').textContent = p.dateRange;
   document.getElementById('week-headline').textContent = p.headline;
+
+  const srEl = document.getElementById('special-report');
+  if (p.specialReport) {
+    const sr = p.specialReport;
+    const bodyHtml = sr.body.split('\n\n').map(para => `<p>${para}</p>`).join('');
+    srEl.innerHTML =
+      `<div class="special-report">
+         <div class="sr-kicker">${sr.kicker}</div>
+         <div class="sr-title">${sr.title}</div>
+         <div class="sr-result">${sr.result}</div>
+         <div class="sr-body">${bodyHtml}</div>
+       </div>`;
+  } else {
+    srEl.innerHTML = '';
+  }
 
   const vClass = { hit: 'rv-hit', over: 'rv-over', note: 'rv-note' };
   document.getElementById('run-breakdown').innerHTML = (p.runBreakdown || []).map(r =>
