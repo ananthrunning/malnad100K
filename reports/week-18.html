@@ -1,0 +1,1219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Malnad Ultra 100K — Ananth's Training Journal</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Source+Sans+3:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+<!-- ═══════════════════════════════════════════════════════════════════
+     ██  PLAN BLOCK — REPLACE ENTIRE BLOCK EACH SUNDAY  ██
+     Only this section changes week to week.
+     Everything else in this file is permanent — do not edit.
+     ═══════════════════════════════════════════════════════════════════ -->
+<script>
+const PLAN = {
+
+  // ── WEEK META ─────────────────────────────────────────────────
+  weekNumber:   17,
+  dateRange:    "3 – 9 Aug 2026",
+  lastUpdated:  "10 August 2026",
+  daysToRace:   110,
+  phase:        "Phase 2: Build & Specificity — ACTIVE",
+  phaseDetail:  "Phase 2 opened Jun 30 · Weeks 12–22 · Bangalore Ultra 50K done · Bengaluru Marathon Sep 27 · Jawadhu 50K Oct 31",
+  campaignPct:  53,        // weekNumber ÷ 32 × 100
+  status:       "on-track",
+
+  // ── HEADLINE ────────────────────────────────────────────────
+  headline: "Two days lost, three sessions run, and the longest training run of the campaign with 936 metres in it.",
+
+  // ── SPECIAL REPORT ─────────────────────────────────────────
+  specialReport: null,
+
+  // ── COACH SUMMARY ──────────────────────────────────────────
+  coachSummary: "Three running sessions, sixty-two point four three kilometres, and a week that lost its Tuesday and Wednesday to a family situation before it started. Ten point zero eight on Thursday, thirty-two point five nine on Saturday, nineteen point seven six on Sunday. That is the second-biggest week of the campaign, behind only the seventy-one of race week — and unlike race week, every kilometre of it was training.\n\nThursday was the best quality session on file. Three by eight minutes: 5:24, 5:22, 5:16 per kilometre at 156, 157 and 160 beats, 332, 332 and 334 watts, ground contact falling 252 to 250 to 248 milliseconds. The third repetition was the fastest and the longest. Nobody executes a threshold session that way by accident — it means the first two were correctly restrained and the effort was under control throughout.\n\nThat session also closed something that had been open too long. The plan's threshold pace of 5:36 per kilometre was dead, and had been for roughly eight weeks. The same three-repetition shape at the same power had already appeared in Week 13 and in Week 8, and each time it was logged and not acted on. Three sightings, no correction — the identical failure to the volume plateau, and Adaptation Rule 8 exists precisely to stop it. Threshold is now formally 162 beats, 333 watts, 5:20 per kilometre. The heart rate and power anchors were always right; only the pace figure, inherited from a conservative watch estimate, was wrong.\n\nSaturday was Nandi, and it was the longest training run of the campaign — thirty-two point five nine kilometres against a previous best of thirty. Nine hundred and thirty-six metres of ascent, four hours thirty-two, average heart rate 140 with a maximum of 159, aerobic training effect 4.7 and anaerobic exactly zero. The lap file reads as two complete climb-and-descent cycles rather than one, with the second climb holding the first climb's pace to within five seconds per kilometre. Cadence 165, ground contact 292 milliseconds, vertical ratio 10.6 per cent — identical to his flat easy runs. Four and a half hours on a mountain road and the mechanics never moved.\n\nThe second descent was run slower than the first. I read that as eccentric fatigue and built a descent-durability thesis on top of it, including a Phase 3 test session to probe where it breaks. It was quad-saving strategy, deliberately chosen, with a mandatory twenty the next morning. He said so, and then made the more important point: the whole hypothesis rested on my own speculation about last year's Malnad, for which no descent data exists. It is withdrawn in full. No test, no watch item. This is the second time this campaign a plausible story has been mistaken for a mechanism, and the first cost months of misplaced attention on hydration.\n\nSunday is the session that makes the weekend mean something. Nineteen point seven six kilometres at 124 beats against a 125 ceiling, in twenty-seven degrees, the morning after Nandi. Stamina opened at 93 per cent rather than 100, which is the watch correctly reading Saturday's residue. Kilometres two through seventeen sit inside an 8:27 to 9:23 band with no directional drift. Power 211 watts, ground contact 294 milliseconds — the same numbers he produces on a fresh Tuesday. Fifty-two point three five kilometres across thirty-six hours with nine hundred metres of climb in the middle of it, and the second day showed no decay at all.\n\nThe recovery data agrees. Sleep averaged 7.1 hours for the week, with 7.5 on both weekend nights. Body battery recovered sixty-seven points overnight into Sunday and Monday's daily low sat at 66. Nothing tripped.\n\nWhich leaves the one thing that did. Load Focus has read High Aerobic Shortage for two consecutive weeks. Rule 8 fires, so Week 18 carries a concrete change rather than another observation. The cause is not mysterious: since the fifty on the twenty-sixth of July he has completed one threshold session in three weeks, while volume climbed from twenty-six to sixty-two. The quality dose thinned out exactly as the aerobic load went up, and VO2 max drifting from 45 to 43 is consistent with that rather than with heat. Week 18 adds strides on Tuesday, a fourth repetition to Thursday's threshold, and a Zone 3 progression on the final four kilometres of Saturday. Two genuine high-aerobic touches per week plus strides — the same dose that cleared this flag in Week 8, rebuilt on current numbers. If Load Focus has not shifted by Week 20 it escalates again rather than waiting.",
+
+  // ── RUN BREAKDOWN ─────────────────────────────────────────────────
+  runBreakdown: [
+    {
+      day: "Thu · Threshold",
+      title: "3 × 8 min — and the pace anchor finally corrected",
+      stats: "10.08 km · 1:10:36 · reps 5:24 / 5:22 / 5:16 · 156 / 157 / 160 bpm · 332 / 332 / 334 W",
+      verdict: "hit",
+      verdictLabel: "Best quality session on file",
+      note: "Textbook shape: the third repetition was both the fastest and the longest, which means the first two were held back correctly. Cadence climbed 176 → 178 → 179 spm and ground contact fell 252 → 250 → 248 ms across the set — form improving under accumulating fatigue, not degrading. Session max HR 164 against a confirmed 188 max. Aerobic TE 4.1, exercise load 153, ending stamina 72 per cent. The same power at 156–160 bpm where Week 13 needed 161: a small efficiency gain, worth watching over the next two quality sessions before anything is read into it.",
+    },
+    {
+      day: "Sat · Nandi",
+      title: "32.59 km, 936 m — longest training run of the campaign",
+      stats: "32.59 km · 4:32:46 · 8:22/km · 140 bpm avg · 159 max · 936 m ascent · 165 spm · 248 W",
+      verdict: "hit",
+      verdictLabel: "Campaign-best long run",
+      note: "Two full climb-descent cycles, not one. Climb 1 (km 1–9) averaged 9:41, climb 2 (km 19–25) averaged 9:46 — five seconds per kilometre apart, on legs three hours deep. Aerobic TE 4.7 with anaerobic at 0.0: entirely aerobic across four and a half hours. Cadence 165, GCT 292 ms, vertical ratio 10.6 per cent, all identical to his flat easy runs, so nothing broke down mechanically. Stamina 100 → 50. Recovery heart rate 19 bpm. The 7:13 start put the back half into thirty degrees. Descents were deliberately paced to protect the quads for Sunday — a tactical choice, correctly made, and not a fatigue signal.",
+    },
+    {
+      day: "Sun · B2B",
+      title: "Nagavara — no decay on day two",
+      stats: "19.76 km · 2:53:44 · 8:48/km · 124 bpm avg · 136 max · 163 spm · 211 W",
+      verdict: "hit",
+      verdictLabel: "The session that made the weekend count",
+      note: "Held a 125 ceiling for nearly three hours at twenty-seven degrees on the morning after Nandi. Kilometres 2–17 sit in an 8:27–9:23 band with no directional drift; km 18's 9:40 is the only outlier and km 1 and 20 are start/stop artefacts. Stamina opened at 93 per cent — the watch correctly carrying Saturday's residue — and closed at 70. Aerobic TE 3.3, anaerobic 0.0, load 94. Power 211 W and GCT 294 ms are his fresh-Tuesday numbers. Cadence 163 is the week's lowest but above the 162 trigger, so no drill fires; read it as accumulated fatigue rather than form loss.",
+    },
+  ],
+
+  flags: [
+    { type: "warn", text: "RULE 8 FIRES — HIGH AEROBIC SHORTAGE, TWO CONSECUTIVE WEEKS. Load Focus showed the flag in Week 16 and again in Week 17. That is the trigger for a concrete plan change, not a third week of commentary. Cause: one threshold session in the three weeks since the 50K, while weekly volume went 26 → 62 km. VO2 max 45 → 43 is consistent with the training mix, not with heat. ACTION IN WEEK 18: strides added Tuesday, threshold goes 3 × 8 min → 4 × 8 min, Saturday long run carries a 4 km Zone 3 progression finish. Two high-aerobic touches per week plus strides — the dose that cleared this same flag in Week 8. Re-escalates at Week 20 if unchanged." },
+    { type: "warn", text: "I CALLED 62.43 KM A CAMPAIGN HIGH TWICE. IT ISN'T. Week 15 was 71.54 km. Week 17 is the second-biggest week of the campaign, and the biggest that was entirely training rather than built around a race. The distinction matters because chronic load is what the next step-up is anchored to, and that is exactly the number I got wrong at the start of Week 17." },
+    { type: "warn", text: "DESCENT-DURABILITY HYPOTHESIS WITHDRAWN IN FULL. Saturday's slower second descent was deliberate quad-saving ahead of Sunday's mandatory 20 km, not eccentric failure. I built a mechanism on top of it — including a proposed Phase 3 descent test — and the underlying premise, that last year's Malnad failed on loop-2 descending, is speculation with no data behind it. No test scheduled, no watch item carried. Second instance this campaign of a plausible story being treated as a mechanism; the first was the months spent over-weighting hydration ahead of volume." },
+    { type: "warn", text: "HEAT ACCLIMATION COLLAPSED AND IS ONLY PART-RECOVERED. 78 per cent on 19 July, down to roughly 10 per cent by 4 August, back to 28 per cent now. The recovery-week block of short early-morning runs cost almost all of it. This matters more for the Bengaluru Marathon on 27 September — a late-morning road 42 km — than it does for Malnad. No action this week; it rebuilds naturally as long-run duration returns." },
+    { type: "warn", text: "MONDAY AM RESTING HR STILL NOT CAPTURED. The figure on this page is carried from Week 15 and was not measured. Monday's 55 bpm was a daytime average across a working day, not a resting value, and Rule 1 does not apply to it — I initially read it as one and was wrong. Rule 1 is the highest-leverage recovery check in this plan and it has now been guesswork twice. One reading, on waking, before getting out of bed." },
+    { type: "info", text: "WEIGHT 77.0 KG, FLAT. Race-day target is 73–74 kg and there are fifteen weeks left. No change since Week 12. Not urgent at this point in the build — losing weight during a rising-volume block costs lean mass as readily as fat — but it stops being a background item once Phase 3 taper volume drops." },
+    { type: "info", text: "FUELLING STRATEGY MAY MOVE TO REAL FOOD. He is considering solids over gels for Malnad and being more precise with electrolytes. Reasonable for a 17–19 hour race: solids tolerate better late when sweet gels turn the stomach, and the aid stations will carry familiar food. The one constraint is that real food empties slower, so the achievable carbohydrate rate per hour is lower and more variable between people. Whatever it turns out to be, it has to be eaten on the move on a long run before Jawadhu — not tried first at Malnad. No logging required." },
+    { type: "info", text: "AUGUST HEALTH TESTS — STILL UNBOOKED, WINDOW IS NOW. Ferritin and full iron panel first, plus CBC, TSH, serum electrolytes and creatinine/eGFR. Peak volume starts Week 23 and under Rev 3 it is bigger than originally planned. Low ferritin against rising load is how a campaign ends quietly." },
+    { type: "info", text: "RACE CALENDAR ROW BELOW IS STALE. The Aug 9 entry still reads as a 20 km Nandi training session. The actual session was Saturday 8 August, 32.59 km with 936 m. Left untouched pending instruction — the calendar sits outside the PLAN block." },
+  ],
+
+  // ── CURRENT WEEK METRICS ─────────────────────────────────────
+  current: {
+    weeklyKm:    62.43,     // 10.08 + 32.59 + 19.76
+    vo2max:      43,
+    rhr:         50,        // ⚠ carried from W15 — Monday AM not measured
+    weight:      77.0,
+    cadence:     164,       // distance-weighted, Sat + Sun (Thu session avg not logged)
+    avgHR:       134,       // distance-weighted, Sat + Sun (Thu session avg not logged)
+    sleep:       7.1,
+    protein:     105,       // ⚠ estimate — not separately logged this week
+    bodyBattery: 66,        // Monday daily low
+  },
+
+  // ── HISTORY (append one entry per week — never remove) ────────────
+  history: [
+    { week: 1, label: "W1", km: 33.7, vo2: 41, cadence: 154, weight: 79.2, rhr: 52, avgHR: 124, sleep: 7.3, protein: 80  },
+    { week: 2, label: "W2", km: 39.4, vo2: 41, cadence: 157, weight: 79.2, rhr: 52, avgHR: 120, sleep: 6.5, protein: 70  },
+    { week: 3, label: "W3", km: 41.4, vo2: 43, cadence: 159, weight: 78.6, rhr: 49, avgHR: 121, sleep: 7.5, protein: 80  },
+    { week: 4, label: "W4", km: 43.0, vo2: 43, cadence: 166, weight: 78.8, rhr: 49, avgHR: 120, sleep: 7.2, protein: 80  },
+    { week: 5, label: "W5", km: 34.1, vo2: 43, cadence: 164, weight: 76.6, rhr: 52, avgHR: 120, sleep: 7.0, protein: 110 },
+    { week: 6, label: "W6", km: 27.0, vo2: 43, cadence: 167, weight: 76.0, rhr: 52, avgHR: 143, sleep: 7.0, protein: 110 },
+    { week: 7, label: "W7", km: 33.4, vo2: 41, cadence: 166, weight: 76.5, rhr: 52, avgHR: 124, sleep: 7.3, protein: 115 },
+    { week: 8, label: "W8", km: 41.0, vo2: 43, cadence: 164, weight: 77.0, rhr: 47, avgHR: 125, sleep: 7.3, protein: 115 },
+    { week: 9, label: "W9", km: 26.0, vo2: 45, cadence: 165, weight: 77.0, rhr: 48, avgHR: 124, sleep: 7.7, protein: 105 },
+    { week: 10, label: "W10", km: 48.2, vo2: 42, cadence: 168, weight: 76.5, rhr: 49, avgHR: 123, sleep: 7.5, protein: 105 },
+    { week: 11, label: "W11", km: 45.13, vo2: 45, cadence: 163, weight: 76.6, rhr: 49, avgHR: 125, sleep: 7.5, protein: 105 },
+    { week: 12, label: "W12", km: 57.08, vo2: 45, cadence: 165, weight: 77.2, rhr: 49, avgHR: 123, sleep: 7.4, protein: 105 },
+    { week: 13, label: "W13", km: 55.23, vo2: 42, cadence: 169, weight: 77.2, rhr: 52, avgHR: 130, sleep: 7.1, protein: 105 },
+    { week: 14, label: "W14", km: 35.61, vo2: 45, cadence: 164, weight: 77.0, rhr: 50, avgHR: 122, sleep: 7.5, protein: 105 },
+    { week: 15, label: "W15", km: 71.54, vo2: 45, cadence: 160, weight: 77.0, rhr: 50, avgHR: 138, sleep: 7.3, protein: 105 },
+    { week: 16, label: "W16", km: 26.45, vo2: 45, cadence: 166, weight: 77.0, rhr: 50, avgHR: 123, sleep: 7.3, protein: 105 },
+    { week: 17, label: "W17", km: 62.43, vo2: 43, cadence: 164, weight: 77.0, rhr: 50, avgHR: 134, sleep: 7.1, protein: 105 },
+  ],
+
+  // ── NEXT WEEK PLAN ───────────────────────────────────────
+  nextWeek: {
+    label: "Week 18 · 10 – 16 Aug 2026",
+    theme: "QUALITY ESCALATION · 66 km · Rule 8 actioned · two high-aerobic touches + strides",
+    note: "Sixty-six kilometres, up three point six on Week 17. The volume step is deliberately small because the escalation this week is in quality, not distance — adding both at once after a 26 → 62 jump is how a build turns into an injury. High Aerobic Shortage has now shown for two consecutive weeks, so Rule 8 requires a concrete change and this is it: strides on Tuesday, a fourth repetition on Thursday's threshold, and a Zone 3 progression on the last four kilometres of Saturday. That is two genuine high-aerobic touches per week plus strides, which is the same structure that cleared this flag in Week 8. Nothing else moves. The long run holds at thirty-two, the B2B holds, and the easy days stay strictly easy — the escalation only works if the easy running is actually easy.",
+    qualityRotation: "Threshold Thursday: 4 × 8 min with 3 min jog float, EVO SL. Anchors are 162 bpm / 333 W / 5:20 per km — the recalibrated figures from Week 17, not the retired 5:36. That is 32 minutes at threshold against 24 last week. Governed by power and RPE; heart rate is the guardrail. Strides return Tuesday: 6 × 20 sec relaxed and fast off the easy run, full recovery between, no timing. Saturday's final 4 km at Zone 3, 140–148 bpm — high-aerobic time inside a run already on the calendar, at no extra recovery cost.",
+    days: [
+      { day: "Mon", type: "rest",     label: "FULL REST",                                   detail: "Complete rest. Take the resting heart rate on waking, before getting out of bed — that reading is what Rule 1 runs on and it has been missing two weeks running." },
+      { day: "Tue", type: "run",      label: "Easy 10 km · Z2 · HR ≤125 + 6 × 20 sec strides", detail: "Manyata flat, Novablast 5. Conversational throughout, then six strides at the end — twenty seconds each, relaxed and fast, full walk-back recovery, not timed. Strides are neuromuscular, not a workout; they cost nothing in recovery and they count toward clearing the shortage." },
+      { day: "Wed", type: "strength", label: "Full strength",                                detail: "Gym plus home. Squats, split squats, calf raises, core. Full lower body — no restriction this week, since Thursday's session is not eccentric-loaded and Saturday is road." },
+      { day: "Thu", type: "run",      label: "Threshold · ~12 km · 4 × 8 min",               detail: "Warm up 3 km, then 4 × 8 min at threshold with 3 min jog float, cool down. EVO SL. Anchors 5:20/km, 162 bpm, 333 W — power and RPE lead, HR is the guardrail. The fourth repetition is the point of the session; hold the first two back enough to run it. Report splits and power." },
+      { day: "Fri", type: "rest",     label: "FULL REST",                                    detail: "Complete rest before the weekend block. Friday rest preceded a 95 body-battery high before Nandi — it works, keep it." },
+      { day: "Sat", type: "run",      label: "Long run 32 km · Z2 + final 4 km Z3",          detail: "Road, flat, Glycerin Max 2. First 28 km at ≤125 bpm, then the final 4 km lifted to Zone 3, 140–148 bpm. Fuel on the clock, not by feel. If the food strategy is changing, this is the run to test solids on the move." },
+      { day: "Sun", type: "run",      label: "B2B easy 12 km · Z2 · HR ≤125",                detail: "Flat, easy, on tired legs. Novablast 5. The ceiling is not negotiable — the value of this session is entirely in running it aerobically the morning after a hard Saturday, and Week 17 proved he can." },
+    ],
+    nutrition: "Protein comes off the weekly check-in list. The target stands at 130–140 g/day from whole food and is accepted; a self-reported weekly estimate is a rough band rather than a measurement, and reporting it every week was generating friction without generating information. Rule 5 stays in the protocol and fires if a real figure ever comes in under 90 g twice running.\n\nThe live nutrition question this block is the fuelling switch. Moving from gels to real food for a 17–19 hour race is a defensible choice — solids sit better late when sweet gels start turning the stomach, and Malnad's aid stations carry food he already recognises. The trade-off is gastric emptying: real food clears the stomach more slowly, so the achievable carbohydrate rate per hour is lower than with gels and varies more between individuals.\n\nThe only requirement is timing. Whatever the food turns out to be, it has to be eaten while running, on a long run, before Jawadhu on 31 October. Saturday's 32 km is the obvious place to start. Testing it first at Malnad is the one version of this that fails.\n\nElectrolytes stay as they are — clock-governed, SaltCaps or the Func. Lab sachet as the vehicle. The intervention signal remains a cramp, not a modelled deficit.",
+  },
+
+  // ── ADAPTATION RULES (visible on page — permanent protocol) ──────
+  adaptationRules: [
+    { trigger: "RHR ≥ 55 bpm on Monday AM",                     action: "Flag recovery concern. Reduce Thursday run to 6 km easy only. Investigate sleep and stress before prescribing next week. Applies to a waking resting figure only — a daytime average is a different metric and does not trigger this rule." },
+    { trigger: "Avg sleep < 6.5 hrs for the week",              action: "Reduce Saturday long run target by 15%. Sleep is the training. Do not compensate with longer weekday runs." },
+    { trigger: "Body battery < 70 on Monday AM",                action: "Tuesday HR ceiling drops from 125 to 115 bpm." },
+    { trigger: "Cadence < 162 spm on any run",                  action: "Add 5 × 1-min metronome drill at 170 spm to next Tuesday's plan. Note it explicitly." },
+    { trigger: "Protein < 90 g/day two consecutive weeks",      action: "Escalate: provide concrete meal-by-meal plan for that specific week — not just a target number." },
+    { trigger: "HR elevated 5+ bpm at same pace vs prior week", action: "Do not increase load. Investigate root cause: sleep, heat, illness, or stress. Hold volume flat." },
+    { trigger: "Illness or pain flagged in check-in",           action: "Volume does not increase that week regardless of other metrics. Recovery plan replaces training plan." },
+    { trigger: "Same Garmin flag two consecutive weeks",        action: "Concrete plan change in week 3 — not commentary. Notice → watch → act. Applies to High Aerobic Shortage, Heat Acclimation decreasing, Training Status decline." },
+    { trigger: "Plateau despite individually-valid weekly reasons", action: "Name the plateau and restart progression deliberately. Zoom out before declaring a week 'fine' — each week having its own good excuse is exactly how a plateau hides." },
+    { trigger: "A weekly total is set by stepping up from a deload week", action: "Anchor to chronic load, not the trough. Write the long run first and build the week around it — never trim the long run to protect a smaller session." },
+    { trigger: "A pace, zone or threshold figure is contradicted by two other metrics", action: "Recalibrate immediately, in the same session it is spotted. The 5:36/km threshold was contradicted by HR and power in Weeks 8, 13 and 17 before it was corrected. A logged sighting is not an action." },
+    { trigger: "A training concern is being explained by a plausible story rather than data", action: "State the evidentiary basis or drop the concern. Do not build prescriptions on inferred mechanisms — the hydration over-weighting and the descent-durability thesis were both this error." },
+  ],
+
+  // ── ARCHIVE LINKS (append each week — never remove) ──────────────
+  archive: [
+    { week: 1, label: "Week 1 · Apr 13", url: "https://ananthrunning.com/week-01" },
+    { week: 2, label: "Week 2 · Apr 20", url: "https://ananthrunning.com/reports/week-02.html" },
+    { week: 3, label: "Week 3 · Apr 27", url: "https://ananthrunning.com/reports/week-03.html" },
+    { week: 4, label: "Week 4 · May 4",  url: "https://ananthrunning.com/reports/week-04.html" },
+    { week: 5, label: "Week 5 · May 11", url: "https://ananthrunning.com/reports/week-05.html" },
+    { week: 6, label: "Week 6 · May 18", url: "https://ananthrunning.com/reports/week-06.html" },
+    { week: 7, label: "Week 7 · May 25", url: "https://ananthrunning.com/reports/week-07.html" },
+    { week: 8, label: "Week 8 · Jun 1",  url: "https://ananthrunning.com/reports/week-08.html" },
+    { week: 9, label: "Week 9 · Jun 8",  url: "https://ananthrunning.com/reports/week-09.html" },
+    { week: 10, label: "Week 10 · Jun 15", url: "https://ananthrunning.com/reports/week-10.html" },
+    { week: 11, label: "Week 11 · Jun 22", url: "https://ananthrunning.com/reports/week-11.html" },
+    { week: 12, label: "Week 12 · Jun 30", url: "https://ananthrunning.com/reports/week-12.html" },
+    { week: 13, label: "Week 13 · Jul 7",  url: "https://ananthrunning.com/reports/week-13.html" },
+    { week: 14, label: "Week 14 · Jul 14", url: "https://ananthrunning.com/reports/week-14.html" },
+    { week: 15, label: "Week 15 · Jul 21", url: "https://ananthrunning.com/reports/week-15.html" },
+    { week: 16, label: "Week 16 · Jul 27", url: "https://ananthrunning.com/reports/week-16.html" },
+    { week: 17, label: "Week 17 · Aug 3",  url: "https://ananthrunning.com/reports/week-17.html" },
+  ],
+};
+</script>
+<!-- ═══════════════════════════════════════════════════════════════════
+     END PLAN BLOCK
+     ═══════════════════════════════════════════════════════════════════ -->
+
+<style>
+/* ── RESET ───────────────────────────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+
+:root {
+  --cream:     #F7F4EF;
+  --green:     #1B4332;
+  --green-mid: #2D6A4F;
+  --green-lt:  #D8F3DC;
+  --amber:     #92400E;
+  --amber-lt:  #FEF3C7;
+  --red:       #991B1B;
+  --red-lt:    #FEE2E2;
+  --blue:      #1E40AF;
+  --blue-lt:   #EFF6FF;
+  --ink:       #1A1A1A;
+  --muted:     #6B7280;
+  --border:    #E5DDD0;
+  --card:      #FFFFFF;
+}
+
+body {
+  font-family: 'Source Sans 3', sans-serif;
+  background: var(--cream);
+  color: var(--ink);
+  font-size: 16px;
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ── LAYOUT ──────────────────────────────────────────────────────── */
+.wrap    { max-width: 900px; margin: 0 auto; padding: 0 1.5rem; }
+.section { padding: 3.5rem 0; border-top: 1px solid var(--border); }
+
+/* ── TYPE ────────────────────────────────────────────────────────── */
+h1, h2, h3 { font-family: 'Playfair Display', serif; line-height: 1.2; }
+h2          { font-size: clamp(1.5rem, 3vw, 2.1rem); margin-bottom: 1.5rem; }
+.eyebrow {
+  display: block;
+  font-family: 'DM Mono', monospace;
+  font-size: 0.65rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--green);
+  margin-bottom: 0.5rem;
+}
+
+/* ── HERO (clean split banner) ───────────────────────────────────── */
+.hero {
+  background: var(--cream);
+  color: var(--ink);
+  border-bottom: 1px solid var(--border);
+  padding: 0;
+}
+.hero-grid {
+  max-width: 900px;
+  margin: 0 auto;
+  display: block;
+}
+.hero-text {
+  padding: 2.5rem 1.5rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.hero-label {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.66rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--green);
+  margin-bottom: 0.6rem;
+}
+.hero-name {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(1.8rem, 5vw, 2.8rem);
+  font-weight: 700;
+  line-height: 1.05;
+  letter-spacing: -0.01em;
+  color: var(--ink);
+}
+.hero-sub { font-size: 0.95rem; color: var(--muted); margin-top: 0.4rem; }
+
+/* status — green is the accent that stands out on the clean banner */
+.status-pill {
+  align-self: flex-start;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.35rem 0.95rem;
+  border-radius: 999px;
+  font-family: 'DM Mono', monospace;
+  font-size: 0.7rem;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  margin-top: 1.25rem;
+  font-weight: 500;
+}
+.pill-dot { width: 7px; height: 7px; border-radius: 50%; background: currentColor; }
+.pill-on-track  { background: var(--green-lt); border: 1px solid var(--green-mid); color: var(--green); }
+.pill-lagging   { background: var(--amber-lt); border: 1px solid var(--amber);     color: var(--amber); }
+.pill-overdoing { background: var(--red-lt);   border: 1px solid var(--red);       color: var(--red); }
+
+.hero-stats {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.75rem;
+  margin-top: 1.75rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--border);
+}
+.hstat-val   { display: block; font-family: 'DM Mono', monospace; font-size: 1.8rem; line-height: 1; color: var(--green); }
+.hstat-label { font-size: 0.68rem; text-transform: uppercase; letter-spacing: 0.08em; color: var(--muted); margin-top: 0.3rem; }
+
+.progress-wrap { margin-top: 1.75rem; }
+.progress-labels {
+  display: flex;
+  justify-content: space-between;
+  font-family: 'DM Mono', monospace;
+  font-size: 0.62rem;
+  color: var(--muted);
+  margin-bottom: 0.4rem;
+}
+.progress-track { height: 4px; background: var(--border); border-radius: 2px; overflow: hidden; }
+.progress-fill  { height: 100%; background: var(--green-mid); border-radius: 2px; transition: width 1.2s cubic-bezier(.4,0,.2,1); }
+
+.phases-row { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 1.5rem; }
+.phase-chip {
+  padding: 0.28rem 0.8rem;
+  border-radius: 4px;
+  font-family: 'DM Mono', monospace;
+  font-size: 0.64rem;
+  letter-spacing: 0.04em;
+}
+.phase-now    { background: var(--green-lt); border: 1px solid var(--green-mid); color: var(--green); }
+.phase-future { background: transparent;     border: 1px solid var(--border);    color: var(--muted); }
+
+/* ── FLAGS ───────────────────────────────────────────────────────── */
+.flags { display: flex; flex-direction: column; gap: 0.4rem; margin-top: 0.5rem; }
+.flag {
+  display: flex;
+  gap: 0.6rem;
+  align-items: flex-start;
+  padding: 0.5rem 0.75rem;
+  border-radius: 5px;
+  font-size: 0.82rem;
+  line-height: 1.4;
+}
+.flag-icon { flex-shrink: 0; font-size: 0.78rem; margin-top: 0.05rem; }
+.flag-warn { background: var(--amber-lt); color: var(--amber); border-left: 3px solid currentColor; }
+.flag-info { background: var(--blue-lt);  color: var(--blue);  border-left: 3px solid currentColor; }
+.flag-good { background: var(--green-lt); color: var(--green); border-left: 3px solid currentColor; }
+
+.week-headline {
+  font-family: 'Playfair Display', serif;
+  font-weight: 700;
+  font-size: clamp(1.9rem, 4.5vw, 2.9rem);
+  line-height: 1.15;
+  letter-spacing: -0.015em;
+  color: var(--green);
+  margin: 0.4rem 0 1.75rem;
+}
+@media (max-width: 640px) { .week-headline { font-size: 1.7rem; } }
+
+/* ── SPECIAL RACE REPORT ─────────────────────────────────────────── */
+.special-report {
+  background: var(--green);
+  color: var(--cream);
+  border-radius: 12px;
+  padding: 2rem 1.9rem 2.1rem;
+  margin: 0 0 2rem;
+}
+@media (max-width: 640px) { .special-report { padding: 1.6rem 1.35rem; } }
+.sr-kicker {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.66rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--green-lt);
+  margin-bottom: 0.9rem;
+}
+.sr-title {
+  font-family: 'Playfair Display', serif;
+  font-weight: 700;
+  font-size: clamp(1.6rem, 4vw, 2.3rem);
+  line-height: 1.1;
+  letter-spacing: -0.01em;
+  color: #fff;
+  margin-bottom: 0.7rem;
+}
+.sr-result {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.82rem;
+  color: var(--green-lt);
+  padding-bottom: 1.15rem;
+  margin-bottom: 1.15rem;
+  border-bottom: 1px solid rgba(216,243,220,0.22);
+}
+.sr-body p {
+  font-family: 'Source Sans 3', sans-serif;
+  font-size: 1.02rem;
+  line-height: 1.72;
+  color: #EDEAE3;
+  margin-bottom: 0.95rem;
+}
+.sr-body p:last-child { margin-bottom: 0; }
+.sr-body p:first-child::first-letter {
+  font-family: 'Playfair Display', serif;
+  font-weight: 700;
+  font-size: 3.1rem;
+  float: left;
+  line-height: 0.82;
+  padding: 0.08em 0.12em 0 0;
+  color: #fff;
+}
+
+.run-breakdown {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+  gap: 0.85rem;
+  margin-bottom: 1.75rem;
+}
+.run-card {
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: 0.95rem 1.1rem;
+}
+.run-card-head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 0.5rem;
+  margin-bottom: 0.4rem;
+}
+.run-day {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.72rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--muted);
+}
+.run-verdict {
+  font-size: 0.7rem;
+  font-weight: 600;
+  padding: 0.12rem 0.5rem;
+  border-radius: 999px;
+}
+.rv-hit  { background: var(--green-lt); color: var(--green); }
+.rv-over { background: var(--blue-lt);  color: var(--blue); }
+.rv-note { background: var(--amber-lt); color: var(--amber); }
+.run-title { font-weight: 600; font-size: 0.96rem; color: var(--ink); margin-bottom: 0.3rem; }
+.run-stats {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.78rem;
+  color: var(--green-mid);
+  margin-bottom: 0.45rem;
+}
+.run-note { font-size: 0.86rem; line-height: 1.5; color: #2D3748; }
+
+.coach-text {
+  font-family: 'Source Sans 3', sans-serif;
+  font-size: 1.02rem;
+  line-height: 1.7;
+  color: #2D3748;
+}
+.coach-text p { margin-bottom: 0.9rem; }
+.coach-text p:last-child { margin-bottom: 0; }
+
+/* ── METRICS ─────────────────────────────────────────────────────── */
+.metrics-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+  gap: 0.875rem;
+  margin-bottom: 2rem;
+}
+.mcard {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 0.9rem 1rem 0.8rem;
+}
+.mval {
+  display: block;
+  font-family: 'DM Mono', monospace;
+  font-size: 1.75rem;
+  font-weight: 500;
+  color: var(--green);
+  line-height: 1;
+}
+.munit  { font-size: 0.82rem; color: var(--muted); font-family: 'DM Mono', monospace; }
+.mlabel { font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.07em; color: var(--muted); margin-top: 0.3rem; }
+
+/* ── CHARTS ──────────────────────────────────────────────────────── */
+.charts-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+@media (max-width: 560px) { .charts-grid { grid-template-columns: 1fr; } }
+
+.chart-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 1.1rem 1.1rem 0.9rem;
+}
+.chart-label {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.65rem;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--muted);
+  margin-bottom: 0.75rem;
+}
+.chart-area { position: relative; height: 130px; }
+
+/* ── PLAN ────────────────────────────────────────────────────────── */
+.plan-meta {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.78rem;
+  color: var(--green);
+  letter-spacing: 0.04em;
+  margin-bottom: 0.4rem;
+}
+.plan-note { font-size: 0.93rem; color: var(--muted); margin-bottom: 1.5rem; line-height: 1.55; }
+
+.days { display: flex; flex-direction: column; gap: 0.65rem; }
+.day-row {
+  display: grid;
+  grid-template-columns: 46px 1fr;
+  gap: 0.75rem;
+  align-items: start;
+}
+.day-pill {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.67rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  text-align: center;
+  padding: 0.32rem 0.2rem;
+  border-radius: 4px;
+  line-height: 1.3;
+}
+.t-rest     { background: #F3F4F6; color: var(--muted); }
+.t-run      { background: var(--green-lt); color: var(--green); }
+.t-race     { background: var(--red-lt); color: var(--red); }
+.t-recovery { background: var(--amber-lt); color: var(--amber); }
+.t-strength { background: #EDE9FE; color: #6D28D9; }
+.t-trail    { background: #D1FAE5; color: #065F46; }
+
+.day-title  { font-weight: 600; font-size: 0.93rem; margin-bottom: 0.15rem; }
+.day-detail { font-size: 0.85rem; color: var(--muted); line-height: 1.5; }
+
+.nutrition-box {
+  margin-top: 1.5rem;
+  padding: 1rem 1.25rem;
+  background: var(--green-lt);
+  border-radius: 6px;
+  font-size: 0.9rem;
+  color: var(--green);
+  line-height: 1.65;
+}
+
+/* ── ADAPTATION RULES ────────────────────────────────────────────── */
+.rules-intro { font-size: 0.9rem; color: var(--muted); line-height: 1.6; margin-bottom: 1.5rem; }
+.rules-table { width: 100%; border-collapse: collapse; }
+.rules-table th {
+  text-align: left;
+  font-family: 'DM Mono', monospace;
+  font-size: 0.65rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--muted);
+  padding: 0 0 0.75rem;
+  border-bottom: 2px solid var(--border);
+}
+.rules-table td {
+  padding: 0.8rem 0;
+  border-bottom: 1px solid var(--border);
+  vertical-align: top;
+  font-size: 0.875rem;
+  line-height: 1.5;
+}
+.rules-table td:first-child { padding-right: 2rem; width: 45%; }
+.rule-if   { font-family: 'DM Mono', monospace; font-size: 0.62rem; color: var(--amber); letter-spacing: 0.1em; text-transform: uppercase; display: block; margin-bottom: 0.2rem; }
+.rule-then { font-family: 'DM Mono', monospace; font-size: 0.62rem; color: var(--green); letter-spacing: 0.1em; text-transform: uppercase; display: block; margin-bottom: 0.2rem; }
+@media (max-width: 600px) {
+  .rules-table thead { display: none; }
+  .rules-table tr { display: block; border-bottom: 1px solid var(--border); padding: 0.75rem 0; }
+  .rules-table td { display: block; border: none; padding: 0.2rem 0; width: 100% !important; }
+}
+
+/* ── STORY ───────────────────────────────────────────────────────── */
+.lede {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(1.05rem, 2.5vw, 1.3rem);
+  line-height: 1.75;
+  margin-bottom: 1.25rem;
+}
+.body-text { font-size: 0.97rem; line-height: 1.8; color: #374151; margin-bottom: 1rem; }
+
+.calendar { margin-top: 2.5rem; }
+.calendar h3 { font-size: 1.15rem; margin-bottom: 1rem; }
+.cal-row {
+  display: grid;
+  grid-template-columns: 100px 1fr;
+  gap: 1rem;
+  padding: 0.8rem 0;
+  border-bottom: 1px solid var(--border);
+  align-items: start;
+}
+.cal-row:first-of-type { border-top: 1px solid var(--border); }
+.cal-date  { font-family: 'DM Mono', monospace; font-size: 0.73rem; color: var(--muted); padding-top: 0.1rem; }
+.cal-event { font-weight: 600; font-size: 0.93rem; }
+.cal-info  { font-size: 0.83rem; color: var(--muted); margin-top: 0.15rem; }
+.badge {
+  display: inline-block;
+  font-family: 'DM Mono', monospace;
+  font-size: 0.6rem;
+  padding: 0.12rem 0.45rem;
+  border-radius: 999px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  margin-left: 0.4rem;
+  vertical-align: middle;
+}
+.b-a    { background: var(--red-lt);   color: var(--red); }
+.b-b    { background: var(--amber-lt); color: var(--amber); }
+.b-opt  { background: #F3F4F6;         color: var(--muted); }
+.b-done { background: var(--green-lt); color: var(--green); }
+.b-goal { background: var(--green);    color: #fff; }
+
+/* ── COMMENTS ────────────────────────────────────────────────────── */
+.comments-intro { font-size: 0.93rem; color: var(--muted); margin-bottom: 1.75rem; line-height: 1.6; }
+.form-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 1.5rem;
+  margin-bottom: 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.7rem;
+}
+.form-card input,
+.form-card textarea {
+  padding: 0.7rem 1rem;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  font-family: 'Source Sans 3', sans-serif;
+  font-size: 0.93rem;
+  background: var(--cream);
+  color: var(--ink);
+  transition: border-color 0.15s;
+  resize: vertical;
+}
+.form-card input:focus,
+.form-card textarea:focus { outline: none; border-color: var(--green); }
+.form-card textarea { min-height: 80px; }
+.btn-send {
+  align-self: flex-start;
+  background: var(--green);
+  color: #fff;
+  border: none;
+  padding: 0.65rem 1.5rem;
+  border-radius: 6px;
+  font-family: 'Source Sans 3', sans-serif;
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.15s, opacity 0.15s;
+}
+.btn-send:hover    { background: var(--green-mid); }
+.btn-send:disabled { opacity: 0.45; cursor: not-allowed; }
+.form-status { font-size: 0.8rem; color: var(--green); font-family: 'DM Mono', monospace; }
+
+.cmts-list { display: flex; flex-direction: column; gap: 0.875rem; }
+.cmt {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 1rem 1.25rem;
+}
+.cmt-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  margin-bottom: 0.45rem;
+}
+.cmt-name { font-weight: 600; font-size: 0.9rem; }
+.cmt-date { font-family: 'DM Mono', monospace; font-size: 0.68rem; color: var(--muted); }
+.cmt-msg  { font-size: 0.93rem; line-height: 1.6; color: #374151; }
+.cmts-empty { font-size: 0.93rem; color: var(--muted); font-style: italic; }
+
+/* ── ARCHIVE ─────────────────────────────────────────────────────── */
+.archive-row { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 1rem; }
+.arc-link {
+  display: inline-block;
+  padding: 0.32rem 0.85rem;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  font-family: 'DM Mono', monospace;
+  font-size: 0.73rem;
+  color: var(--green);
+  text-decoration: none;
+  transition: border-color 0.15s;
+}
+.arc-link:hover   { border-color: var(--green); }
+.arc-link.current { background: var(--green); color: #fff; border-color: var(--green); }
+
+/* ── FOOTER ──────────────────────────────────────────────────────── */
+.site-footer {
+  background: var(--ink);
+  color: rgba(255,255,255,.4);
+  padding: 1.25rem 0;
+  margin-top: 4rem;
+  font-family: 'DM Mono', monospace;
+  font-size: 0.72rem;
+}
+.footer-inner {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+@media (max-width: 640px) {
+  .hero-stats { gap: 1.5rem; }
+  .metrics-grid { grid-template-columns: repeat(3, 1fr); }
+  .cal-row { grid-template-columns: 80px 1fr; }
+}
+</style>
+</head>
+
+<body>
+
+<!-- ── HERO ──────────────────────────────────────────────────────────── -->
+<header class="hero">
+  <div class="hero-grid">
+    <div class="hero-text">
+      <div class="hero-label">Malnad Ultra 100K · Training Journal · 2026</div>
+      <div class="hero-name">Ananth S Kumar</div>
+      <div class="hero-sub">47 · North Bengaluru · Running to the Western Ghats</div>
+
+      <div id="hero-status"></div>
+
+      <div class="hero-stats">
+        <div>
+          <span class="hstat-val" id="h-days">—</span>
+          <div class="hstat-label">Days to race</div>
+        </div>
+        <div>
+          <span class="hstat-val" id="h-week">—</span>
+          <div class="hstat-label">Week of 32</div>
+        </div>
+        <div>
+          <span class="hstat-val" id="h-phase">—</span>
+          <div class="hstat-label">Phase</div>
+        </div>
+      </div>
+
+      <div class="progress-wrap">
+        <div class="progress-labels">
+          <span>Start · Apr 13</span>
+          <span id="h-pct">—%</span>
+          <span>Race · Nov 28</span>
+        </div>
+        <div class="progress-track">
+          <div class="progress-fill" id="progress-fill" style="width:0%"></div>
+        </div>
+      </div>
+
+      <div class="phases-row">
+        <div class="phase-chip phase-future">Phase 1 · Wks 1–11</div>
+        <div class="phase-chip phase-now">Phase 2 · Wks 12–22</div>
+        <div class="phase-chip phase-future">Phase 3 · Wks 23–32</div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- ── 1. PROGRESS SUMMARY ───────────────────────────────────────────── -->
+<section class="section" id="sec-summary">
+  <div class="wrap">
+    <span class="eyebrow">Week <span id="s-week">—</span> · <span id="s-dates">—</span></span>
+    <div class="week-headline" id="week-headline"></div>
+    <div id="special-report"></div>
+    <div class="run-breakdown" id="run-breakdown"></div>
+    <div class="coach-text" id="coach-text"></div>
+    <span class="eyebrow" style="margin-top:1.75rem;">On the radar</span>
+    <div class="flags" id="flags"></div>
+  </div>
+</section>
+
+<!-- ── 2. KEY METRICS ────────────────────────────────────────────────── -->
+<section class="section" id="sec-metrics">
+  <div class="wrap">
+    <span class="eyebrow">Numbers</span>
+    <h2>Key metrics</h2>
+    <div class="metrics-grid" id="metrics-grid"></div>
+    <div class="charts-grid">
+      <div class="chart-card">
+        <div class="chart-label">Weekly volume (km)</div>
+        <div class="chart-area"><canvas id="c-vol"></canvas></div>
+      </div>
+      <div class="chart-card">
+        <div class="chart-label">VO₂ Max (Garmin)</div>
+        <div class="chart-area"><canvas id="c-vo2"></canvas></div>
+      </div>
+      <div class="chart-card">
+        <div class="chart-label">Cadence (spm) — target 170</div>
+        <div class="chart-area"><canvas id="c-cad"></canvas></div>
+      </div>
+      <div class="chart-card">
+        <div class="chart-label">Weight (kg) — target 73–74</div>
+        <div class="chart-area"><canvas id="c-wt"></canvas></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── 3. NEXT WEEK PLAN ─────────────────────────────────────────────── -->
+<section class="section" id="sec-plan">
+  <div class="wrap">
+    <span class="eyebrow">Training plan</span>
+    <h2 id="plan-title">Next week</h2>
+    <div class="plan-meta" id="plan-theme"></div>
+    <div class="plan-note" id="plan-note"></div>
+    <div class="days" id="days-list"></div>
+    <div class="nutrition-box" id="nutrition-box"></div>
+  </div>
+</section>
+
+<!-- ── 4. ADAPTATION RULES ──────────────────────────────────────────── -->
+<section class="section" id="sec-rules">
+  <div class="wrap">
+    <span class="eyebrow">Coach's protocol</span>
+    <h2>Adaptation rules</h2>
+    <p class="rules-intro">These rules govern how the training plan responds to Ananth's weekly body signals. They are applied before every new week is written — automatically, without negotiation.</p>
+    <table class="rules-table">
+      <thead>
+        <tr>
+          <th>If this is observed</th>
+          <th>Then this happens</th>
+        </tr>
+      </thead>
+      <tbody id="rules-tbody"></tbody>
+    </table>
+  </div>
+</section>
+
+<!-- ── 5. THE STORY ──────────────────────────────────────────────────── -->
+<section class="section" id="sec-story">
+  <div class="wrap">
+    <span class="eyebrow">What he is attempting</span>
+    <h2>A hundred kilometres through the Western Ghats</h2>
+
+    <p class="lede">The Malnad Ultra 100K is one of India's most demanding trail running events — 100 kilometres of mountain trail through the coffee estates and forests of Karnataka's Malnad region, gaining and losing 3,410 metres in elevation in a single continuous push lasting up to 21 hours.</p>
+
+    <p class="body-text">The course runs as two identical 50-kilometre loops through dense forest, river crossings, and unrelenting climbs in the Western Ghats near Chikmagalur. The first loop must be completed by 4:30 PM; the second begins in the late afternoon and runs deep into the night under a mandatory headlamp. The cut-off is 3:30 AM the following morning.</p>
+
+    <p class="body-text">Ananth is 47 and lives in North Bengaluru. He completed the Malnad 50K in November 2025, earning his qualification for the 100K. This 32-week campaign — three phases, five races — is the methodical preparation for what comes next.</p>
+
+    <p class="body-text">At 47 the body is capable of extraordinary endurance performance, but it recovers on its own schedule and adapts more deliberately than it did at 30. The plan is built around that reality: Zone 2 aerobic discipline every Tuesday and Thursday, long runs every Saturday, one strength session mid-week, sleep protected as a training variable, and protein tracked like a metric. Every early morning, every held-back heart rate, every protein-rich meal is part of the same plan.</p>
+
+    <p class="body-text">The only finishing time that matters for a first 100K is the one that says Finisher. Everything before November 28 is preparation.</p>
+
+    <div class="calendar">
+      <h3 class="serif-">The road to Malnad — race calendar</h3>
+      <div id="race-cal"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ── 6. SUPPORT / COMMENTS ─────────────────────────────────────────── -->
+<section class="section" id="sec-comments">
+  <div class="wrap">
+    <span class="eyebrow">Support Ananth</span>
+    <h2>Leave a message</h2>
+    <p class="comments-intro">Messages from friends, family, and fellow runners — visible to everyone, updated in real time. A long run at 5 AM is easier when you know people are cheering.</p>
+
+    <div class="form-card">
+      <input type="text" id="c-name" placeholder="Your name" maxlength="60">
+      <textarea id="c-msg"  placeholder="Your message for Ananth…" maxlength="500"></textarea>
+      <button class="btn-send" onclick="sendComment()">Send message</button>
+      <div class="form-status" id="c-status"></div>
+    </div>
+
+    <div class="cmts-list" id="cmts-list">
+      <div class="cmts-empty">Loading messages…</div>
+    </div>
+  </div>
+</section>
+
+<!-- ── ARCHIVE ───────────────────────────────────────────────────────── -->
+<section class="section" id="sec-archive">
+  <div class="wrap">
+    <span class="eyebrow">Previous weeks</span>
+    <h2 style="margin-bottom:0.75rem;">Week archive</h2>
+    <div class="archive-row" id="arc-row"></div>
+  </div>
+</section>
+
+<!-- ── FOOTER ────────────────────────────────────────────────────────── -->
+<footer class="site-footer">
+  <div class="wrap footer-inner">
+    <span>Malnad Ultra 100K · Training Journal · Ananth S Kumar · Bengaluru</span>
+    <span>Updated <span id="f-updated">—</span> · Garmin Forerunner 955 Solar · <a href="https://malnadultra.com/" style="color:inherit;">malnadultra.com</a></span>
+  </div>
+</footer>
+
+<!-- ── RENDER & CHARTS ────────────────────────────────────────────────── -->
+<script>
+/* ─────────────────────────── RENDER ─────────────────────────────── */
+function render() {
+  const p = PLAN;
+
+  // Hero
+  document.getElementById('h-days').textContent  = p.daysToRace;
+  document.getElementById('h-week').textContent  = p.weekNumber;
+  document.getElementById('h-phase').textContent = '2';
+  document.getElementById('h-pct').textContent   = p.campaignPct + '%';
+  setTimeout(() => {
+    document.getElementById('progress-fill').style.width = p.campaignPct + '%';
+  }, 100);
+
+  const pillMap = {
+    'on-track':  ['pill-on-track',  '● On track'],
+    'lagging':   ['pill-lagging',   '● Attention needed'],
+    'overdoing': ['pill-overdoing', '● Overreaching — pull back'],
+  };
+  const [cls, lbl] = pillMap[p.status] || pillMap['on-track'];
+  document.getElementById('hero-status').innerHTML =
+    `<div class="status-pill ${cls}">${lbl}</div>`;
+
+  // Summary
+  document.getElementById('s-week').textContent = p.weekNumber;
+  document.getElementById('s-dates').textContent = p.dateRange;
+  document.getElementById('week-headline').textContent = p.headline;
+
+  const srEl = document.getElementById('special-report');
+  if (p.specialReport) {
+    const sr = p.specialReport;
+    const bodyHtml = sr.body.split('\n\n').map(para => `<p>${para}</p>`).join('');
+    srEl.innerHTML =
+      `<div class="special-report">
+         <div class="sr-kicker">${sr.kicker}</div>
+         <div class="sr-title">${sr.title}</div>
+         <div class="sr-result">${sr.result}</div>
+         <div class="sr-body">${bodyHtml}</div>
+       </div>`;
+  } else {
+    srEl.innerHTML = '';
+  }
+
+  const vClass = { hit: 'rv-hit', over: 'rv-over', note: 'rv-note' };
+  document.getElementById('run-breakdown').innerHTML = (p.runBreakdown || []).map(r =>
+    `<div class="run-card">
+       <div class="run-card-head">
+         <span class="run-day">${r.day}</span>
+         <span class="run-verdict ${vClass[r.verdict]||'rv-hit'}">${r.verdictLabel}</span>
+       </div>
+       <div class="run-title">${r.title}</div>
+       <div class="run-stats">${r.stats}</div>
+       <div class="run-note">${r.note}</div>
+     </div>`
+  ).join('');
+
+  document.getElementById('coach-text').innerHTML =
+    p.coachSummary.split('\n\n').map(para => `<p>${para}</p>`).join('');
+
+  const flagIcon = { warn: '⚠', info: 'ℹ', good: '✓' };
+  document.getElementById('flags').innerHTML = p.flags.map(f =>
+    `<div class="flag flag-${f.type}">
+       <span class="flag-icon">${flagIcon[f.type]||'·'}</span>
+       <span>${f.text}</span>
+     </div>`
+  ).join('');
+
+  // Metrics
+  const m = p.current;
+  const cards = [
+    [m.weeklyKm,    'km',   'Week volume'],
+    [m.vo2max,      '',     'VO₂ Max'],
+    [m.rhr,         'bpm',  'Resting HR'],
+    [m.weight,      'kg',   'Weight'],
+    [m.cadence,     'spm',  'Cadence'],
+    [m.avgHR,       'bpm',  'Avg run HR'],
+    [m.sleep,       'hrs',  'Avg sleep'],
+    [m.protein,     'g',    'Daily protein'],
+    [m.bodyBattery, '/100', 'Body battery'],
+  ];
+  document.getElementById('metrics-grid').innerHTML = cards.map(([v,u,l]) =>
+    `<div class="mcard">
+       <span class="mval">${v}<span class="munit">${u}</span></span>
+       <div class="mlabel">${l}</div>
+     </div>`
+  ).join('');
+
+  // Plan
+  document.getElementById('plan-title').textContent = p.nextWeek.label;
+  document.getElementById('plan-theme').textContent = p.nextWeek.theme;
+  document.getElementById('plan-note').textContent  = p.nextWeek.note;
+  document.getElementById('days-list').innerHTML = p.nextWeek.days.map(d =>
+    `<div class="day-row">
+       <div class="day-pill t-${d.type}">${d.day}</div>
+       <div>
+         <div class="day-title">${d.label}</div>
+         <div class="day-detail">${d.detail}</div>
+       </div>
+     </div>`
+  ).join('');
+  document.getElementById('nutrition-box').innerHTML =
+    `<strong>Nutrition this week:</strong> ${p.nextWeek.nutrition}`;
+
+  // Adaptation rules
+  document.getElementById('rules-tbody').innerHTML = p.adaptationRules.map(r =>
+    `<tr>
+       <td><span class="rule-if">If</span>${r.trigger}</td>
+       <td><span class="rule-then">Then</span>${r.action}</td>
+     </tr>`
+  ).join('');
+
+  // Race calendar
+  const races = [
+    ['May 24, 2026',  'Freedom Bengaluru Half Marathon ✓', '21.1 km · Road · Completed in 2:47:50 (max HR 177)',     'Done', 'b-done'],
+    ['Jul 26, 2026',  'Bangalore Ultra 50K ✓',           '50 km · Road · Completed in 6:49:51 · first 50K',        'Done', 'b-done'],
+    ['Aug 9, 2026',   'Nandi Hills — self-supported',    '20 km · Road climb · 400–500 m · Training session, no bib','Train','b-opt'],
+    ['Sep 27, 2026',  'Wipro Bengaluru Marathon',        '42.2 km · Road · Malnad time predictor',                 'A',    'b-a'],
+    ['Oct 31, 2026',  'Jawadhu Hills 50K',               '50 km · Trail · 1,160 m · SITG · 70% effort, conditional','Opt',  'b-opt'],
+    ['Nov 28, 2026',  'Malnad Ultra 100K',               '100 km · Trail · 3,410 m elevation · Goal: Finish',      'Goal', 'b-goal'],
+  ];
+  document.getElementById('race-cal').innerHTML = races.map(([dt,nm,info,bd,bc]) =>
+    `<div class="cal-row">
+       <div class="cal-date">${dt}</div>
+       <div>
+         <div class="cal-event">${nm}<span class="badge ${bc}">${bd}</span></div>
+         <div class="cal-info">${info}</div>
+       </div>
+     </div>`
+  ).join('');
+
+  // Archive
+  const arcs = [
+    ...PLAN.archive.map(a =>
+      `<a href="${a.url}" class="arc-link">${a.label}</a>`
+    ),
+    `<span class="arc-link current">Week ${p.weekNumber} · ${p.dateRange} — current</span>`,
+  ];
+  document.getElementById('arc-row').innerHTML = arcs.join('');
+
+  // Footer
+  document.getElementById('f-updated').textContent = p.lastUpdated;
+}
+
+/* ─────────────────────────── CHARTS ─────────────────────────────── */
+function initCharts() {
+  const h      = PLAN.history;
+  const labels = h.map(w => w.label);
+
+  const base = {
+    responsive: true,
+    maintainAspectRatio: false,
+    animation: { duration: 700 },
+    plugins: { legend: { display: false } },
+    scales: {
+      x: {
+        grid: { display: false },
+        ticks: { font: { family: 'DM Mono', size: 10 }, color: '#9CA3AF' },
+      },
+      y: {
+        grid: { color: '#F3F4F6' },
+        ticks: { font: { family: 'DM Mono', size: 10 }, color: '#9CA3AF' },
+      },
+    },
+  };
+
+  // Volume — bar
+  new Chart(document.getElementById('c-vol'), {
+    type: 'bar',
+    data: {
+      labels,
+      datasets: [{
+        data: h.map(w => w.km),
+        backgroundColor: h.map((w, i) => i === h.length - 1 ? '#1B4332' : '#D8F3DC'),
+        borderRadius: 3,
+      }],
+    },
+    options: { ...base },
+  });
+
+  // VO2 Max — line
+  new Chart(document.getElementById('c-vo2'), {
+    type: 'line',
+    data: {
+      labels,
+      datasets: [{
+        data: h.map(w => w.vo2),
+        borderColor: '#2D6A4F',
+        backgroundColor: 'rgba(45,106,79,0.07)',
+        tension: 0.35,
+        pointRadius: 4,
+        pointBackgroundColor: '#2D6A4F',
+        fill: true,
+      }],
+    },
+    options: { ...base, scales: { ...base.scales, y: { ...base.scales.y, min: 38, suggestedMax: 52 } } },
+  });
+
+  // Cadence — line + target
+  new Chart(document.getElementById('c-cad'), {
+    type: 'line',
+    data: {
+      labels,
+      datasets: [
+        {
+          data: h.map(w => w.cadence),
+          borderColor: '#B45309',
+          backgroundColor: 'rgba(180,83,9,0.07)',
+          tension: 0.35,
+          pointRadius: 4,
+          pointBackgroundColor: '#B45309',
+          fill: true,
+        },
+        {
+          data: h.map(() => 170),
+          borderColor: '#D97706',
+          borderDash: [5, 4],
+          pointRadius: 0,
+          tension: 0,
+        },
+      ],
+    },
+    options: { ...base, scales: { ...base.scales, y: { ...base.scales.y, min: 148, max: 178 } } },
+  });
+
+  // Weight — line + target
+  new Chart(document.getElementById('c-wt'), {
+    type: 'line',
+    data: {
+      labels,
+      datasets: [
+        {
+          data: h.map(w => w.weight),
+          borderColor: '#6B7280',
+          backgroundColor: 'rgba(107,114,128,0.07)',
+          tension: 0.35,
+          pointRadius: 4,
+          pointBackgroundColor: '#6B7280',
+          fill: true,
+        },
+        {
+          data: h.map(() => 73.5),
+          borderColor: '#1B4332',
+          borderDash: [5, 4],
+          pointRadius: 0,
+          tension: 0,
+        },
+      ],
+    },
+    options: { ...base, scales: { ...base.scales, y: { ...base.scales.y, min: 70, max: 82 } } },
+  });
+}
+
+/* ────────────────────────── COMMENTS (Supabase) ─────────────────── */
+const SUPA_URL = 'https://wiowwmtnpihfuvximjsg.supabase.co';
+const SUPA_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Indpb3d3bXRucGloZnV2eGltanNnIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzcyOTIxMjcsImV4cCI6MjA5Mjg2ODEyN30.qOrdQQoa8oHu-lvg-htDcWSAB36YQZ1-1BlkbjhXlMs';
+const db = supabase.createClient(SUPA_URL, SUPA_KEY);
+
+async function loadComments() {
+  const el = document.getElementById('cmts-list');
+  try {
+    const { data, error } = await db
+      .from('messages')
+      .select('name, message, created_at')
+      .order('created_at', { ascending: false });
+
+    if (error) throw error;
+
+    if (!data || !data.length) {
+      el.innerHTML = '<div class="cmts-empty">No messages yet — be the first to cheer Ananth on!</div>';
+    } else {
+      el.innerHTML = data.map(c => {
+        const date = new Date(c.created_at).toLocaleDateString('en-IN', {
+          day: 'numeric', month: 'short', year: 'numeric'
+        });
+        return `<div class="cmt">
+           <div class="cmt-top">
+             <span class="cmt-name">${esc(c.name)}</span>
+             <span class="cmt-date">${date}</span>
+           </div>
+           <div class="cmt-msg">${esc(c.message)}</div>
+         </div>`;
+      }).join('');
+    }
+  } catch {
+    el.innerHTML = '<div class="cmts-empty">Messages unavailable — try refreshing.</div>';
+  }
+}
+
+async function sendComment() {
+  const nameEl = document.getElementById('c-name');
+  const msgEl  = document.getElementById('c-msg');
+  const stEl   = document.getElementById('c-status');
+  const btn    = document.querySelector('.btn-send');
+
+  const name    = nameEl.value.trim();
+  const message = msgEl.value.trim();
+  if (!name || !message) { stEl.textContent = 'Please add your name and a message.'; return; }
+
+  btn.disabled     = true;
+  stEl.textContent = 'Sending…';
+
+  try {
+    const { error } = await db
+      .from('messages')
+      .insert([{ name, message }]);
+
+    if (error) throw error;
+
+    nameEl.value     = '';
+    msgEl.value      = '';
+    stEl.textContent = '✓ Sent — thank you!';
+    await loadComments();
+  } catch {
+    stEl.textContent = 'Could not send — please try again.';
+  }
+  btn.disabled = false;
+}
+
+function esc(s) {
+  return String(s)
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;');
+}
+
+/* ─────────────────────────── INIT ───────────────────────────────── */
+render();
+initCharts();
+loadComments();
+</script>
+
+</body>
+</html>
